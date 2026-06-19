@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: flow_redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: flow_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
+    restart: always
+
+  scheduler:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: flow_scheduler
+    command: python backend/scheduler.py
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
+    restart: always
+
+  worker-1:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: flow_worker_1
+    command: python backend/worker.py
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - CONCURRENCY=2
+    depends_on:
+      - redis
+    restart: always
+
+  worker-2:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: flow_worker_2
+    command: python backend/worker.py
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - CONCURRENCY=2
+    depends_on:
+      - redis
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: flow_frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    restart: always
