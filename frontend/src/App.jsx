@@ -478,7 +478,7 @@ function App() {
                   )}
 
                   {!isLoading && !response && (
-                    <div className="glass-card stat-card" style={{ padding: '4rem 2rem', color: var(--text-muted) }}>
+                    <div className="glass-card stat-card" style={{ padding: '4rem 2rem', color: 'var(--text-muted)' }}>
                       <Activity size={48} style={{ marginBottom: '1rem', opacity: 0.3 }} />
                       <p>Enter a query above to execute the multi-agent reasoning flow.</p>
                     </div>
