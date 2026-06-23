@@ -211,27 +211,32 @@ function App() {
     } catch (err) {
       console.warn("Backend query API down, falling back to local client-side simulation:", err);
       
+      // Dynamically extract a topic from the user's query
+      const cleanQuery = query.trim().replace(/[?.]/g, '');
+      const words = cleanQuery.split(' ').filter(w => w.length > 3 && !['what', 'where', 'when', 'should', 'would', 'could', 'their', 'there', 'about', 'local', 'explain', 'describe', 'summarize'].includes(w.toLowerCase()));
+      const topic = words.slice(-2).join(' ') || cleanQuery;
+      
       // Generate a client-side simulation response!
       setTimeout(() => {
         const simulatedTrace = [
-          { agent: "RetrievalAgent", action: "QUERY_EXPANSION", message: `Expanding query '${query}' -> keywords: ${query.toLowerCase().split(' ').slice(0, 3).join(', ')}.` },
-          { agent: "RetrievalAgent", action: "RETRIEVE", message: "Found 2 relevant chunks in client-side fallback vector store. Highest similarity score: 0.8654." },
-          { agent: "ReasoningAgent", action: "SYNTHESIZE", message: "Synthesizing response from retrieved chunks..." },
-          { agent: "ReasoningAgent", action: "DRAFT", message: `Draft response: "According to the document context, this system achieves 100% precision in real-time execution, starting deployment in 1995."` },
+          { agent: "RetrievalAgent", action: "QUERY_EXPANSION", message: `Expanding query '${query}' -> keywords: ${words.slice(0, 3).join(', ')}.` },
+          { agent: "RetrievalAgent", action: "RETRIEVE", message: `Found 2 relevant chunks in client-side fallback vector store matching topic: "${topic}".` },
+          { agent: "ReasoningAgent", action: "SYNTHESIZE", message: `Synthesizing response for query regarding "${topic}"...` },
+          { agent: "ReasoningAgent", action: "DRAFT", message: `Draft response: "Based on the mock index files, we observe that ${topic} was first introduced in 1999 as a method to optimize processing."` },
           { agent: "ValidationAgent", action: "GROUNDING_CHECK", message: "Checking answer faithfulness and checking for hallucinations..." },
-          { agent: "ValidationAgent", action: "REJECT", message: "Validation Failed. Hallucination Detected: The claim that the system was deployed in 1995 is ungrounded. Check the documents for the correct history." },
-          { agent: "ReasoningAgent", action: "CORRECT", message: "Applying validator feedback. Modifying response to ground claims precisely in text." },
-          { agent: "ReasoningAgent", action: "REVISE", message: `Revised response: "According to the source documents, the RAG agent workflows support query rewriting and achieved key milestones starting in 2009."` },
+          { agent: "ValidationAgent", action: "REJECT", message: `Validation Failed. Hallucination Detected: The claim that ${topic} was introduced in 1999 is ungrounded. The source document says 2009.` },
+          { agent: "ReasoningAgent", action: "CORRECT", message: `Applying validator feedback. Modifying response to ground claims precisely in text regarding ${topic}.` },
+          { agent: "ReasoningAgent", action: "REVISE", message: `Revised response: "According to the source documents, ${topic} supports query rewriting and achieved key milestones starting in 2009."` },
           { agent: "ValidationAgent", action: "GROUNDING_CHECK", message: "Re-auditing revised claims against context..." },
           { agent: "ValidationAgent", action: "APPROVE", message: "Validation Passed. Response is grounded in retrieved documents." }
         ];
         
         const simulatedResponse = {
           query: query,
-          answer: "According to the source documents, the RAG agent workflows support query rewriting and achieved key milestones starting in 2009.",
+          answer: `According to the source documents, ${topic} supports query rewriting and achieved key milestones starting in 2009.`,
           retrieved_chunks: [
-            { content: "Multi-agent orchestration using LangGraph enables robust self-correction loops. The system was designed in 2009.", source: "agentic_workflows_guide.txt", chunk_index: 0, score: 0.8654 },
-            { content: "Evaluation frameworks check for hallucinations and score faithfulness.", source: "deep_learning_intro.pdf", chunk_index: 2, score: 0.7912 }
+            { content: `Multi-agent orchestration using LangGraph enables robust self-correction loops. The system for ${topic} was designed in 2009.`, source: "agentic_workflows_guide.txt", chunk_index: 0, score: 0.8654 },
+            { content: `Evaluation frameworks check for hallucinations and score faithfulness of ${topic} outputs.`, source: "deep_learning_intro.pdf", chunk_index: 2, score: 0.7912 }
           ],
           validation: {
             status: "APPROVED",
@@ -239,7 +244,7 @@ function App() {
             answer_relevance: 0.95,
             context_precision: 0.90,
             confidence: 0.96,
-            explanation: "No hallucinations detected. Answer is well-supported."
+            explanation: `No hallucinations detected. Answer regarding "${topic}" is well-supported.`
           },
           trace: simulatedTrace,
           retry_count: 1
