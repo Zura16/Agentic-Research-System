@@ -120,7 +120,8 @@ def run_reasoning_agent(state: Dict[str, Any]) -> Dict[str, Any]:
         if retry_count == 0 and chunks:
             # First draft - let's add a minor hallucinated claim to show the loop
             filename = chunks[0]["source"]
-            draft_answer = f"According to {filename}, this system achieves 100% precision in real-time execution, starting deployment in 1995."
+            content = chunks[0]["content"]
+            draft_answer = f"According to {filename}, the system was deployed in 1995. Key details: '{content[:120]}...'"
             agent_trace.append({
                 "agent": "ReasoningAgent",
                 "action": "DRAFT",
@@ -132,8 +133,9 @@ def run_reasoning_agent(state: Dict[str, Any]) -> Dict[str, Any]:
             }
         else:
             # Corrected response
-            content = chunks[0]["content"] if chunks else "Local task scheduling is supported."
-            revised_answer = f"According to the source documents, the system supports task scheduling and processing. Detail: '{content}'."
+            filename = chunks[0]["source"] if chunks else "documents"
+            content = chunks[0]["content"] if chunks else "No relevant information found."
+            revised_answer = f"Based on the retrieved context from {filename}, we can ground the answer: {content}"
             agent_trace.append({
                 "agent": "ReasoningAgent",
                 "action": "REVISE",
