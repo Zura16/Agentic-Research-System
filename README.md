@@ -6,7 +6,7 @@ It features a high-fidelity React frontend dashboard with real-time graph execut
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
 * **Multi-Agent Orchestration (LangGraph)**:
   * **RetrievalAgent**: Handles FAISS query matching and dynamic query expansion.
@@ -19,7 +19,7 @@ It features a high-fidelity React frontend dashboard with real-time graph execut
 
 ---
 
-## 🛠️ Architecture Flow
+## Architecture Flow
 
 ```mermaid
 graph TD
@@ -32,7 +32,7 @@ graph TD
 
 ---
 
-## 💻 Getting Started
+## Getting Started
 
 ### Prerequisites
 * Python 3.10+
@@ -79,7 +79,7 @@ graph TD
 
 ---
 
-## 🌐 Offline & Demo Mode
+## Offline & Demo Mode
 
 If the backend is not running, the frontend automatically enters **Offline Fallback / Demo Mode**. 
 * Supports interactive document management simulations.
