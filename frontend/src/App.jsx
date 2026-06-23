@@ -211,10 +211,110 @@ function App() {
     } catch (err) {
       console.warn("Backend query API down, falling back to local client-side simulation:", err);
       
-      // Dynamically extract a topic from the user's query
       const cleanQuery = query.trim().replace(/[?.]/g, '');
+      const lowercaseQuery = cleanQuery.toLowerCase();
       const words = cleanQuery.split(' ').filter(w => w.length > 3 && !['what', 'where', 'when', 'should', 'would', 'could', 'their', 'there', 'about', 'local', 'explain', 'describe', 'summarize'].includes(w.toLowerCase()));
-      const topic = words.slice(-2).join(' ') || cleanQuery;
+      const extractedTopic = words.slice(-2).join(' ') || cleanQuery;
+      
+      // Determine the mock response data based on the user query
+      let mockData = null;
+      
+      if (lowercaseQuery.includes('deep learning') || lowercaseQuery.includes('neural') || lowercaseQuery.includes('machine learning') || lowercaseQuery.includes('artificial intelligence') || lowercaseQuery.includes('ai')) {
+        mockData = {
+          topic: "Deep Learning",
+          draft: "Based on the index files, Deep Learning was invented in 1950 by Turing to run on the first digital computer.",
+          hallucination: "The claim that Deep Learning was invented in 1950 by Turing to run on the first digital computer is historically ungrounded in our context.",
+          answer: "Deep Learning is a subset of machine learning based on artificial neural networks with representation learning. It uses multiple layers of nonlinear processing units to extract and transform features directly from raw data without manual feature engineering.",
+          source: "deep_learning_intro.pdf",
+          chunks: [
+            { content: "Artificial Neural Networks (ANNs) form the core of deep learning, stacking multiple layers (input, hidden, output) to learn high-level abstractions.", source: "deep_learning_intro.pdf", chunk_index: 0, score: 0.9412 },
+            { content: "Deep learning models such as CNNs and Transformers process raw inputs hierarchically, automatically discovering representations needed for classification.", source: "deep_learning_intro.pdf", chunk_index: 1, score: 0.8876 }
+          ],
+          explanation: "Definition of deep learning and neural representation is fully verified against deep_learning_intro.pdf."
+        };
+      } else if (lowercaseQuery.includes('rag') || lowercaseQuery.includes('retrieval augmented') || lowercaseQuery.includes('vector') || lowercaseQuery.includes('embedding') || lowercaseQuery.includes('faiss')) {
+        mockData = {
+          topic: "Retrieval-Augmented Generation",
+          draft: "RAG retrieves data by querying Google search directly and copying the first three links into the model prompt.",
+          hallucination: "The claim that RAG queries Google Search directly is incorrect. The system retrieves chunks from a local FAISS vector store.",
+          answer: "Retrieval-Augmented Generation (RAG) optimizes LLM outputs by querying an authoritative, external knowledge base. Documents are chunked and embedded into a vector space, indexed in a vector store (like FAISS), retrieved semantically for a user query, and appended to the prompt to ground generation.",
+          source: "agentic_workflows_guide.txt",
+          chunks: [
+            { content: "RAG systems bridge the gap between static LLM parameters and dynamic private documents by injecting context chunks into the generation prompt.", source: "agentic_workflows_guide.txt", chunk_index: 4, score: 0.9245 },
+            { content: "Vector search indexes high-dimensional embeddings of text segments, enabling semantic similarity matching using distance metrics.", source: "agentic_workflows_guide.txt", chunk_index: 5, score: 0.8912 }
+          ],
+          explanation: "RAG retrieval flow, embedding index, and local vector store groundings are authenticated."
+        };
+      } else if (lowercaseQuery.includes('langgraph') || lowercaseQuery.includes('multi-agent') || lowercaseQuery.includes('agent') || lowercaseQuery.includes('orchestration') || lowercaseQuery.includes('graph')) {
+        mockData = {
+          topic: "LangGraph Multi-Agent Orchestration",
+          draft: "LangGraph coordinates agents using a simple sequential bash script that executes Python files one after another.",
+          hallucination: "The assertion that LangGraph is a simple sequential bash script is inaccurate. It is a stateful graph library that allows cycles and shared state.",
+          answer: "LangGraph is a library designed for building stateful, multi-agent systems with LLMs. By modeling agent interactions as graphs where nodes are agent decisions and edges are transitions (including conditional routing), it enables cyclic loops, self-correction, and collaborative workflows.",
+          source: "agentic_workflows_guide.txt",
+          chunks: [
+            { content: "Multi-agent systems divide complex research tasks among specialized nodes (e.g. RetrievalAgent, ReasoningAgent, ValidationAgent) sharing state.", source: "agentic_workflows_guide.txt", chunk_index: 2, score: 0.9543 },
+            { content: "LangGraph supports cycles, enabling self-correction loops where validators critique outputs and route them back to reasoning for revision.", source: "agentic_workflows_guide.txt", chunk_index: 3, score: 0.9108 }
+          ],
+          explanation: "Multi-agent graph orchestration, cycles, and LangGraph structures are validated."
+        };
+      } else if (lowercaseQuery.includes('hallucination') || lowercaseQuery.includes('validation') || lowercaseQuery.includes('validate') || lowercaseQuery.includes('guardrail') || lowercaseQuery.includes('faithfulness')) {
+        mockData = {
+          topic: "Hallucination Audit & Validation",
+          draft: "Validation is performed by asking a human administrator via email to approve each generated LLM response.",
+          hallucination: "Ungrounded claim: validation is automated via ValidationAgent checks, not by emailing human admins.",
+          answer: "Response validation is handled by a specialized ValidationAgent acting as an automated guardrail. It cross-references the reasoning agent's output with retrieved context to compute faithfulness (checking for hallucinations) and relevance, initiating feedback loops if issues arise.",
+          source: "deep_learning_intro.pdf",
+          chunks: [
+            { content: "Validation agents act as automated guardrails by evaluating the faithfulness of generated drafts relative to the retrieved context chunks.", source: "deep_learning_intro.pdf", chunk_index: 7, score: 0.9388 },
+            { content: "If the verification agent flags a claim as ungrounded, it returns structured critique, triggering a self-correction loop in the reasoning agent.", source: "deep_learning_intro.pdf", chunk_index: 8, score: 0.8921 }
+          ],
+          explanation: "Faithfulness metrics and automated self-correction guardrails conform to system logs."
+        };
+      } else if (lowercaseQuery.includes('evaluation') || lowercaseQuery.includes('ragas') || lowercaseQuery.includes('metric') || lowercaseQuery.includes('compliance') || lowercaseQuery.includes('precision')) {
+        mockData = {
+          topic: "RAGAS Evaluation Framework",
+          draft: "Ragas evaluation measures if the code compiles and if the frontend page renders within 2 seconds.",
+          hallucination: "The metric description is ungrounded. Ragas measures faithfulness, answer relevance, and context precision, not compilation or UI speed.",
+          answer: "Ragas is an evaluation framework used to audit and score RAG pipelines without human ground truth. It measures Faithfulness (verifying answers are grounded in context), Answer Relevance (checking if the query is directly addressed), and Context Precision (evaluating retriever quality).",
+          source: "deep_learning_intro.pdf",
+          chunks: [
+            { content: "RAGAS computes continuous scores between 0 and 1 for faithfulness and relevance using LLM-assisted reasoning to audit compliance.", source: "deep_learning_intro.pdf", chunk_index: 9, score: 0.9632 },
+            { content: "Automated evaluation studio runs test cases to identify systematic failures in either retrieval or generation layers.", source: "deep_learning_intro.pdf", chunk_index: 10, score: 0.8974 }
+          ],
+          explanation: "Ragas compliance, metrics definition, and automated scoring are grounded in deep_learning_intro.pdf."
+        };
+      } else if (lowercaseQuery.includes('scheduling') || lowercaseQuery.includes('task') || lowercaseQuery.includes('distributed') || lowercaseQuery.includes('queue') || lowercaseQuery.includes('worker') || lowercaseQuery.includes('redis')) {
+        mockData = {
+          topic: "Distributed Task Scheduling",
+          draft: "Tasks are stored in local CPU registers and executed directly in the main browser event loop thread.",
+          hallucination: "Ungrounded claim: tasks are processed asynchronously via Redis broker queues and background worker nodes, not the browser thread.",
+          answer: "A distributed task processing system schedules and executes background jobs across worker nodes. It relies on a message broker (e.g. Redis) to queue task payloads, which are consumed asynchronously by workers that handle retries, rate limits, and state tracking.",
+          source: "agentic_workflows_guide.txt",
+          chunks: [
+            { content: "Distributed worker queues coordinate asynchronous tasks by decoupling submission from execution via broker queues.", source: "agentic_workflows_guide.txt", chunk_index: 12, score: 0.9102 },
+            { content: "Retry policies and execution metrics are monitored by a central dashboard tracking worker health and resource usage.", source: "agentic_workflows_guide.txt", chunk_index: 13, score: 0.8544 }
+          ],
+          explanation: "Distributed architecture, broker queueing, and asynchronous worker systems are validated."
+        };
+      } else {
+        // Dynamic fallback fallback
+        const cleanTopic = extractedTopic.charAt(0).toUpperCase() + extractedTopic.slice(1);
+        mockData = {
+          topic: cleanTopic,
+          draft: `Based on the mock index files, we observe that ${extractedTopic} was first introduced in 1999 as a method to optimize processing.`,
+          hallucination: `The claim that ${extractedTopic} was introduced in 1999 is ungrounded. The source document says 2009.`,
+          answer: `According to the source documents, the framework for ${extractedTopic} supports stateful query routing, enabling structured execution flows and multi-agent validation starting in 2009.`,
+          source: "agentic_workflows_guide.txt",
+          chunks: [
+            { content: `Multi-agent orchestration using LangGraph enables robust self-correction loops. The system for ${extractedTopic} was designed in 2009.`, source: "agentic_workflows_guide.txt", chunk_index: 0, score: 0.8654 },
+            { content: `Evaluation frameworks check for hallucinations and score faithfulness of ${extractedTopic} outputs.`, source: "deep_learning_intro.pdf", chunk_index: 2, score: 0.7912 }
+          ],
+          explanation: `No hallucinations detected. Answer regarding "${extractedTopic}" is well-supported.`
+        };
+      }
+      
+      const { topic, draft, hallucination, answer, source, chunks, explanation } = mockData;
       
       // Generate a client-side simulation response!
       setTimeout(() => {
@@ -222,29 +322,26 @@ function App() {
           { agent: "RetrievalAgent", action: "QUERY_EXPANSION", message: `Expanding query '${query}' -> keywords: ${words.slice(0, 3).join(', ')}.` },
           { agent: "RetrievalAgent", action: "RETRIEVE", message: `Found 2 relevant chunks in client-side fallback vector store matching topic: "${topic}".` },
           { agent: "ReasoningAgent", action: "SYNTHESIZE", message: `Synthesizing response for query regarding "${topic}"...` },
-          { agent: "ReasoningAgent", action: "DRAFT", message: `Draft response: "Based on the mock index files, we observe that ${topic} was first introduced in 1999 as a method to optimize processing."` },
+          { agent: "ReasoningAgent", action: "DRAFT", message: `Draft response: "${draft}"` },
           { agent: "ValidationAgent", action: "GROUNDING_CHECK", message: "Checking answer faithfulness and checking for hallucinations..." },
-          { agent: "ValidationAgent", action: "REJECT", message: `Validation Failed. Hallucination Detected: The claim that ${topic} was introduced in 1999 is ungrounded. The source document says 2009.` },
+          { agent: "ValidationAgent", action: "REJECT", message: `Validation Failed. Hallucination Detected: ${hallucination}` },
           { agent: "ReasoningAgent", action: "CORRECT", message: `Applying validator feedback. Modifying response to ground claims precisely in text regarding ${topic}.` },
-          { agent: "ReasoningAgent", action: "REVISE", message: `Revised response: "According to the source documents, ${topic} supports query rewriting and achieved key milestones starting in 2009."` },
+          { agent: "ReasoningAgent", action: "REVISE", message: `Revised response: "${answer}"` },
           { agent: "ValidationAgent", action: "GROUNDING_CHECK", message: "Re-auditing revised claims against context..." },
           { agent: "ValidationAgent", action: "APPROVE", message: "Validation Passed. Response is grounded in retrieved documents." }
         ];
         
         const simulatedResponse = {
           query: query,
-          answer: `According to the source documents, ${topic} supports query rewriting and achieved key milestones starting in 2009.`,
-          retrieved_chunks: [
-            { content: `Multi-agent orchestration using LangGraph enables robust self-correction loops. The system for ${topic} was designed in 2009.`, source: "agentic_workflows_guide.txt", chunk_index: 0, score: 0.8654 },
-            { content: `Evaluation frameworks check for hallucinations and score faithfulness of ${topic} outputs.`, source: "deep_learning_intro.pdf", chunk_index: 2, score: 0.7912 }
-          ],
+          answer: answer,
+          retrieved_chunks: chunks,
           validation: {
             status: "APPROVED",
             faithfulness: 0.98,
             answer_relevance: 0.95,
             context_precision: 0.90,
             confidence: 0.96,
-            explanation: `No hallucinations detected. Answer regarding "${topic}" is well-supported.`
+            explanation: explanation
           },
           trace: simulatedTrace,
           retry_count: 1
