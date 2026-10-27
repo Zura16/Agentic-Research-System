@@ -149,3 +149,6 @@ dist-ssr/
 # Progressive push state
 .git_progressive_push_state.json
 
+
+# Removed helper script state
+.git_progressive_push_state.json
