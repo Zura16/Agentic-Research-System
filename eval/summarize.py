@@ -7,11 +7,30 @@ Usage:
 from __future__ import annotations
 
 import json
+import random
+import statistics
 from pathlib import Path
+
+from check_questions import normalize
 
 EVAL_DIR = Path(__file__).resolve().parent
 REPO = EVAL_DIR.parent
 OUT = REPO / "docs" / "benchmarks.md"
+BOOTSTRAP_RESAMPLES = 10000
+BOOTSTRAP_SEED = 0
+
+
+def paired_diffs(base: dict, other: dict, metric: str) -> list[float]:
+    """Per-question metric difference (other - base) where both runs produced a score."""
+    a = {r["id"]: r.get(metric) for r in base["records"] if r["answerable"]}
+    b = {r["id"]: r.get(metric) for r in other["records"] if r["answerable"]}
+    return [b[i] - a[i] for i in a if isinstance(a[i], float) and isinstance(b.get(i), float)]
+
+
+def bootstrap_interval(diffs: list[float]) -> tuple[float, float]:
+    rng = random.Random(BOOTSTRAP_SEED)
+    means = sorted(statistics.fmean(rng.choices(diffs, k=len(diffs))) for _ in range(BOOTSTRAP_RESAMPLES))
+    return means[int(0.025 * BOOTSTRAP_RESAMPLES)], means[int(0.975 * BOOTSTRAP_RESAMPLES) - 1]
 
 
 def fmt(metric: dict) -> str:
@@ -21,15 +40,28 @@ def fmt(metric: dict) -> str:
     return f"{metric['mean']:.3f} (n={metric['n']}{failed})"
 
 
-def source_hits(result: dict, questions_path: Path) -> tuple[int, int]:
-    """Count answerable, error-free questions whose cited paper appears in the retrieved chunks."""
-    sources = {}
+def passage_retrieved(passage: str, contexts: list[str]) -> bool:
+    """True if any 60-character window of the source passage occurs in the retrieved text.
+
+    Both sides are normalized as in check_questions.py. Windows step by 20 characters, and
+    passage parts shorter than 20 normalized characters are skipped.
+    """
+    text = normalize(" ".join(contexts))
+    parts = [p for p in (normalize(s) for s in passage.split("...")) if len(p) > 20]
+    return any(p[i:i + 60] in text for p in parts for i in range(0, max(1, len(p) - 59), 20))
+
+
+def source_hits(result: dict, questions_path: Path) -> tuple[int, int, int]:
+    """For answerable, error-free questions: (cited paper retrieved, cited passage retrieved, n)."""
+    rows = {}
     for line in questions_path.read_text().splitlines():
         if line.strip():
             row = json.loads(line)
-            sources[row["id"]] = row["source"]
+            rows[row["id"]] = row
     answerable = [rec for rec in result["records"] if rec["answerable"] and not rec["error"]]
-    return sum(sources[rec["id"]] in rec["context_sources"] for rec in answerable), len(answerable)
+    papers = sum(rows[rec["id"]]["source"] in rec["context_sources"] for rec in answerable)
+    passages = sum(passage_retrieved(rows[rec["id"]]["source_passage"], rec["contexts"]) for rec in answerable)
+    return papers, passages, len(answerable)
 
 
 def main() -> None:
@@ -50,9 +82,10 @@ def main() -> None:
         "Every source passage was checked against its paper by `eval/check_questions.py`. The author",
         "authorized the runs on 2026-10-27 without reviewing each row by hand.",
         "",
-        "Source retrieved: answerable questions whose cited paper is among the final retrieved chunks.",
+        "Paper / passage retrieved: answerable questions whose cited paper, and whose cited source passage,",
+        "is in the final retrieved chunks. Passage matching is approximate (see `passage_retrieved`).",
         "",
-        "| config | faithfulness | answer relevancy | context precision | source retrieved | refusal accuracy | false refusals | mean revisions | latency p50 / p95 (s) | cost (USD) | errors |",
+        "| config | faithfulness | answer relevancy | context precision | paper / passage retrieved | refusal accuracy | false refusals | mean revisions | latency p50 / p95 (s) | cost (USD) | errors |",
         "|---|---|---|---|---|---|---|---|---|---|---|",
     ]
     for key in sorted(latest):
@@ -61,12 +94,34 @@ def main() -> None:
         ra, fr = s["refusal_accuracy"], s["false_refusals"]
         cost = s["cost_usd"]["pipeline"] + s["cost_usd"]["judge"]
         lat = s["latency_s"] or {"p50": float("nan"), "p95": float("nan")}
-        hit, n_ans = source_hits(r, REPO / m["questions_file"])
+        papers, passages, n_ans = source_hits(r, REPO / m["questions_file"])
         lines.append(
             f"| {key}: {m['configuration_label']} | {fmt(s['faithfulness'])} | {fmt(s['answer_relevancy'])} | "
-            f"{fmt(s['context_precision'])} | {hit}/{n_ans} | {ra['correct']}/{ra['n']} | {fr['count']}/{fr['n']} | "
+            f"{fmt(s['context_precision'])} | {papers}/{n_ans} / {passages}/{n_ans} | {ra['correct']}/{ra['n']} | {fr['count']}/{fr['n']} | "
             f"{s['mean_revisions']} | {lat['p50']} / {lat['p95']} | {cost:.2f} | {s['n_errors']} |"
         )
+
+    if "a" in latest:
+        lines += [
+            "",
+            "## Paired difference against configuration a",
+            "",
+            "Per question, configuration minus a, over answerable questions scored in both runs.",
+            f"95% interval: percentile bootstrap, {BOOTSTRAP_RESAMPLES} resamples, seed {BOOTSTRAP_SEED}.",
+            "",
+            "| config | metric | mean difference | 95% interval | n | latency p50 ratio | latency p95 ratio |",
+            "|---|---|---|---|---|---|---|",
+        ]
+        base = latest["a"][1]
+        for key in sorted(k for k in latest if k != "a"):
+            other = latest[key][1]
+            p50 = other["summary"]["latency_s"]["p50"] / base["summary"]["latency_s"]["p50"]
+            p95 = other["summary"]["latency_s"]["p95"] / base["summary"]["latency_s"]["p95"]
+            for metric in ("faithfulness", "answer_relevancy", "context_precision"):
+                diffs = paired_diffs(base, other, metric)
+                lo, hi = bootstrap_interval(diffs)
+                lines.append(f"| {key} | {metric} | {statistics.fmean(diffs):+.3f} | [{lo:+.3f}, {hi:+.3f}] | "
+                             f"{len(diffs)} | {p50:.1f}x | {p95:.1f}x |")
 
     lines += ["", "## Run details", ""]
     for key in sorted(latest):
