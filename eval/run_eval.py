@@ -56,14 +56,15 @@ without going on to give a substantive answer to the question? Reply with JSON o
 
 
 # --- token metering -------------------------------------------------------------------------------
-# Every OpenAI call (LangChain, ragas/instructor, embeddings) goes through httpx, so usage is read
-# from the response body there. `PHASE` attributes each call to the pipeline or the judge.
+# Every OpenAI call (LangChain, ragas/instructor, embeddings) goes through the OpenAI SDK's HTTP
+# client, so usage is read from the response body there. openai>=3 uses the httpx2 package and
+# older releases use httpx; both are patched. `PHASE` attributes each call to the pipeline or the judge.
 
 PHASE = "pipeline"
 USAGE: dict[str, dict[str, dict[str, int]]] = {"pipeline": {}, "judge": {}}
 
 
-def _record(response: httpx.Response) -> None:
+def _record(response) -> None:
     if not str(response.request.url).startswith("https://api.openai.com/"):
         return
     try:
@@ -79,20 +80,38 @@ def _record(response: httpx.Response) -> None:
     slot["calls"] += 1
 
 
-def _install_meter() -> None:
-    sync_send, async_send = httpx.Client.send, httpx.AsyncClient.send
+def _patch(module) -> None:
+    sync_send, async_send = module.Client.send, module.AsyncClient.send
+
+    # The OpenAI SDK requests with stream=True, so the body is unread when send() returns.
+    # Reading it here is safe: the client caches the bytes and the SDK parses them afterwards.
+    def is_json(response) -> bool:
+        return response.headers.get("content-type", "").startswith("application/json")
 
     def send(self, request, **kwargs):
         response = sync_send(self, request, **kwargs)
-        _record(response)
+        if is_json(response):
+            response.read()
+            _record(response)
         return response
 
     async def asend(self, request, **kwargs):
         response = await async_send(self, request, **kwargs)
-        _record(response)
+        if is_json(response):
+            await response.aread()
+            _record(response)
         return response
 
-    httpx.Client.send, httpx.AsyncClient.send = send, asend
+    module.Client.send, module.AsyncClient.send = send, asend
+
+
+def _install_meter() -> None:
+    _patch(httpx)
+    try:
+        import httpx2
+    except ImportError:
+        return
+    _patch(httpx2)
 
 
 def _price(model: str) -> dict[str, float]:
@@ -249,7 +268,7 @@ def run_pipeline(rows: list[dict], config_key: str, max_usd: float) -> list[dict
 async def judge(records: list[dict], rows: dict[str, dict]) -> None:
     global PHASE
     from openai import AsyncOpenAI
-    from ragas.embeddings import embedding_factory
+    from ragas.embeddings.base import embedding_factory
     from ragas.llms import llm_factory
     from ragas.metrics.collections import AnswerRelevancy, ContextPrecision, Faithfulness
 
