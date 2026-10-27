@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     DEFAULT_MODEL: str = os.getenv("DEFAULT_MODEL", "gpt-4o-mini")
     TEMPERATURE: float = float(os.getenv("TEMPERATURE", "0.2"))
     MAX_RETRIES: int = int(os.getenv("MAX_RETRIES", "3"))
+    EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "text-embedding-ada-002")
 
     class Config:
         env_file = ".env"

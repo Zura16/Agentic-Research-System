@@ -13,7 +13,7 @@ def get_embeddings_model():
     else:
         # Fallback to OpenAI if api_key is present, otherwise use mock
         if settings.OPENAI_API_KEY:
-            return OpenAIEmbeddings(openai_api_key=settings.OPENAI_API_KEY)
+            return OpenAIEmbeddings(model=settings.EMBEDDING_MODEL, openai_api_key=settings.OPENAI_API_KEY)
         else:
             print("[!] Warning: OPENAI_API_KEY not found. Defaulting to MockEmbeddings.")
             return MockEmbeddings()
