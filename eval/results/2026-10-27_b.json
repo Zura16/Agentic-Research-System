@@ -1,0 +1,1421 @@
+{
+  "meta": {
+    "date": "2026-10-27T15:56:06-07:00",
+    "command": "python eval/run_eval.py --config b",
+    "configuration": "b",
+    "configuration_label": "full pipeline, max 2 revisions",
+    "git_commit": "4c7bd4ba6501a10931d3d0fcd3a18eabba9b6949",
+    "git_dirty": false,
+    "pipeline": {
+      "provider": "openai",
+      "model": "gpt-4o-mini",
+      "temperature": 0.2,
+      "embedding_model": "text-embedding-ada-002",
+      "retrieval_k": 4
+    },
+    "judge": {
+      "model": "gpt-4o",
+      "temperature": 0.0,
+      "embedding_model": "text-embedding-3-small"
+    },
+    "questions_file": "eval/questions.jsonl",
+    "questions_sha256": "7c2e7caa07561a3aa199105703e204bb2e2921511f6985c7b4468d42384ed3b3",
+    "corpus_manifest_sha256": "159af3dd1e5642b9c7275340744e317f731508a71b7d339d57decc3db50ec73c",
+    "index_chunks": 3129,
+    "n_questions": 50,
+    "hardware": "macOS-26.5.1-arm64-arm-64bit / arm64 / Python 3.12.4",
+    "packages": {
+      "ragas": "0.4.3",
+      "langchain": "1.4.7",
+      "langchain-openai": "1.7.3",
+      "langgraph": "1.2.18",
+      "openai": "3.3.0",
+      "faiss-cpu": "1.15.1"
+    }
+  },
+  "summary": {
+    "n_total": 50,
+    "n_errors": 0,
+    "faithfulness": {
+      "mean": 0.9459,
+      "n": 39,
+      "failed": 1
+    },
+    "answer_relevancy": {
+      "mean": 0.7412,
+      "n": 40,
+      "failed": 0
+    },
+    "context_precision": {
+      "mean": 0.5917,
+      "n": 40,
+      "failed": 0
+    },
+    "refusal_accuracy": {
+      "correct": 10,
+      "n": 10
+    },
+    "false_refusals": {
+      "count": 7,
+      "n": 40
+    },
+    "mean_revisions": 0.68,
+    "ended_rejected": 17,
+    "latency_s": {
+      "p50": 4.18,
+      "p95": 10.71
+    },
+    "tokens": {
+      "pipeline": {
+        "text-embedding-ada-002-v2": {
+          "input": 1206,
+          "output": 0,
+          "calls": 67
+        },
+        "gpt-4o-mini-2024-07-18": {
+          "input": 117294,
+          "output": 15893,
+          "calls": 151
+        }
+      },
+      "judge": {
+        "gpt-4o-2024-08-06": {
+          "input": 387805,
+          "output": 36624,
+          "calls": 410
+        },
+        "text-embedding-3-small": {
+          "input": 2469,
+          "output": 0,
+          "calls": 80
+        }
+      }
+    },
+    "cost_usd": {
+      "pipeline": 0.0273,
+      "judge": 1.3358
+    }
+  },
+  "records": [
+    {
+      "id": "q01",
+      "answerable": true,
+      "question": "In the RAG paper by Lewis et al., what serve as the parametric and the non-parametric memory?",
+      "answer": "In the RAG paper by Lewis et al., the parametric memory is represented by a pre-trained sequence-to-sequence (seq2seq) model, while the non-parametric memory is a dense vector index of Wikipedia, which is accessed using a pre-trained neural retriever. This combination allows the RAG models to effectively perform knowledge-intensive tasks by leveraging both learned parameters and external knowledge sources.",
+      "contexts": [
+        "Our results highlight the bene\ufb01ts of combining parametric and non-parametric memory with genera-\ntion for knowledge-intensive tasks\u2014tasks that humans could not reasonably be expected to perform\nwithout access to an external knowledge source. Our RAG models achieve state-of-the-art results\non open Natural Questions [29], WebQuestions [3] and CuratedTrec [2] and strongly outperform\nrecent approaches that use specialised pre-training objectives on TriviaQA [24]. Despite these being\nextractive tasks, we \ufb01nd that unconstrained generation outperforms previous extractive approaches.",
+        "found that people prefer RAG\u2019s generation over purely parametric BART, \ufb01nding RAG more factual\nand speci\ufb01c. We conducted an thorough investigation of the learned retrieval component, validating\nits effectiveness, and we illustrated how the retrieval index can be hot-swapped to update the model\nwithout requiring any retraining. In future work, it may be fruitful to investigate if the two components\ncan be jointly pre-trained from scratch, either with a denoising objective similar to BART or some\nanother objective. Our work opens up new research directions on how parametric and non-parametric",
+        "explore a general-purpose \ufb01ne-tuning recipe for retrieval-augmented generation\n(RAG) \u2014 models which combine pre-trained parametric and non-parametric mem-\nory for language generation. We introduce RAG models where the parametric\nmemory is a pre-trained seq2seq model and the non-parametric memory is a dense\nvector index of Wikipedia, accessed with a pre-trained neural retriever. We com-\npare two RAG formulations, one which conditions on the same retrieved passages\nacross the whole generated sequence, and another which can use different passages",
+        "treatz as a latent variable and marginalize over seq2seq predictions given different documents.\nbut have only explored open-domain extractive question answering. Here, we bring hybrid parametric\nand non-parametric memory to the \u201cworkhorse of NLP,\u201d i.e. sequence-to-sequence (seq2seq) models.\nWe endow pre-trained, parametric-memory generation models with a non-parametric memory through\na general-purpose \ufb01ne-tuning approach which we refer to as retrieval-augmented generation (RAG).\nWe build RAG models where the parametric memory is a pre-trained seq2seq transformer, and the"
+      ],
+      "context_sources": [
+        "2005.11401",
+        "2005.11401",
+        "2005.11401",
+        "2005.11401"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 5.007,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9054108133647724,
+      "context_precision": 0.4166666666458333
+    },
+    {
+      "id": "q02",
+      "answerable": true,
+      "question": "How did Lewis et al. split Wikipedia into documents for the RAG retrieval index, and how many documents resulted?",
+      "answer": "Lewis et al. split Wikipedia into documents by first applying pre-processing code from DrQA to extract the clean text portions of articles from a Wikipedia dump dated December 20, 2018. This pre-processing step involved removing semi-structured data such as tables, info boxes, lists, and disambiguation pages. After this, each article was divided into multiple, disjoint text blocks of 100 words, which served as the basic retrieval units. This process resulted in a total of 21,015,324 passages.",
+      "contexts": [
+        "Wikipedia dump from Dec. 20, 2018 as the source\ndocuments for answering questions. We \ufb01rst apply\nthe pre-processing code released in DrQA (Chen\net al., 2017) to extract the clean, text-portion of\narticles from the Wikipedia dump. This step re-\nmoves semi-structured data, such as tables, info-\nboxes, lists, as well as the disambiguation pages.\nWe then split each article into multiple, disjoint text\nblocks of 100 words as passages, serving as our\nbasic retrieval units, following (Wang et al., 2019),\nwhich results in 21,015,324 passages in the end.5",
+        "metric [48], [50], [82]. Cuconasu et al. [54] analyze which\ntype of documents should be retrieved, evaluate the relevance\nof the documents to the prompt, their position, and the\nnumber included in the context. The research findings reveal\nthat including irrelevant documents can unexpectedly increase\naccuracy by over 30%, contradicting the initial assumption\nof reduced quality. These results underscore the importance\nof developing specialized strategies to integrate retrieval with\nlanguage generation models, highlighting the need for further\nresearch and exploration into the robustness of RAG.",
+        "evidence in FEVER. We calculate the overlap in article titles between the topk documents retrieved\nby RAG and gold evidence annotations. We \ufb01nd that the top retrieved document is from a gold article\nin 71% of cases, and a gold article is present in the top 10 retrieved articles in 90% of cases.\n4.5 Additional Results\nGeneration Diversity Section 4.3 shows that RAG models are more factual and speci\ufb01c than\nBART for Jeopardy question generation. Following recent work on diversity-promoting decoding",
+        "RAG-S This 14th century work is divided into 3 sections: \"Inferno\", \"Purgatorio\" & \"Paradiso\"\nFor 2-way classi\ufb01cation, we compare against Thorne and Vlachos [57], who train RoBERTa [35]\nto classify the claim as true or false given the gold evidence sentence. RAG achieves an accuracy\nwithin 2.7% of this model, despite being supplied with only the claim and retrieving its own evidence.\nWe also analyze whether documents retrieved by RAG correspond to documents annotated as gold\nevidence in FEVER. We calculate the overlap in article titles between the topk documents retrieved"
+      ],
+      "context_sources": [
+        "2004.04906",
+        "2312.10997",
+        "2005.11401",
+        "2005.11401"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 4.4,
+      "error": null,
+      "refused": false,
+      "faithfulness": 0.8333333333333334,
+      "answer_relevancy": 0.6649360610767953,
+      "context_precision": 0.9999999999
+    },
+    {
+      "id": "q03",
+      "answerable": true,
+      "question": "By how much does Dense Passage Retrieval outperform BM25 on top-20 passage retrieval accuracy?",
+      "answer": "The document context provides the following retrieval accuracy for BM25 and Dense Passage Retrieval (DPR) on the top-20 passages:\n\n- BM25: 59.1 (NQ), 66.9 (TriviaQA), 55.0 (WQ), 70.9 (TREC), 68.8 (SQuAD)\n- Single DPR: 78.4 (NQ), 79.4 (TriviaQA), 73.2 (WQ), 79.8 (TREC), 63.2 (SQuAD)\n\nTo calculate the improvement of DPR over BM25 for the top-20 passage retrieval accuracy, we can take the difference for each dataset:\n\n- NQ: 78.4 - 59.1 = 19.3\n- TriviaQA: 79.4 - 66.9 = 12.5\n- WQ: 73.2 - 55.0 = 18.2\n- TREC: 79.8 - 70.9 = 8.9\n- SQuAD: 63.2 - 68.8 = -5.6 (indicating BM25 outperforms DPR)\n\nThus, Dense Passage Retrieval outperforms BM25 by the following amounts on the top-20 passage retrieval accuracy:\n\n- NQ: 19.3%\n- TriviaQA: 12.5%\n- WQ: 18.2%\n- TREC: 8.9%\n- SQuAD: DPR is behind by 5.6%\n\nOverall, DPR shows significant improvement over BM25 in most datasets, except for SQuAD where it performs worse.",
+      "contexts": [
+        "the retriever.\n5 Experiments: Passage Retrieval\nIn this section, we evaluate the retrieval perfor-\nmance of our Dense Passage Retriever (DPR),\nalong with analysis on how its output differs from\n6We use the un\ufb01ltered TriviaQA version and discard the\nnoisy evidence documents mined from Bing.\n7The improvement of using gold contexts over passages\nthat contain answers is small. See Section 5.2 and Ap-\npendix A.\nTraining Retriever Top-20 Top-100\nNQ TriviaQA WQ TREC SQuAD NQ TriviaQA WQ TREC SQuAD\nNone BM25 59.1 66.9 55.0 70.9 68.8 73.7 76.7 71.1 84.1 80.0",
+        "retrieval performance. Figure 1 illustrates the top-k\nretrieval accuracy with respect to different num-\nbers of training examples, measured on the devel-\nopment set of Natural Questions. As is shown, a\ndense passage retriever trained using only 1,000 ex-\namples already outperforms BM25. This suggests\nthat with a general pretrained language model, it is\npossible to train a high-quality dense retriever with\na small number of question\u2013passage pairs. Adding\nmore training examples (from 1k to 59k) further\nimproves the retrieval accuracy consistently.\nIn-batch negative training We test different",
+        "None BM25 59.1 66.9 55.0 70.9 68.8 73.7 76.7 71.1 84.1 80.0\nSingle DPR 78.4 79.4 73.2 79.8 63.2 85.4 85.0 81.4 89.1 77.2BM25 + DPR 76.6 79.8 71.0 85.2 71.5 83.8 84.5 80.5 92.7 81.3\nMulti DPR 79.4 78.8 75.0 89.1 51.6 86.0 84.7 82.9 93.9 67.6BM25 + DPR 78.0 79.9 74.7 88.5 66.2 83.9 84.4 82.3 94.1 78.6\nTable 2: Top-20 & Top-100 retrieval accuracy on test sets, measured as the percentage of top 20/100 retrieved\npassages that contain the answer. Single and Multi denote that our Dense Passage Retriever (DPR) was trained",
+        "20 40 60 80 100\nk: # of retrieved passages\n40\n50\n60\n70\n80\n90Top-k accuracy (%)\nBM25\n# Train: 1k\n# Train: 10k\n# Train: 20k\n# Train: 40k\n# Train: all (59k)\nFigure 1: Retriever top-k accuracy with different num-\nbers of training examples used in our dense passage re-\ntriever vs BM25. The results are measured on the de-\nvelopment set of Natural Questions. Our DPR trained\nusing 1,000 examples already outperforms BM25.\ntiple datasets, TREC, the smallest dataset of the\n\ufb01ve, bene\ufb01ts greatly from more training examples.\nIn contrast, Natural Questions and WebQuestions"
+      ],
+      "context_sources": [
+        "2004.04906",
+        "2004.04906",
+        "2004.04906",
+        "2004.04906"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 6.735,
+      "error": null,
+      "refused": false,
+      "faithfulness": "IncompleteOutputException: The output is incomplete due to a max_tokens length limit.",
+      "answer_relevancy": 0.834531650131828,
+      "context_precision": 0.3333333333
+    },
+    {
+      "id": "q04",
+      "answerable": true,
+      "question": "What are in-batch negatives in DPR training?",
+      "answer": "In-batch negatives in DPR (Dense Passage Retrieval) training refer to a training strategy where negative examples (i.e., passages that are not relevant to a given question) are included within the same batch of training data. Specifically, during training, each question in the batch is paired with a positive passage and its own set of negative passages. This approach allows the model to learn from a larger variety of examples in each training iteration, enhancing its ability to distinguish between relevant and irrelevant passages.\n\nThe document context mentions that in the in-batch negative training setting, the model is trained with a batch size of 128 and includes one additional BM25 negative passage per question. This method has been shown to be effective for learning dual-encoder models and improves retrieval accuracy by increasing the number of training examples available for the model to learn from.",
+      "contexts": [
+        "using individial or combined training datasets (all the datasets excluding SQuAD). See text for more details.\ntraditional retrieval methods, the effects of different\ntraining schemes and the run-time ef\ufb01ciency.\nThe DPR model used in our main experiments\nis trained using the in-batch negative setting (Sec-\ntion 3.2) with a batch size of128 and one additional\nBM25 negative passage per question. We trained\nthe question and passage encoders for up to 40\nepochs for large datasets (NQ, TriviaQA, SQuAD)\nand 100 epochs for small datasets (TREC, WQ),\nwith a learning rate of 10\u22125 using Adam, linear",
+        "effective solution that shows stronger empirical per-\nformance, without relying on additional pretraining\nor complex joint training schemes.\nDPR has also been used as an important mod-\nule in very recent work. For instance, extending\nthe idea of leveraging hard negatives, Xiong et al.\n(2020a) use the retrieval model trained in the pre-\nvious iteration to discover new negatives and con-\nstruct a different set of examples in each training\niteration. Starting from our trained DPR model,\nthey show that the retrieval performance can be\nfurther improved. Recent work (Izacard and Grave,",
+        "improves the retrieval accuracy consistently.\nIn-batch negative training We test different\ntraining schemes on the development set of Natural\nQuestions and summarize the results in Table 3.\nThe top block is the standard 1-of-N training set-\nting, where each question in the batch is paired\nwith a positive passage and its own set of n neg-\native passages (Eq. (2)). We \ufb01nd that the choice\nof negatives \u2014 random, BM25 or gold passages\n(positive passages from other questions) \u2014 does\nnot impact the top-k accuracy much in this setting\nwhenk\u2265 20.\nThe middle bock is the in-batch negative training",
+        "The trick of in-batch negatives has been used in\nthe full batch setting (Yih et al., 2011) and more\nrecently for mini-batch (Henderson et al., 2017;\nGillick et al., 2019). It has been shown to be an\neffective strategy for learning a dual-encoder model\nthat boosts the number of training examples.\n4 Experimental Setup\nIn this section, we describe the data we used for\nexperiments and the basic setup.\n4.1 Wikipedia Data Pre-processing\nFollowing (Lee et al., 2019), we use the English\nWikipedia dump from Dec. 20, 2018 as the source\ndocuments for answering questions. We \ufb01rst apply"
+      ],
+      "context_sources": [
+        "2004.04906",
+        "2004.04906",
+        "2004.04906",
+        "2004.04906"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 4.04,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9999997341485898,
+      "context_precision": 0.3333333333
+    },
+    {
+      "id": "q05",
+      "answerable": true,
+      "question": "What learning signal does REALM use to pre-train its knowledge retriever without supervision?",
+      "answer": "REALM uses a performance-based learning signal from unsupervised text to pre-train its knowledge retriever. Specifically, it rewards retrievals that improve the language model's perplexity, indicating that a successful retrieval is beneficial for the model's predictions. This approach allows the model to learn which knowledge to retrieve and utilize during inference without requiring supervision.",
+      "contexts": [
+        "To capture knowledge in a more interpretable and modular\nway, we propose a novel framework, Retrieval-Augmented\nLanguage Model (REALM) pre-training, which augments\nlanguage model pre-training algorithms with a learned tex-\ntual knowledge retriever . In contrast to models that store\nknowledge in their parameters, this approach explicitly ex-\nposes the role of world knowledge by asking the model to\nREALM: Retrieval-Augmented Language Model Pre-Training\ndecide what knowledge to retrieve and use during inference.\nBefore making each prediction, the language model uses",
+        "Before making each prediction, the language model uses\nthe retriever to retrieve documents 1 from a large corpus\nsuch as Wikipedia, and then attends over those documents\nto help inform its prediction. Learning this model end-to-\nend requires backpropagating through a retrieval step that\nconsiders an entire corpus of textual knowledge, as shown\nin Figure 1.\nThe key intuition of REALM is to train the retriever us-\ning a performance-based signal from unsupervised text:\na retrieval that improves the language model\u2019s perplex-\nity is helpful and should be rewarded, while an un-",
+        "through a retrieval step that considers millions\nof documents. We demonstrate the effective-\nness of Retrieval-Augmented Language Model\npre-training (REALM) by \ufb01ne-tuning on the chal-\nlenging task of Open-domain Question Answer-\ning (Open-QA). We compare against state-of-the-\nart models for both explicit and implicit knowl-\nedge storage on three popular Open-QA bench-\nmarks, and \ufb01nd that we outperform all previous\nmethods by a signi\ufb01cant margin (4-16% absolute\naccuracy), while also providing qualitative bene-\n\ufb01ts such as interpretability and modularity.\n1. Introduction",
+        "REALM: Retrieval-Augmented Language Model Pre-Training\nFigure 2. The overall framework of REALM. Left: Unsupervised pre-training. The knowledge retriever and knowledge-augmented\nencoder are jointly pre-trained on the unsupervised langua ge modeling task. Right: Supervised \ufb01ne-tuning. After the parameters of the\nretriever (\u03b8) and encoder ( \u03c6) have been pre-trained, they are then \ufb01ne-tuned on a task of p rimary interest, using supervised examples.\nlanguage modeling (MLM) loss as in Devlin et al. (2018):\np(y | z, x) =\nJx\u220f\nj=1\np(yj | z, x)\np(yj | z, x) \u221d exp\n(\nw\u22a4j BERTMASK(j)(joinBERT(x, zbody)))"
+      ],
+      "context_sources": [
+        "2002.08909",
+        "2002.08909",
+        "2002.08909",
+        "2002.08909"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.887,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8332344802192763,
+      "context_precision": 0.499999999975
+    },
+    {
+      "id": "q06",
+      "answerable": true,
+      "question": "What is salient span masking in REALM, and how are the spans found?",
+      "answer": "Salient span masking in REALM is a strategy used during pre-training to focus on examples that require world knowledge to predict masked tokens. Instead of masking tokens that can be predicted using only local context, salient span masking targets specific spans of text that are significant, such as named entities (e.g., \"United Kingdom\") or dates (e.g., \"July 1969\"). \n\nTo identify these salient spans, REALM employs a BERT-based tagger trained on the CoNLL-2003 dataset, which is designed to recognize named entities. Additionally, a regular expression is used to identify dates. During the masked language modeling task, one of these identified salient spans is selected and masked within a sentence. This approach has been shown to significantly outperform other masking strategies in the context of REALM.",
+      "contexts": [
+        "In the process of developing REALM, we discovered sev-\neral additional strategies that further guide the model to-\nwards meaningful retrievals, described below.\nSalient span masking During REALM pre-training, we\nwant to focus on examples x that require world knowledge\nto predict the masked tokens. As explained in Section 2,\nsome MLM spans only require local context. To focus on\nproblems that require world knowledge, we mask salient\nspans such as \u201c United Kingdom \u201d or \u201c July 1969 \u201d. We\nuse a BERT-based tagger trained on CoNLL-2003 data\n(Sang & De Meulder , 2003) to identify named entities, and",
+        "Masking scheme We compare our salient span masking\nscheme (Section 3.4) with (1) random token masking in-\ntroduced in BERT ( Devlin et al., 2018) and (2) random\nspan masking proposed by SpanBERT ( Joshi et al. , 2019).\nWhile such salient span masking has not been shown to\nbe impactful in previous work with standard BERT train-\ning (Joshi et al. , 2019), it is crucial for REALM. Intuitively,\nthe latent variable learning relies heavily on the utility of re-\ntrieval and is therefore more sensitive to a consistent lear n-\ning signal.\nMIPS index refresh rate During pre-training, we run a",
+        "(Sang & De Meulder , 2003) to identify named entities, and\na regular expression to identify dates. We select and mask\none of these salient spans within a sentence for the masked\nlanguage modeling task. We show that this signi\ufb01cantly\noutperforms other masking strategies in Section 4.5.\nNull document Even with salient span masking, not all\nmasked tokens require world knowledge to predict. We\nmodel this by adding an empty null document \u2205 to the top\nk retrieved documents, allowing appropriate credit to be as-\nsigned to a consistent sink when no retrieval is necessary.",
+        "Encoder or Retriever We \ufb01rst aim to determine whether\nREALM pre-training improves the retriever or the encoder,\nor both. To do so, we can reset the parameters of either\nthe retriever or the encoder to their baseline state before\nREALM pre-training, and feed that into \ufb01ne-tuning. Reset-\nting both the retriever and encoder reduces the system to\nour main baseline, ORQA. We \ufb01nd that both the encoder\nand retriever bene\ufb01t from REALM training separately, but\nthe best result requires both components acting in unison.\nMasking scheme We compare our salient span masking"
+      ],
+      "context_sources": [
+        "2002.08909",
+        "2002.08909",
+        "2002.08909",
+        "2002.08909"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 4.893,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.945806597640224,
+      "context_precision": 0.8333333332916666
+    },
+    {
+      "id": "q07",
+      "answerable": true,
+      "question": "How does Fusion-in-Decoder process retrieved passages?",
+      "answer": "Fusion-in-Decoder processes retrieved passages by first encoding each passage independently alongside the question, which allows the model to scale efficiently to a large number of contexts. This independent processing in the encoder ensures that the computation time grows linearly with the number of passages, rather than quadratically. \n\nIn the decoder, however, the model processes the passages jointly, which enables better aggregation of evidence from multiple passages. This two-step approach\u2014first retrieving supporting passages and then generating an answer using a sequence-to-sequence model\u2014facilitates effective evidence fusion and has led to state-of-the-art results in open-domain question answering tasks.",
+      "contexts": [
+        "sentations of all the retrieved passages. The model\nthus performs evidence fusion in the decoder only,\nand we refer to it as Fusion-in-Decoder.\nBy processing passages independently in the en-\ncoder, but jointly in the decoder, this method dif-\nfers from Min et al. (2020) and Lewis et al. (2020).\nProcessing passages independently in the encoder\nallows to scale to large number of contexts, as it\nonly performs self attention over one context at a\ntime. This means that the computation time of the\nmodel grows linearly with the number of passages,\ninstead of quadratically. On the other hand, pro-",
+        "method proceeds in two steps, by \ufb01rst retrieving\nsupporting passages using either sparse or dense\narXiv:2007.01282v2  [cs.CL]  3 Feb 2021\nQuestion + Passage 1encoder\nQuestion + Passage 2encoder\nQuestion + Passage Nencoder\ndecoder Answerconcat \u2026\n\u2026\n\u2026\n\u2026\nFigure 2: Architecture of the Fusion-in-Decoder method.\nrepresentations. Then, a sequence-to-sequence\nmodel generates the answer, taking as input the re-\ntrieved passages in addition to the question. While\nconceptually simple, this method sets new state-of-\nthe-art results on the TriviaQA and NaturalQues-",
+        "model grows linearly with the number of passages,\ninstead of quadratically. On the other hand, pro-\ncessing passages jointly in the decoder allows to\nbetter aggregate evidence from multiple passages.\n4 Experiments\nIn this section, we report empirical evaluations of\nFusion-in-Decoder for open domain QA.\nDatasets. We consider the following datasets,\nand use the same setting as Lee et al. (2019):\n\u2022 NaturalQuestions (Kwiatkowski et al., 2019)\ncontains questions corresponding to Google\nsearch queries. The open-domain version of\nthis dataset is obtained by discarding answers",
+        "using the title Python string method. For both\ntraining and testing, we retrieve 100 passages (un-\nless said otherwise), and truncate them to 250 word\npieces. Following the results of Karpukhin et al.\n(2020), passages are retrieved with DPR for NQ\nand TriviaQA, and with BM25 for SQuAD. We\ngenerate answers by using greedy decoding.\nComparison to state-of-the-art. In table 1, we\ncompare the results obtained by Fusion-in-Decoder\nwith existing approaches for open domain ques-\ntion answering. We observe that while conceptu-\nally simple, this method outperforms existing work"
+      ],
+      "context_sources": [
+        "2007.01282",
+        "2007.01282",
+        "2007.01282",
+        "2007.01282"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.87,
+      "error": null,
+      "refused": false,
+      "faithfulness": 0.8888888888888888,
+      "answer_relevancy": 0.983721738058647,
+      "context_precision": 0.99999999995
+    },
+    {
+      "id": "q08",
+      "answerable": true,
+      "question": "What did Izacard and Grave observe when they increased the number of retrieved passages?",
+      "answer": "Izacard and Grave observed that the performance of their models continued to improve when retrieving up to one hundred passages. This suggests that increasing the number of retrieved passages enhances the effectiveness of the passage retrieval process in their open domain question answering framework.",
+      "contexts": [
+        "number of retrieved passages, as the performance keeps\nimproving when retrieving up to one hundred passages.\nsupport documents, before extracting the answer\nfrom these documents. Different retrieval tech-\nniques have been considered, either using sparse\nrepresentations based on TF/IDF or using dense\nembeddings (Guu et al., 2020; Karpukhin et al.,\n2020). The models which extract the answers are\noften based on contextualized word representations\nsuch as ELMo or BERT (Peters et al., 2018; De-\nvlin et al., 2019), and predict a span as answer.\nAggregating and combining evidence from mul-",
+        "G. Izacard and E. Grave. Leveraging passage retrieval with generative models for open domain\nquestion answering. InConference of the European Chapter of the Association for Computational\nLinguistics, Apr. 2021. URLhttps://aclanthology.org/2021.eacl-main.74.\nG. Izacard, F. Petroni, L. Hosseini, N. De Cao, S. Riedel, and E. Grave. A memory e\ufb03cient baseline for\nopen domain question answering.arXiv preprint arXiv:2012.15156, 2020.\nS. Jain and B. C. Wallace. Attention is not Explanation. InProceedings of the 2019 Conference of",
+        "Leveraging Passage Retrieval with Generative Models\nfor Open Domain Question Answering\nGautier Izacard1,2,3 Edouard Grave1\n1 Facebook AI Research, Paris\n2 ENS, PSL University, Paris\n3 Inria, Paris\ngizacard|egrave@fb.com\nAbstract\nGenerative models for open domain question\nanswering have proven to be competitive, with-\nout resorting to external knowledge. While\npromising, this approach requires to use mod-\nels with billions of parameters, which are ex-\npensive to train and query. In this paper, we\ninvestigate how much these models can ben-\ne\ufb01t from retrieving text passages, potentially",
+        "to demonstrate that our retrieval pathway can be used to inject information from arbitrary data\nsources. We use the version4 provided by Izacard and Grave (2021) which is augmented with the\nretrieved passages fromD/p.sc /r.sc (Karpukhin et al., 2020). We \ufb01ne-tune all the weights of our 7.5B\npre-trained R/e.sc /t.sc /r.sc/o.sc model for 25,000 steps using the top 20 retrieved passages. We format the\ndata as \u201cquestion: {question} \\n answer: {answer} \u201d and left pad the data such that\n\u201canswer:\u201d coincides with the end of the \ufb01rst chunk of 64 tokens and thus aligns with the \ufb01rst"
+      ],
+      "context_sources": [
+        "2007.01282",
+        "2112.04426",
+        "2007.01282",
+        "2112.04426"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.693,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8168776109291707,
+      "context_precision": 0.8333333332916666
+    },
+    {
+      "id": "q09",
+      "answerable": true,
+      "question": "How large is RETRO's retrieval database, and how does RETRO compare to GPT-3 on the Pile?",
+      "answer": "The document context does not provide specific information about the size of RETRO's retrieval database, which is a significant gap in answering your query. While it mentions that RETRO has a model size of 7.5 billion parameters, it does not detail the size of its retrieval database.\n\nRegarding the comparison between RETRO and GPT-3 on the Pile, the context indicates that RETRO outperforms the 7B baseline and Jurassic-1, but it does not provide a direct performance comparison between RETRO and GPT-3. However, it does include performance metrics for GPT-3.5-Turbo, which could imply a context for comparison, but specific results or comparisons to RETRO are not explicitly stated.\n\nIn summary, the context lacks details on the retrieval database size for RETRO and does not provide a direct performance comparison between RETRO and GPT-3 on the Pile.",
+      "contexts": [
+        "ubuntu_irc\nnih_exporter\narxiv\nuspto_backgrounds\nopensubtitles\nphilpapers\nhackernews\nstackexchange\nfreelaw\npubmed_abstracts\nbooks3\npile_cc\npubmed_central\ngutenberg_pg_19\ngithub\n20\n0\n20\n40\n60\n80\n100% improvement\nRelative bits-per-byte improvement over our 7B baseline without retrieval\nJurassic-1 (178B)\nGopher (280B)\nRETRO (7.5B)\nFigure 4j The Pile: Comparison of our 7B baseline against Jurassic-1, Gopher, andR/e.sc /t.sc /r.sc/o.sc. We\nobserve that the retrieval model outperforms the baseline on all test sets and outperforms Jurassic-1",
+        "GPT-3.5 model (gpt-3.5-turbo-instruct). For the\nretrieval-augmented LLM design, we follow the\nimplementation details from Trivedi et al. (2023),\nwhich include input prompts, instructions, and the\nnumber of test samples for evaluation (e.g., 500\nsamples per dataset). In our Adaptive-RAG, for the\nquery-complexity classifier, we use and train the\nT5-Large model (Raffel et al., 2020). Specifically,\nthe classifier is trained using the epoch that shows\nthe best performance until 100 training iterations\nfrom the validation set, with the learning rate of 3e-",
+        "Claude-1.3 (100K) 59.1% 55.1% 54.9% 55.7% 56.6% 56.1% 60.0%\nGPT-3.5-Turbo (16K) 73.4% 55.1% 50.5% 50.9% 51.8% 54.9% 63.7%\nMPT-30B-Instruct 51.6% 51.3% 51.2% 49.0% 49.6% 51.3% 54.1%\nLongChat-13B (16K) 66.9% 54.8% 52.5% 52.9% 52.2% 51.3% 55.1%\nTable 7: Model performance when evaluated on the multi-document QA task with 30 total retrieved documents.",
+        "ChatGPT-CoT, and ChatGPT-few-shot used in our\nexperiments can be referred to in Appendix A.\nResults reveal that the lightweight T5-based re-\ntrieval evaluator significantly outperformed the\ncompetitive ChatGPT in all settings.\n5.6 Robustness to Retrieval Performance\nTo further verify the robustness of the proposed\nmethod to retrieval performance, we studied how\nthe generation performance changed given different\n69.8\n(Actual)\n60 50 40 30 20 10\nAccuracy of retrieval\n20\n30\n40\n50\n60\n70Accuracy of generation\nno retrieval\nSelf-RAG Self-CRAG\nFigure 3: The generation performance of Self-RAG"
+      ],
+      "context_sources": [
+        "2112.04426",
+        "2403.14403",
+        "2307.03172",
+        "2401.15884"
+      ],
+      "revisions": 2,
+      "final_validation_status": "REJECTED",
+      "query_rewrite_failures": 0,
+      "latency_s": 11.652,
+      "error": null,
+      "refused": true,
+      "faithfulness": 0.7272727272727273,
+      "answer_relevancy": 0.0,
+      "context_precision": 0.0
+    },
+    {
+      "id": "q10",
+      "answerable": true,
+      "question": "When RETRO is fine-tuned for question answering, for how many steps is it trained and what passages can it attend to?",
+      "answer": "The provided document context does not specify the number of training steps for RETRO when fine-tuned for question answering, nor does it indicate the specific passages that RETRO can attend to. Therefore, the answer to your query is that this information is missing from the context.",
+      "contexts": [
+        "domain question answering. It proceeds in two\nsteps, \ufb01rst retrieving support passages before pro-\ncessing them with a sequence to sequence model.\nModel NQ TriviaQA SQuAD Open\nEM EM EM EM F1\nDrQA (Chen et al., 2017) - - - 29.8 -\nMulti-Passage BERT (Wang et al., 2019) - - - 53.0 60.9\nPath Retriever (Asai et al., 2020) 31.7 - - 56.5 63.8\nGraph Retriever (Min et al., 2019b) 34.7 55.8 - - -\nHard EM (Min et al., 2019a) 28.8 50.9 - - -\nORQA (Lee et al., 2019) 31.3 45.1 - 20.2 -\nREALM (Guu et al., 2020) 40.4 - - - -\nDPR (Karpukhin et al., 2020) 41.5 57.9 - 36.7 -",
+        "T.Rockt\u00e4schel,S.Riedel,andD.Kiela. Retrieval-augmentedgenerationforknowledge-intensiveNLP\ntasks. InAdvances in Neural Information Processing Systems, 2020. URLhttps://proceedings.\nneurips.cc/paper/2020/file/6b493230205f780e1bc26945df7481e5-Paper.pdf.\nP. Lewis, P. Stenetorp, and S. Riedel. Question and answer test-train overlap in open-domain question\nanswering datasets. InConference of the European Chapter of the Association for Computational\nLinguistics, Apr. 2021. URLhttps://aclanthology.org/2021.eacl-main.86.",
+        "using additional knowledge in generative models\nby using retrieval lead to important performance\ngains. On NaturalQuestions, the closed book T5\nmodel obtains 36.6% accuracy with 11B parame-\nters, while our approach obtains 44.1% with 770M\nparameters plus Wikipedia with BM25 retrieval.\nBoth methods use roughly the same amount of\nmemory to store information, indicating that text\nbased explicit memories are competitive for knowl-\nedge retrieval tasks.\nScaling with number of passages. In Figure 3,\nwe report the performance with respect to the\nNaturalQuestions TriviaQA",
+        "through a retrieval step that considers millions\nof documents. We demonstrate the effective-\nness of Retrieval-Augmented Language Model\npre-training (REALM) by \ufb01ne-tuning on the chal-\nlenging task of Open-domain Question Answer-\ning (Open-QA). We compare against state-of-the-\nart models for both explicit and implicit knowl-\nedge storage on three popular Open-QA bench-\nmarks, and \ufb01nd that we outperform all previous\nmethods by a signi\ufb01cant margin (4-16% absolute\naccuracy), while also providing qualitative bene-\n\ufb01ts such as interpretability and modularity.\n1. Introduction"
+      ],
+      "context_sources": [
+        "2007.01282",
+        "2112.04426",
+        "2007.01282",
+        "2002.08909"
+      ],
+      "revisions": 2,
+      "final_validation_status": "REJECTED",
+      "query_rewrite_failures": 0,
+      "latency_s": 7.661,
+      "error": null,
+      "refused": true,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.0,
+      "context_precision": 0.0
+    },
+    {
+      "id": "q11",
+      "answerable": true,
+      "question": "What are the two steps of HyDE (Hypothetical Document Embeddings)?",
+      "answer": "The two steps of HyDE (Hypothetical Document Embeddings) are:\n\n1. **Generative Task**: An instruction-following language model (such as InstructGPT) is used to generate a hypothetical document based on a given query. This document is designed to capture relevance patterns, although it may contain false details.\n\n2. **Document-Document Similarity Task**: An unsupervised contrastively learned encoder (like Contriever) encodes the generated hypothetical document into an embedding vector. This vector is used to identify document-document similarity in the embedding space.\n\nThese steps allow HyDE to perform retrieval based on document embeddings rather than directly on the original query.",
+      "contexts": [
+        "engineering to let LLM generate a query based on the original\nquery for subsequent retrieval. HyDE [11] construct hypothet-\nical documents (assumed answers to the original query). It\nfocuses on embedding similarity from answer to answer rather\nthan seeking embedding similarity for the problem or query.\nUsing the Step-back Prompting method [10], the original\nquery is abstracted to generate a high-level concept question\n(step-back question). In the RAG system, both the step-back\nquestion and the original query are used for retrieval, and both",
+        "evance label is available. In this paper, we\nrecognize the dif\ufb01culty of zero-shot learning\nand encoding relevance. Instead, we pro-\npose to pivot through Hypothetical Document\nEmbeddings (HyDE). Given a query, HyDE \ufb01rst\nzero-shot instructs an instruction-following\nlanguage model (e.g. InstructGPT) to gen-\nerate a hypothetical document. The docu-\nment captures relevance patterns but is unreal\nand may contain false details. Then, an un-\nsupervised contrastively learned encoder (e.g.\nContriever) encodes the document into an\nembedding vector. This vector identi\ufb01es a",
+        "3.2 HyDE\nHyDE circumvents the aforementioned learning\nproblem by performing search in document-\nonly embedding space that captures document-\ndocument similarity. This can be easily learned\nusing unsupervised contrastive learning (Izacard\net al., 2021; Gao et al., 2021; Gao and Callan,\n2022). We set document encoder encd directly as a\ncontrastive encoder enccon.\nf = encd = enccon (2)\nThis function is also denoted as f for simplic-\nity. This unsupervised contrastive encoder will\nbe shared by all incoming document corpus.\nvd = f (d) \u2200d \u2208 D1 \u222a D2 \u222a ... \u222a DL (3)",
+        "\uc5d0\ub809\ud22c\uc2a4\uac00  \uc0b4\uc558\ub358  142 \ub9cc  \ub144  \uc804\uc73c\n\ub85c  \uac70\uc2ac\ub7ec\uac04\ub2e4 ...\ninstruction query generated document real document\nFigure 1: An illustration of the HyDE model. Documents snippets are shown. HyDE serves all types of queries\nwithout changing the underlyingGPT-3 andContriever/mContriever models.\nto human intent to follow instructions.\nWith these ingredients, we propose to\npivot through Hypothetical Document\nEmbeddings ( HyDE), and decompose dense\nretrieval into two tasks, a generative task per-\nformed by an instruction-following language\nmodel and a document-document similarity task"
+      ],
+      "context_sources": [
+        "2312.10997",
+        "2212.10496",
+        "2212.10496",
+        "2212.10496"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 4.19,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9999999999999997,
+      "context_precision": 0.49999999995
+    },
+    {
+      "id": "q12",
+      "answerable": true,
+      "question": "Why can HyDE tolerate false details in the hypothetical document it generates?",
+      "answer": "HyDE can tolerate false details in the hypothetical documents it generates because it focuses on capturing relevance patterns rather than ensuring factual accuracy. The generated documents are considered \"unreal\" and may contain inaccuracies, but they are designed to reflect the underlying relevance to the original query. This approach allows HyDE to leverage the capabilities of large language models (LLMs) to generate content that is semantically relevant, even if it includes false details. The emphasis is on embedding similarity and relevance rather than strict adherence to factual correctness.",
+      "contexts": [
+        "engineering to let LLM generate a query based on the original\nquery for subsequent retrieval. HyDE [11] construct hypothet-\nical documents (assumed answers to the original query). It\nfocuses on embedding similarity from answer to answer rather\nthan seeking embedding similarity for the problem or query.\nUsing the Step-back Prompting method [10], the original\nquery is abstracted to generate a high-level concept question\n(step-back question). In the RAG system, both the step-back\nquestion and the original query are used for retrieval, and both",
+        "retrieval can achieve time-aware RAG, ensuring the freshness\nof knowledge and avoiding outdated information.\nIn addition to extracting metadata from the original doc-\numents, metadata can also be artificially constructed. For\nexample, adding summaries of paragraph, as well as intro-\nducing hypothetical questions. This method is also known as\nReverse HyDE. Specifically, using LLM to generate questions\nthat can be answered by the document, then calculating the\nsimilarity between the original question and the hypothetical\nquestion during retrieval to reduce the semantic gap between",
+        "evance label is available. In this paper, we\nrecognize the dif\ufb01culty of zero-shot learning\nand encoding relevance. Instead, we pro-\npose to pivot through Hypothetical Document\nEmbeddings (HyDE). Given a query, HyDE \ufb01rst\nzero-shot instructs an instruction-following\nlanguage model (e.g. InstructGPT) to gen-\nerate a hypothetical document. The docu-\nment captures relevance patterns but is unreal\nand may contain false details. Then, an un-\nsupervised contrastively learned encoder (e.g.\nContriever) encodes the document into an\nembedding vector. This vector identi\ufb01es a",
+        "evance modeling and instruction understanding\ncan be delegated to the more powerful and \ufb02ex-\nible LLM. As a consequence, the need for rele-\nvance labels is removed. We are excited to see\nhow this can be generalized further to more so-\nphisticated tasks like multi-hop retrieval/QA and\nconversational search.\nWe argueHyDE is also of practical use though not\nnecessarily over the entire lifespan of a search sys-\ntem. At the very beginning of the life of the search\nsystem, serving queries using HyDE offers perfor-\nmance comparable to a \ufb01ne-tuned model, which"
+      ],
+      "context_sources": [
+        "2312.10997",
+        "2312.10997",
+        "2212.10496",
+        "2212.10496"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.679,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9913076849426897,
+      "context_precision": 0.3333333333
+    },
+    {
+      "id": "q13",
+      "answerable": true,
+      "question": "What does FLARE stand for, and what does it use as the retrieval query?",
+      "answer": "FLARE stands for Forward-Looking Active REtrieval augmented generation. It uses a prediction of the upcoming sentence as the retrieval query to anticipate future content. If the generated sentence contains low-confidence tokens, this prediction is utilized to retrieve relevant documents, which are then used to regenerate the sentence. There are two methods associated with FLARE: FLAREinstruct, which prompts the language model (LM) to generate retrieval queries when necessary, and FLAREdirect, which directly uses the LM\u2019s generation as search queries.",
+      "contexts": [
+        "tive retrieval augmented generation, methods\nthat actively decide when and what to retrieve\nacross the course of the generation. We propose\nForward-Looking Active REtrieval augmented\ngeneration (FLARE), a generic method which\niteratively uses a prediction of the upcoming\nsentence to anticipate future content, which is\nthen utilized as a query to retrieve relevant doc-\numents to regenerate the sentence if it contains\nlow-confidence tokens. We test FLARE along\nwith baselines comprehensively over 4 long-\nform knowledge-intensive generation tasks/-\ndatasets. FLARE achieves superior or compet-",
+        "the intents of future generations. We propose two\nforward-looking active retrieval augmented gener-\nation (FLARE) methods to implement the active\nretrieval augmented generation framework. The\nfirst method prompts the LM to generate retrieval\nqueries when necessary while generating the an-\nswer using retrieval-encouraging instructions, de-\nnoted as FLAREinstruct. The second method directly\nuses the LM\u2019s generation as search queries, denoted\nas FLAREdirect, which iteratively generates the next\nsentence to gain insight into the future topic, and",
+        "2021; Stelmakh et al., 2022; Hayashi et al., 2021).\nOver all tasks, FLARE achieves superior or com-\npetitive performance compared to single-time and\nmulti-time retrieval baselines, demonstrating the\neffectiveness and generalizability of our method.\n2 Retrieval Augmented Generation\nWe formally define single-time retrieval augmented\ngeneration and propose the framework of active\nretrieval augmented generation.\n2.1 Notations and Definitions\nGiven a user input x and a document corpus D =\n{di}|D|i=1 (such as all Wikipedia articles), the goal of\nretrieval augmented LMs is to generate the answer",
+        "next sentence, using it as a query to retrieve rel-\nevant documents, and then regenerating the next\nsentence conditioning on the retrieved documents.\nCombining the two aspects, we propose Forward-\nLooking Active REtrieval augmented generation\n(FLARE), as illustrated in Figure 1. FLARE iter-\natively generates a temporary next sentence, use\nit as the query to retrieve relevant documents if it\ncontains low-probability tokens and regenerate the\nnext sentence until reaches the end.\nFLARE is applicable to any existing LMs at\ninference time without additional training. Con-"
+      ],
+      "context_sources": [
+        "2305.06983",
+        "2305.06983",
+        "2305.06983",
+        "2305.06983"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 4.454,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.81175530564771,
+      "context_precision": 0.9166666666361111
+    },
+    {
+      "id": "q14",
+      "answerable": true,
+      "question": "How does the threshold theta control when FLARE retrieves?",
+      "answer": "The threshold theta (\u03b8) in FLARE controls when retrieval is activated based on the confidence level of the model. By adjusting this threshold from 0 to 1, the system determines the proportion of steps or sentences where retrieval occurs. If the confidence is above the threshold, retrieval is triggered; if it is below, retrieval does not happen. \n\nThe performance of FLARE varies with the retrieval percentage. For instance, on the 2WikiMultihopQA dataset, performance plateaus when retrieval exceeds 60%, suggesting that additional retrieval is unnecessary when the model is confident. Conversely, on the StrategyQA dataset, performance declines when retrieval exceeds 50%, indicating that excessive retrieval can introduce noise and hinder the generation process. Thus, theta plays a crucial role in balancing the frequency of retrieval to optimize performance.",
+      "contexts": [
+        "2WikiMultihopQA StrategyQA\nFigure 5: Performance (EM) of FLARE with respect\nto the percentage of steps/sentences with retrieval on\n2WikiMultihopQA and StrategyQA.\nthe past hurts the performance, further confirming\nour hypothesis that previous context might not be\nrelevant to intent of future generations.\nImportance of active retrieval. Next, we inves-\ntigate how active retrieval threshold \u03b8 affects per-\nformance. To alter our method from not retrieving\nto retrieving every sentence, we adjust the confi-\ndence threshold \u03b8 that determines when to trigger",
+        "dence threshold \u03b8 that determines when to trigger\nretrieval from 0 to 1. We then calculate the pro-\nportion of steps/sentences where retrieval is acti-\nvated, and present the performance based on it. As\nshown in Figure 5, on 2WikiMultihopQA, the per-\nformance plateaus when the retrieval percentage\nexceeds 60%, indicating that retrieval when LMs\nare confident is not necessary. On StrategyQA, the\nperformance drops when the retrieval percentage\nexceeds 50%, indicating that unnecessary retrieval\ncan introduce noise and impede the original gen-\neration process. We found triggering retrieval for",
+        "0.6 0.506 0.593 0.586 0.622\nTable 5: Performance of FLARE with respect to the\nmasking threshold \u03b2 on 2WikiMultihopQA.\nASQA-hint WikiAsp\nEM D-F 1 R-L DR UniEval E-F 1 R-L\nImplicit 45.7 36.9 37.7 37.3 53.4 18.8 27.7\nExplicit 46.2 36.7 37.7 37.2 53.4 18.9 27.6\nTable 6: A comparison between implicit and explicit\nquery formulation methods in FLARE.\nthresholds \u03b2. Retrieving directly with the complete\nsentence (\u03b2 = 0) is worse than masking tokens\nwith low probabilities, confirming our hypothesis\nthat low-confidence erroneous tokens can distract\nretrievers. We compare implicit and explicit query",
+        "by Liu et al. (2023a). Our framework lets practitioners choose and customize models\u2019 behaviors at\ntest time by adjusting such parameters without requiring additional training.\nEfficiency and accuracy trade-off. Using our framework, practitioners can adjust how often retrieval\noccurs using the token probability of reward tokens. We evaluate how this adaptive threshold affects\noverall accuracy and frequency of retrieval, and we evaluate the performance with varying numbers\nof threshold \u03b4 (larger \u03b4 results in less retrieval) on PubHealth and PopQA. Figure 3c shows that"
+      ],
+      "context_sources": [
+        "2305.06983",
+        "2305.06983",
+        "2305.06983",
+        "2310.11511"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 4.034,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.874700699295576,
+      "context_precision": 0.99999999995
+    },
+    {
+      "id": "q15",
+      "answerable": true,
+      "question": "What are reflection tokens in Self-RAG?",
+      "answer": "Reflection tokens in Self-RAG are special tokens used to enhance the model's ability to critique and evaluate its own generated text. They are categorized into two types: retrieval tokens, which indicate the need for retrieving additional information, and critique tokens, which assess the quality of the generated content. The model uses these tokens to determine whether augmenting its output with retrieved passages would be beneficial, thus allowing it to adapt its behavior based on the task requirements. This mechanism enables the model to improve its factual accuracy and overall performance during the inference phase.",
+      "contexts": [
+        "and critique text passages and its own generation by predicting the next tokens from its original\nvocabulary as well as newly added special tokens, called reflection tokens.SELF -R AG further enables\nthe tailoring of LM behaviors at test time by leveraging reflection tokens. Our holistic evaluations on\nsix tasks using multiple metrics demonstrate that SELF -RAG significantly outperforms LLMs with\nmore parameters or with conventional retrieval-augmented generation approaches.\n10\nPreprint.\nETHICAL CONCERNS",
+        "tokens (i.e., reflection tokens). Reflection tokens are categorized into retrieval and critique tokens to\nindicate the need for retrieval and its generation quality respectively (Figure 1 right). In particular,\ngiven an input prompt and preceding generations, SELF -RAG first determines if augmenting the\ncontinued generation with retrieved passages would be helpful. If so, it outputs a retrieval token that\ncalls a retriever model on demand (Step 1). Subsequently,SELF -RAG concurrently processes multiple",
+        "3.3 S ELF -RAG INFERENCE\nGenerating reflection tokens to self-evaluate its own output makes SELF -RAG controllable during the\ninference phase, enabling it to tailor its behavior to diverse task requirements. For tasks demanding\nfactual accuracy (Min et al., 2023), we aim for the model to retrieve passages more frequently to\nensure that the output aligns closely with the available evidence. Conversely, in more open-ended\ntasks, like composing a personal experience essay, the emphasis shifts towards retrieving less and",
+        "eration (SELF -R AG) that enhances an LM\u2019s quality and factuality through retrieval\nand self-reflection. Our framework trains a single arbitrary LM that adaptively\nretrieves passages on-demand, and generates and reflects on retrieved passages\nand its own generations using special tokens, called reflection tokens. Generating\nreflection tokens makes the LM controllable during the inference phase, enabling it\nto tailor its behavior to diverse task requirements. Experiments show that SELF -\nRAG (7B and 13B parameters) significantly outperforms state-of-the-art LLMs"
+      ],
+      "context_sources": [
+        "2310.11511",
+        "2310.11511",
+        "2310.11511",
+        "2310.11511"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.559,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9785716419974406,
+      "context_precision": 0.999999999975
+    },
+    {
+      "id": "q16",
+      "answerable": true,
+      "question": "In Self-RAG, what does the ISSUP token judge, and what values can it take?",
+      "answer": "The ISSUP token in Self-RAG judges whether the output is fully supported by certain evidence. However, the document context does not specify the exact values that the ISSUP token can take. It indicates that ISSUP relates to the concept of attribution and assesses the sufficiency of evidence for verifying the validity of the answer, but it does not provide detailed information on the specific values or categories that ISSUP may encompass. Thus, the context is insufficient to determine the precise values of the ISSUP token.",
+      "contexts": [
+        "as if it were occurring in a conversation) and supported (i.e., the provided evidence is sufficient to\nverify the validity of the answer). For S&P, we do not consider the instances where SELF -RAG\npredicts irrelevant or no support . We then ask our annotators whether the model-predicted\nreflection tokens about ISREL and ISSUP match their inspections (e.g., whether the fully supported\noutput is supported by the cited evidence). Human annotators find SELF -RAG answers are often\nplausible and supported by relevant passages with higher S&P scores on short-form PopQA, which is",
+        "previously. For instance, a passage may contain rich factual information, and thus SELF -RAG\ngenerates multiple segments based on the passage.\n\u2022 Relevant ( ISREL ): Retrieved knowledge may not be always relevant to the input. This aspect\nindicates whether the evidence provides useful information (Relevant) or not (Irrelevant).\n\u2022 Supported ( ISSUP ): Attribution is the concept of whether the output is fully supported by\ncertain evidence (Menick et al., 2022; Bohnet et al., 2022). This aspect judges how much infor-",
+        "plausible and supported by relevant passages with higher S&P scores on short-form PopQA, which is\nconsistent with Menick et al. (2022). Human annotators also find ISREL and ISSUP reflection token\npredictions are mostly aligned with their assessments. Appendix Table 6 shows several annotated\nexamples and explanations on assessments.\n6 C ONCLUSION\nThis work introduces SELF -RAG, a new framework to enhance the quality and factuality of LLMs\nthrough retrieval on demand and self-reflection. SELF -R AG trains an LM to learn to retrieve, generate,",
+        "retrieved passages are not relevant, SELF -R AG generates ISREL =Irrelevant, indicating that the\nfollowing answers may not be factually grounded, while those instruction-tuned models continue to\ngenerate plausible answers.\n8https://github.com/facebookresearch/atlas\n9https://programmablesearchengine.google.com/about/\n20\nPreprint.\nC.2 H UMAN EVALUATION EXAMPLES\nTable 6 shows examples with human evaluations on S&P and correctness of ISREL and ISSUP\nreflection tokens.\nC.3 Q UALITATIVE EXAMPLES\nTable 7 shows several examples predicted by ourSELF -RAG (13B). The first example is the model"
+      ],
+      "context_sources": [
+        "2310.11511",
+        "2310.11511",
+        "2310.11511",
+        "2310.11511"
+      ],
+      "revisions": 2,
+      "final_validation_status": "REJECTED",
+      "query_rewrite_failures": 0,
+      "latency_s": 10.54,
+      "error": null,
+      "refused": true,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.0,
+      "context_precision": 0.49999999995
+    },
+    {
+      "id": "q17",
+      "answerable": true,
+      "question": "Which actions can CRAG's retrieval evaluator trigger, and when is web search used?",
+      "answer": "CRAG's retrieval evaluator can trigger three actions based on the relevance score of retrieved documents to the input query: **Correct**, **Incorrect**, and **Ambiguous**. The action **Correct** is triggered when the retrieved documents are deemed relevant, while **Incorrect** is triggered when they are found to be irrelevant. The **Ambiguous** action is used when the relevance of the documents is uncertain.\n\nWeb search is leveraged in the CRAG framework to enhance the retrieval process and improve the robustness of generation by providing optimized knowledge utilization. This suggests that web search is utilized when the retrieval evaluator assesses the relevance of documents and determines that additional information or correction is necessary.",
+      "contexts": [
+        "Figure 2 and Algorithm 1 present an overview\nof CRAG at inference, which designs corrective\nstrategies to improve the robustness of generation.\nGiven an input query and the retrieved documents\nfrom any retriever, a lightweight retrieval evaluator\nis constructed to estimate the relevance score\nof retrieved documents to the input query (Sec-\ntion 4.2). The relevance score is quantified into a\ntotal of three confidence degrees and then triggered\nthe corresponding actions: {Correct, Incorrect,\nAmbiguous} (Section 4.3). If the action Correct\nis triggered, the retrieved documents will be re-",
+        "comparison, but it underperforms as elaborated in\nSection 5.5. Based on these calculated relevance\nscores, a final judgment is made as to whether\nthe retrieval is correct or not associated with the\naction trigger. In our proposed framework, the\nretrieval quality is evaluated at a relatively low\ncost without the need to have access to large and\nexpensive LLMs. Compared with the critic model\nof Self-RAG (Asai et al., 2024) that instruction-\ntuned LLaMA-2 (7B), the evaluator designed in\nCRAG demonstrates the advantages of being quite\nlightweight (0.77B).\nAlgorithm 1: CRAG Inference",
+        "Knowledge\nCorrection\nGeneration\nCorrect Ambiguous Incorrect\nx kin+ x kin+\nGenerator\nkex+ x kex+\nFigure 2: An overview of the proposed CRAG at inference. A retrieval evaluator is constructed to evaluate the\nrelevance of the retrieved documents to the input, and estimate a confidence degree based on which different\nknowledge retrieval actions of {Correct, Incorrect, Ambiguous} can be triggered.\nOur objective is to correct the retrieved documents\nif they are irrelevant. Specifically, T5-large (Raffel\net al., 2020) is adopted for initializing the retrieval",
+        "thereby exposing inaccurate and misleading knowl-\nedge to generative LMs. Corrective Retrieval\nAugmented Generation is proposed to improve the\nrobustness of generation. Essentially, a lightweight\nretrieval evaluator is to estimate and trigger three\nknowledge retrieval actions discriminately. With\nthe further leverage of web search and optimized\nknowledge utilization, CRAG has significantly\nimproved the ability of automatic self-correction\nand efficient utilization of retrieved documents.\nExperiments extensively demonstrate its adaptabil-\nity to RAG-based approaches as well as general-"
+      ],
+      "context_sources": [
+        "2401.15884",
+        "2401.15884",
+        "2401.15884",
+        "2401.15884"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 4.169,
+      "error": null,
+      "refused": false,
+      "faithfulness": 0.7777777777777778,
+      "answer_relevancy": 0.7702003273617025,
+      "context_precision": 0.3333333333
+    },
+    {
+      "id": "q18",
+      "answerable": true,
+      "question": "Which model is CRAG's retrieval evaluator initialized from?",
+      "answer": "CRAG's retrieval evaluator is initialized from T5-large (Raffel et al., 2020).",
+      "contexts": [
+        "comparison, but it underperforms as elaborated in\nSection 5.5. Based on these calculated relevance\nscores, a final judgment is made as to whether\nthe retrieval is correct or not associated with the\naction trigger. In our proposed framework, the\nretrieval quality is evaluated at a relatively low\ncost without the need to have access to large and\nexpensive LLMs. Compared with the critic model\nof Self-RAG (Asai et al., 2024) that instruction-\ntuned LLaMA-2 (7B), the evaluator designed in\nCRAG demonstrates the advantages of being quite\nlightweight (0.77B).\nAlgorithm 1: CRAG Inference",
+        "Figure 2 and Algorithm 1 present an overview\nof CRAG at inference, which designs corrective\nstrategies to improve the robustness of generation.\nGiven an input query and the retrieved documents\nfrom any retriever, a lightweight retrieval evaluator\nis constructed to estimate the relevance score\nof retrieved documents to the input query (Sec-\ntion 4.2). The relevance score is quantified into a\ntotal of three confidence degrees and then triggered\nthe corresponding actions: {Correct, Incorrect,\nAmbiguous} (Section 4.3). If the action Correct\nis triggered, the retrieved documents will be re-",
+        "Knowledge\nCorrection\nGeneration\nCorrect Ambiguous Incorrect\nx kin+ x kin+\nGenerator\nkex+ x kex+\nFigure 2: An overview of the proposed CRAG at inference. A retrieval evaluator is constructed to evaluate the\nrelevance of the retrieved documents to the input, and estimate a confidence degree based on which different\nknowledge retrieval actions of {Correct, Incorrect, Ambiguous} can be triggered.\nOur objective is to correct the retrieved documents\nif they are irrelevant. Specifically, T5-large (Raffel\net al., 2020) is adopted for initializing the retrieval",
+        "been equally referred to and involved in RAG.\nOn account of the above issues, this paper\nparticularly studies the scenarios where\nthe retriever returns inaccurate results. A\nmethod named Corrective Retrieval-Augmented\nGeneration ( CRAG ) is proposed to self-correct\nthe results of retriever and improve the utilization\nof documents for augmenting generation. A\nlightweight retrieval evaluator is designed to\nassess the overall quality of retrieved documents\nfor a query. This serves as a crucial component\nin RAG, contributing to informative generation\nby reviewing and evaluating the relevance"
+      ],
+      "context_sources": [
+        "2401.15884",
+        "2401.15884",
+        "2401.15884",
+        "2401.15884"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 2.782,
+      "error": null,
+      "refused": false,
+      "faithfulness": 0.5,
+      "answer_relevancy": 0.9186823088919905,
+      "context_precision": 0.3333333333
+    },
+    {
+      "id": "q19",
+      "answerable": true,
+      "question": "How does Adaptive-RAG choose a strategy for each query?",
+      "answer": "Adaptive-RAG chooses a strategy for each query by first determining the complexity of the query. This process is crucial as it allows Adaptive-RAG to select the most suitable approach for answering the query. The system is designed to handle queries of varying complexities by employing three different strategies: \n\n1. A non-retrieval-based approach for straightforward queries.\n2. A single-step approach for queries of moderate complexity.\n3. A multi-step approach for complex queries.\n\nTo operationalize this, Adaptive-RAG utilizes a smaller Language Model trained on query-complexity pairs, which are automatically annotated based on predicted outcomes and inductive biases in datasets. This training enables the model to effectively classify the complexity of incoming queries and allocate resources accordingly, enhancing the overall accuracy and efficiency of question-answering systems.",
+      "contexts": [
+        "as Adaptive-RAG, to handle queries of various\ncomplexities. Specifically, Adaptive-RAG is de-\nsigned to dynamically adjust its query handling\nstrategies in the unified retrieval-augmented LLM\nbased on the complexity of queries that they en-\ncounter, which spans across a spectrum of the non-\nretrieval-based approach for the most straightfor-\nward queries, to the single-step approach for the\nqueries of moderate complexity, and finally to the\nmulti-step approach for the complex queries. The\ncore step of our Adaptive-RAG lies in determin-\ning the complexity of the given query, which is",
+        "core step of our Adaptive-RAG lies in determin-\ning the complexity of the given query, which is\ninstrumental in selecting the most suitable strat-\negy for its answer. To operationalize this process,\nwe trained a smaller Language Model with query-\ncomplexity pairs, which are automatically anno-\ntated from the predicted outcomes and the inductive\nbiases in datasets. We validated our Adaptive-RAG\non a collection of open-domain QA datasets, cover-\ning the multiple query complexities including both\nthe single- and multi-hop questions. The results\ndemonstrate that our Adaptive-RAG enhances the",
+        "the single- and multi-hop questions. The results\ndemonstrate that our Adaptive-RAG enhances the\noverall accuracy and efficiency of QA systems, al-\nlocating more resources to handle complex queries\nwhile efficiently handling simpler queries, com-\npared to the existing one-size-fits-all approaches\nthat tend to be either minimalist or maximalist over\nvarying query complexities.\nLimitations\nWhile our Adaptive-RAG shows clear advantages\nin effectiveness and efficiency by determining the\nquery complexity and then leveraging the most\nsuitable approach for tackling it, it is important",
+        "3.2 Adaptive-RAG: Adaptive\nRetrieval-Augmented Generation\nWe now introduce our adaptive retrieval-augmented\nLLMs, which are built upon three different strate-\ngies described in the previous section, and which\nare designed to select the most suitable strategy\naccording to the complexity of queries.\nAdapting Retrieval-Augmented LLMs Note\nthat in real-world scenarios, not all q from users\nhave the same level of complexity, necessitating\n1It is worth noting that implementations of the LLM and\nretriever vary across different multi-step retrieval-augmented"
+      ],
+      "context_sources": [
+        "2403.14403",
+        "2403.14403",
+        "2403.14403",
+        "2403.14403"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.891,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9853250421116434,
+      "context_precision": 0.49999999995
+    },
+    {
+      "id": "q20",
+      "answerable": true,
+      "question": "What do the class labels A, B and C mean in Adaptive-RAG's classifier?",
+      "answer": "In the context of Adaptive-RAG's classifier, the class labels represent different complexity levels of queries:\n\n- **A (No)**: This label indicates that the query is simple and does not require complex processing. It has a classification time of approximately 0.35 seconds and accounts for about 8.60% of the queries.\n  \n- **B (One)**: This label signifies that the query is of moderate complexity, requiring some processing but not as much as multi-step queries. It has a classification time of around 3.08 seconds and makes up about 53.33% of the queries.\n  \n- **C (Multi)**: This label denotes that the query is complex and involves multiple steps or components to answer. It has a longer classification time of approximately 27.18 seconds and represents about 38.07% of the queries.\n\nThese labels help in understanding the performance and efficiency of the Adaptive-RAG classifier in handling different types of queries.",
+      "contexts": [
+        "Labels Time/Query (Sec.) Percentage (%)\nNo (A) 0.35 8.60\nOne (B) 3.08 53.33\nMulti (C) 27.18 38.07\nClassifier Performance To understand how the\nproposed classifier works, we analyze its perfor-\nmance across different complexity labels. As Fig-\nure 3 (Left and Center) shows, the classification\naccuracy of our Adaptive-RAG is better than those\nof the other adaptive retrieval baselines, which\nleads to overall QA performance improvements. In\nother words, this result indicates that our Adaptive-\nRAG is capable of more accurately classifying the\ncomplexity levels with various granularities, which",
+        "\u2018B (One)\u2019 (about 31%) and \u2018B (One)\u2019 as \u2018C (Multi)\u2019\n(about 23%); \u2018A (No)\u2019 is misclassified often as\n\u2018B (One)\u2019 (about 47%) and less frequently as \u2018C\n(Multi)\u2019 (about 22%). While the overall results in\nFigure 3 show that our classifier effectively cate-\ngorizes the three labels, further refining it based\non such misclassification would be a meaningful\ndirection for future work.\nAnalyses on Efficiency for Classifier While Ta-\nble 1 shows the relative elapsed time for each of the\nthree different RAG strategies, we further provide\nthe exact elapsed time per query for our Adaptive-",
+        "smaller classifiers. This indicates that our proposed\nclassifier can contribute to resource-efficient set-\ntings in real-use cases with smaller sizes without\ncompromising the performance.\nCase Study We conduct a case study to qualita-\ntively compare our Adaptive-RAG against Adap-\ntive Retrieval. Table 5 shows the classified com-\nplexity and the query handling patterns for both\nsimple and complex questions. First, for the simple\nsingle-hop question, our Adaptive-RAG identifies\nthat it is answerable by only using the LLM\u2019s para-\nmetric knowledge about \u2018Google\u2019. By contrast,",
+        "two variants: the standard 3-way classi\ufb01cation task (supports/refutes/not enough info) and the 2-way\n(supports/refutes) task studied in Thorne and Vlachos [57]. In both cases we report label accuracy.\n4 Results\n4.1 Open-domain Question Answering\nTable 1 shows results for RAG along with state-of-the-art models. On all four open-domain QA\ntasks, RAG sets a new state of the art (only on the T5-comparable split for TQA). RAG combines\nthe generation \ufb02exibility of the \u201cclosed-book\u201d (parametric only) approaches and the performance of"
+      ],
+      "context_sources": [
+        "2403.14403",
+        "2403.14403",
+        "2403.14403",
+        "2005.11401"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 4.712,
+      "error": null,
+      "refused": false,
+      "faithfulness": 0.7272727272727273,
+      "answer_relevancy": 0.8716868741298169,
+      "context_precision": 0.0
+    },
+    {
+      "id": "q21",
+      "answerable": true,
+      "question": "According to 'Lost in the Middle', where in the input context do language models use relevant information best?",
+      "answer": "According to \"Lost in the Middle,\" language models use relevant information best when it occurs at the very beginning (primacy bias) or at the end (recency bias) of their input context. Performance significantly degrades when models must access relevant information located in the middle of long contexts.",
+      "contexts": [
+        "identifying relevant information in their in-\nput contexts: multi-document question an-\nswering and key-value retrieval. We find that\nperformance can degrade significantly when\nchanging the position of relevant informa-\ntion, indicating that current language models\ndo not robustly make use of information in\nlong input contexts. In particular, we observe\nthat performance is often highest when rele-\nvant information occurs at the beginning or\nend of the input context, and significantly\ndegrades when models must access relevant\ninformation in the middle of long contexts,",
+        "Lost in the Middle: How Language Models Use Long Contexts\nNelson F . Liu1\u2217 Kevin Lin2 John Hewitt1 Ashwin Paranjape3\nMichele Bevilacqua3 Fabio Petroni3 Percy Liang1\n1Stanford University 2University of California, Berkeley 3Samaya AI\nnfliu@cs.stanford.edu\nAbstract\nWhile recent language models have the abil-\nity to take long contexts as input, relatively\nlittle is known about how well they use\nlonger context. We analyze the performance\nof language models on two tasks that require\nidentifying relevant information in their in-\nput contexts: multi-document question an-",
+        "are better at using relevant information that occurs at the\nvery beginning (primacy bias) or end of its input context\n(recency bias), and performance degrades significantly\nwhen models must access and use information located\nin the middle of its input context.\nrelevant documents from a search engine, database\nquery results, etc; Petroni et al., 2020; Ram et al.,\n2023; Shi et al., 2023; Mallen et al., 2023; Schick\net al., 2023, inter alia).\nHandling these use-cases requires language mod-\nels to successfully operate over long sequences. Ex-\nisting language models are generally implemented",
+        "we observe a distinctive U-shaped performance\ncurve (Figure 1); language model performance is\nhighest when relevant information occurs at the\nvery beginning (primacy bias) or end of its in-\nput context (recency bias), and performance sig-\nnificantly degrades when models must access and\nuse information in the middle of their input con-\ntext (\u00a72.3). For example, when relevant infor-\nmation is placed in the middle of its input con-\ntext, GPT-3.5-Turbo\u2019s performance on the multi-\ndocument question task is lower than its perfor-\nmance when predictingwithout any documents (i.e.,"
+      ],
+      "context_sources": [
+        "2307.03172",
+        "2307.03172",
+        "2307.03172",
+        "2307.03172"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.684,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8796160902200628,
+      "context_precision": 0.8055555555287036
+    },
+    {
+      "id": "q22",
+      "answerable": true,
+      "question": "Which two tasks did Liu et al. use to study how language models use long contexts?",
+      "answer": "Liu et al. used two tasks to study how language models use long contexts: multi-document question answering and another task that is not specified in the provided document context. The context mentions the first task but does not provide the name or details of the second task, which is a significant omission. Therefore, while we know one of the tasks, the second task remains unidentified based on the available information.",
+      "contexts": [
+        "Lost in the Middle: How Language Models Use Long Contexts\nNelson F . Liu1\u2217 Kevin Lin2 John Hewitt1 Ashwin Paranjape3\nMichele Bevilacqua3 Fabio Petroni3 Percy Liang1\n1Stanford University 2University of California, Berkeley 3Samaya AI\nnfliu@cs.stanford.edu\nAbstract\nWhile recent language models have the abil-\nity to take long contexts as input, relatively\nlittle is known about how well they use\nlonger context. We analyze the performance\nof language models on two tasks that require\nidentifying relevant information in their in-\nput contexts: multi-document question an-",
+        "6.2 How Do Language Models Use Context?\nThe pioneering work of Khandelwal et al. (2018)\nshowed that small LSTM language models make\nincreasingly coarse use of longer-term context;\nSankar et al. (2019) found similar results in di-\nalogue models. In a similar vein, Daniluk et al.\n(2017) find that attentive LSTM language mod-\nels tend to mainly use recent history. Petroni\net al. (2020) were among the first to demonstrate\nthe potential of combining context from an in-\nformation retrieval system with a pretrained lan-\nguage models for unsupervised question answering.",
+        "and P. Liang, \u201cLost in the middle: How language models use long\ncontexts,\u201d arXiv preprint arXiv:2307.03172 , 2023.\n[99] Y . Gao, T. Sheng, Y . Xiang, Y . Xiong, H. Wang, and J. Zhang, \u201cChat-\nrec: Towards interactive and explainable llms-augmented recommender\nsystem,\u201d arXiv preprint arXiv:2303.14524 , 2023.\n[100] N. Anderson, C. Wilson, and S. D. Richardson, \u201cLingua: Addressing\nscenarios for live interpretation and automatic dubbing,\u201d inProceedings\nof the 15th Biennial Conference of the Association for Machine\nTranslation in the Americas (Volume 2: Users and Providers Track",
+        "attention mechanisms underlying Transformer lan-\nguage models is technically equally capable of re-\ntrieving any token from their contexts.\n7 Conclusion\nWe empirically study how language models use\nlong input contexts via a series of controlled ex-\nperiments. We show that language model perfor-\nmance degrades significantly when changing the\nposition of relevant information, indicating that\nmodels struggle to robustly access and use infor-\nmation in long input contexts. In particular, per-\nformance is often lowest when models must use\ninformation in the middle of long input contexts."
+      ],
+      "context_sources": [
+        "2307.03172",
+        "2307.03172",
+        "2312.10997",
+        "2307.03172"
+      ],
+      "revisions": 2,
+      "final_validation_status": "REJECTED",
+      "query_rewrite_failures": 0,
+      "latency_s": 7.838,
+      "error": null,
+      "refused": true,
+      "faithfulness": 0.8571428571428571,
+      "answer_relevancy": 0.0,
+      "context_precision": 0.9999999999
+    },
+    {
+      "id": "q23",
+      "answerable": true,
+      "question": "How does the Ragas paper define faithfulness?",
+      "answer": "The Ragas paper defines faithfulness as the idea that the answer should be grounded in the given context. This concept is crucial to avoid hallucinations and to ensure that the retrieved context can serve as a justification for the generated answer. Faithfulness is one of the three quality aspects emphasized in the paper, particularly important in applications where factual correctness is essential.",
+      "contexts": [
+        "we usually do not have access to human-annotated\ndatasets or reference answers. We therefore fo-\ncus on metrics that are fully self-contained and\nreference-free. We focus in particular three quality\naspects, which we argue are of central importance.\nFirst, Faithfulness refers to the idea that the an-\nswer should be grounded in the given context. This\nis important to avoid hallucinations, and to ensure\nthat the retrieved context can act as a justification\nfor the generated answer. Indeed, RAG systems are\noften used in applications where the factual con-",
+        "context sufficiently focused). To support the devel-\nopment of such a framework, we have introduced\nWikiEval, a dataset which human judgements of\nthese three different aspects. Finally, we have also\ndescribed Ragas, our implementation of the three\nconsidered quality aspects. This framework is easy\nto use and can provide deverlopers of RAG sys-\ntems with valuable insights, even in the absence\nof any ground truth. Our evaluation on WikiEval\nhas shown that the predictions from Ragas are\nclosely aligned with human predictions, especially\nfor faithfulness and answer relevance.\nReferences",
+        "work provides an integration with both llama-index\nand Langchain, the most widely used frameworks\nfor building RAG solutions, thus enabling devel-\nopers to easily integrate Ragas into their standard\nworkflow.\n2 Related Work\nEstimating faithfulness using LLMs The prob-\nlem of detecting hallucinations in LLM generated\nresponses has been extensively studied (Ji et al.,\n2023). Several authors have suggested the idea\nof predicting factuality using a few-shot prompt-\ning strategy (Zhang et al., 2023). Recent analy-\nses, however, suggest that existing models struggle",
+        "answer 1: [answer 1]\nanswer 2: [answer 2]\nThe results in Table 1 show that our proposed\nmetrics are much closer aligned with the human\njudgements than the predictions from the two base-\nlines. For faithfulness, the Ragas prediction are in\ngeneral highly accurate. For answer relevance, the\nagreement is lower, but this is largely due to the\nfact that the differences between the two candidate\nanswers are often very subtle. We found context\nrelevance to be the hardest quality dimension to\nevaluate. In particular, we observed that ChatGPT\noften struggles with the task of selecting the sen-"
+      ],
+      "context_sources": [
+        "2309.15217",
+        "2309.15217",
+        "2309.15217",
+        "2309.15217"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.297,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9808074263638246,
+      "context_precision": 0.9999999999
+    },
+    {
+      "id": "q24",
+      "answerable": true,
+      "question": "How is context relevance computed in the Ragas paper?",
+      "answer": "The document context does not provide specific details on how context relevance is computed in the Ragas framework. It mentions that context relevance is one of the quality dimensions evaluated, alongside faithfulness and answer relevance. The evaluation of context relevance is noted to be particularly challenging, as it involves determining whether the retrieved context is sufficiently focused. Additionally, the results indicate that the predictions from Ragas are closely aligned with human judgments for faithfulness and answer relevance, but there is no elaboration on the exact computation method for context relevance itself. Therefore, the specific methodology or metrics used to compute context relevance in the Ragas framework is missing from the provided context.",
+      "contexts": [
+        "answer 1: [answer 1]\nanswer 2: [answer 2]\nThe results in Table 1 show that our proposed\nmetrics are much closer aligned with the human\njudgements than the predictions from the two base-\nlines. For faithfulness, the Ragas prediction are in\ngeneral highly accurate. For answer relevance, the\nagreement is lower, but this is largely due to the\nfact that the differences between the two candidate\nanswers are often very subtle. We found context\nrelevance to be the hardest quality dimension to\nevaluate. In particular, we observed that ChatGPT\noften struggles with the task of selecting the sen-",
+        "context sufficiently focused). To support the devel-\nopment of such a framework, we have introduced\nWikiEval, a dataset which human judgements of\nthese three different aspects. Finally, we have also\ndescribed Ragas, our implementation of the three\nconsidered quality aspects. This framework is easy\nto use and can provide deverlopers of RAG sys-\ntems with valuable insights, even in the absence\nof any ground truth. Our evaluation on WikiEval\nhas shown that the predictions from Ragas are\nclosely aligned with human predictions, especially\nfor faithfulness and answer relevance.\nReferences",
+        "often struggles with the task of selecting the sen-\ntences from the context that are crucial, especially\nfor longer contexts.\n6 Conclusions\nWe have highlighted the need for automated\nreference-free evaluation of RAG systems. In par-\nticular, we have argued the need for an evaluation\nframework that can assess faithfulness (i.e. is the\nanswer grounded in the retrieved context), answer\nrelevance (i.e. does the answer address the ques-\ntion) and context relevance (i.e. is the retrieved\ncontext sufficiently focused). To support the devel-\nopment of such a framework, we have introduced",
+        "we usually do not have access to human-annotated\ndatasets or reference answers. We therefore fo-\ncus on metrics that are fully self-contained and\nreference-free. We focus in particular three quality\naspects, which we argue are of central importance.\nFirst, Faithfulness refers to the idea that the an-\nswer should be grounded in the given context. This\nis important to avoid hallucinations, and to ensure\nthat the retrieved context can act as a justification\nfor the generated answer. Indeed, RAG systems are\noften used in applications where the factual con-"
+      ],
+      "context_sources": [
+        "2309.15217",
+        "2309.15217",
+        "2309.15217",
+        "2309.15217"
+      ],
+      "revisions": 2,
+      "final_validation_status": "REJECTED",
+      "query_rewrite_failures": 0,
+      "latency_s": 9.521,
+      "error": null,
+      "refused": true,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.0,
+      "context_precision": 0.0
+    },
+    {
+      "id": "q25",
+      "answerable": true,
+      "question": "How does the FActScore paper define an atomic fact?",
+      "answer": "The FActScore paper defines an atomic fact as a short sentence that conveys one piece of information. It emphasizes that an atomic fact is a more fundamental unit than a sentence for representing a piece of information, allowing for a more fine-grained evaluation of factual precision. This definition is supported by references to prior work, such as Nenkova and Passonneau (2004).",
+      "contexts": [
+        "atomic facts\u2014short statements that each contain\none piece of information (Nenkova and Passonneau,\n2004; Shapira et al., 2019; Zhang and Bansal, 2021;\nLiu et al., 2022), and (2) assigning a binary label\n2Even a single sentence consists of multiple pieces of\ninformation (e.g., 4.4 per sentence in ChatGPT, 40% of which\nare a mixture of supported and unsupported information).\narXiv:2305.14251v2  [cs.CL]  11 Oct 2023\nto each atomic fact, allowing a fine-grained evalua-\ntion of factual precision. We evaluateFACTSCORE\non the task of generating people biographies be-",
+        "mation that are a mixture of true or false,2 making a\nbinary judgment inadequate (Pagnoni et al., 2021).\nSecond, validating every piece of information is\ntime-consuming and costly.\nIn this paper, we introduce FACTSCORE\n(Factual precision in Atomicity Score), a new eval-\nuation of an LM that represents the percentage of\natomic facts (pieces of information) supported by a\ngiven knowledge source. Computing FACTSCORE\ninvolves (1) breaking a generation into a series of\natomic facts\u2014short statements that each contain\none piece of information (Nenkova and Passonneau,",
+        "the following:\n1. Whether or not an atomic fact is supported by\nC is undebatable.\n2. Every atomic fact in Ay has an equal weight of\nimportance, following Krishna et al. (2023).\n3. Pieces of information in C do not conflict or\noverlap with each other.\nIn the rest of the paper, we propose to use people\nbiographies as X and Wikipedia as C because they\nsatisfy these assumptions to a reasonable degree\n(Section 3.3). We discuss in which cases these\nassumptions hold or may not hold in more detail in\nthe Limitation section.\nFACTSCORE considers precision but not recall,",
+        "though the first generation is considerably more\naccurate than the second.\nIn this paper, we define an atomic fact as a short\nsentence conveying one piece of information (ex-\namples in Figure 1), similar to summarization con-\ntent units (Nenkova and Passonneau, 2004). An\natomic fact is a more fundamental unit than a sen-\ntence for a piece of information and provides a\nmore fine-grained evaluation, e.g., in Figure 1, rat-\ning the first generation higher than the second.\nKey Idea 2: Factual precision as a function of a\ngiven knowledge source. Prior work often consid-"
+      ],
+      "context_sources": [
+        "2305.14251",
+        "2305.14251",
+        "2305.14251",
+        "2305.14251"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.647,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9850965202815566,
+      "context_precision": 0.9166666666361111
+    },
+    {
+      "id": "q26",
+      "answerable": true,
+      "question": "What FActScore did ChatGPT achieve, and what would human evaluation of 6,500 generations have cost?",
+      "answer": "ChatGPT achieved a FACTSCORE of 58%. The human evaluation of 6,500 generations would have cost $26,000.",
+      "contexts": [
+        "tain FACTSCORE s of people biographies gen-\nerated by several state-of-the-art commercial\nLMs\u2014InstructGPT, ChatGPT, and the retrieval-\naugmented PerplexityAI\u2014and report new anal-\nysis demonstrating the need for such a fine-\ngrained score (e.g., ChatGPT only achieves\n58%). Since human evaluation is costly, we\nalso introduce an automated model that esti-\nmates FACTSCORE using retrieval and a strong\nlanguage model, with less than a 2% error rate.\nFinally, we use this automated metric to eval-\nuate 6,500 generations from a new set of 13\nrecent LMs that would have cost $26K if evalu-",
+        "uate 6,500 generations from a new set of 13\nrecent LMs that would have cost $26K if evalu-\nated by humans, with various findings: GPT-4\nand ChatGPT are more factual than public mod-\nels, and Vicuna and Alpaca are some of the best\npublic models. FACTSCORE is available for\npublic use via pip install factscore.1\n1 Introduction\nLong-form text generated by large language mod-\nels (LMs) has widely been used (Brown et al., 2020;\nOuyang et al., 2022); nonetheless, evaluating their\nfactual precision\u2014whether each piece of informa-\ntion conveyed in a generation is factually accurate\u2014",
+        "on a given knowledge source, leveraging retrieval\nfrom the given knowledge source and strong lan-\nguage models. Our estimator closely approximates\nFACTSCORE with an error rate of < 2% and can\nbe applied to a range of new LMs at scale with no\nhuman effort. Our case study evaluates 6,500 gen-\nerations from 13 LMs that could have cost $26K,\nwith various findings: GPT-4 (OpenAI, 2023) and\nChatGPT are far less factual than humans but are\nmuch better than public models, and there is a large\nvariance between public models, with Vicuna (Chi-\nang et al., 2023) and Alpaca (Taori et al., 2023)",
+        "ChatGPT generates 40 tokens on average), resulting in inflated str-em scores. We limit the maximum\ngeneration length to 100 tokens for all baselines to avoid this issue, rather than the original 300\ntokens in the ALCE paper. Consequently, all of the baseline output length is within 30-60 tokens.\nFor FactScore, we set the maximum new token length to 500 for baselines and 200 for SELF -R AG at\neach segment level.\nTask-specific instructions. Table 5 shows the list of the instructions used during evaluations. For\nOpen-domain QA, we do not provide explicit instructions.\nC R ESULTS\nC.1 A NALYSIS"
+      ],
+      "context_sources": [
+        "2305.14251",
+        "2305.14251",
+        "2305.14251",
+        "2310.11511"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.604,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7438947277616911,
+      "context_precision": 0.9999999999666667
+    },
+    {
+      "id": "q27",
+      "answerable": true,
+      "question": "Which three RAG paradigms does the survey by Gao et al. describe?",
+      "answer": "The survey by Gao et al. describes three RAG paradigms: Naive RAG, Advanced RAG, and Modular RAG. Each of these paradigms represents a progressive enhancement over the previous methodologies in the RAG framework.",
+      "contexts": [
+        "could clarify its broader trajectory. This survey endeavors to\nfill this gap by mapping out the RAG process and charting\nits evolution and anticipated future paths, with a focus on the\nintegration of RAG within LLMs. This paper considers both\ntechnical paradigms and research methods, summarizing three\nmain research paradigms from over 100 RAG studies, and\nanalyzing key technologies in the core stages of \u201cRetrieval,\u201d\n\u201cGeneration,\u201d and \u201cAugmentation.\u201d On the other hand, current\nresearch tends to focus more on methods, lacking analysis and\nsummarization of how to evaluate RAG. This paper compre-",
+        "sic knowledge with the vast, dynamic repositories of external\ndatabases. This comprehensive review paper offers a detailed\nexamination of the progression of RAG paradigms, encompassing\nthe Naive RAG, the Advanced RAG, and the Modular RAG.\nIt meticulously scrutinizes the tripartite foundation of RAG\nframeworks, which includes the retrieval, the generation and the\naugmentation techniques. The paper highlights the state-of-the-\nart technologies embedded in each of these critical components,\nproviding a profound understanding of the advancements in RAG",
+        "question-answering tasks.\nVIII. C ONCLUSION\nThe summary of this paper, as depicted in Figure 6, empha-\nsizes RAG\u2019s significant advancement in enhancing the capa-\nbilities of LLMs by integrating parameterized knowledge from\nlanguage models with extensive non-parameterized data from\nexternal knowledge bases. The survey showcases the evolution\nof RAG technologies and their application on many different\ntasks. The analysis outlines three developmental paradigms\nwithin the RAG framework: Naive, Advanced, and Modu-\nlar RAG, each representing a progressive enhancement over",
+        "RAG method are cost-effective and surpass the performance\nof the native LLM, they also exhibit several limitations.\nThe development of Advanced RAG and Modular RAG is\na response to these specific shortcomings in Naive RAG.\nA. Naive RAG\nThe Naive RAG research paradigm represents the earli-\nest methodology, which gained prominence shortly after the\n3\nFig. 2. A representative instance of the RAG process applied to question answering. It mainly consists of 3 steps. 1) Indexing. Documents are split into chunks,"
+      ],
+      "context_sources": [
+        "2312.10997",
+        "2312.10997",
+        "2312.10997",
+        "2312.10997"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.555,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9180709581144516,
+      "context_precision": 0.6388888888675925
+    },
+    {
+      "id": "q28",
+      "answerable": true,
+      "question": "What does the RAG survey call the tripartite foundation of RAG frameworks?",
+      "answer": "The RAG survey calls the tripartite foundation of RAG frameworks \"retrieval,\" \"generation,\" and \"augmentation\" techniques.",
+      "contexts": [
+        "sic knowledge with the vast, dynamic repositories of external\ndatabases. This comprehensive review paper offers a detailed\nexamination of the progression of RAG paradigms, encompassing\nthe Naive RAG, the Advanced RAG, and the Modular RAG.\nIt meticulously scrutinizes the tripartite foundation of RAG\nframeworks, which includes the retrieval, the generation and the\naugmentation techniques. The paper highlights the state-of-the-\nart technologies embedded in each of these critical components,\nproviding a profound understanding of the advancements in RAG",
+        "of RAG capabilities. RAG toolkits are converging into a\nfoundational technology stack, laying the groundwork for\nadvanced enterprise applications. However, a fully integrated,\ncomprehensive platform concept is still in the future, requiring\nfurther innovation and development.\nF . Multi-modal RAG\nRAG has transcended its initial text-based question-\nanswering confines, embracing a diverse array of modal data.\nThis expansion has spawned innovative multimodal models\nthat integrate RAG concepts across various domains:\nImage. RA-CM3 [176] stands as a pioneering multimodal",
+        "could clarify its broader trajectory. This survey endeavors to\nfill this gap by mapping out the RAG process and charting\nits evolution and anticipated future paths, with a focus on the\nintegration of RAG within LLMs. This paper considers both\ntechnical paradigms and research methods, summarizing three\nmain research paradigms from over 100 RAG studies, and\nanalyzing key technologies in the core stages of \u201cRetrieval,\u201d\n\u201cGeneration,\u201d and \u201cAugmentation.\u201d On the other hand, current\nresearch tends to focus more on methods, lacking analysis and\nsummarization of how to evaluate RAG. This paper compre-",
+        "context sufficiently focused). To support the devel-\nopment of such a framework, we have introduced\nWikiEval, a dataset which human judgements of\nthese three different aspects. Finally, we have also\ndescribed Ragas, our implementation of the three\nconsidered quality aspects. This framework is easy\nto use and can provide deverlopers of RAG sys-\ntems with valuable insights, even in the absence\nof any ground truth. Our evaluation on WikiEval\nhas shown that the predictions from Ragas are\nclosely aligned with human predictions, especially\nfor faithfulness and answer relevance.\nReferences"
+      ],
+      "context_sources": [
+        "2312.10997",
+        "2312.10997",
+        "2312.10997",
+        "2309.15217"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 2.977,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8548110944297101,
+      "context_precision": 0.8333333332916666
+    },
+    {
+      "id": "q29",
+      "answerable": true,
+      "question": "What three actions does ReAct's Wikipedia API provide?",
+      "answer": "The document context does not specify the three actions that ReAct's Wikipedia API provides. It mentions that ReAct interacts with the Wikipedia API to retrieve information to support reasoning and to target what to retrieve next, but it does not detail specific actions or functionalities of the API itself. Therefore, the information needed to answer the user's query is missing.",
+      "contexts": [
+        "veri\ufb01cation. As shown in Figure 1(1d), by interacting with a Wikipedia API, ReAct is able to\nretrieve information to support reasoning, while also use reasoning to target what to retrieve next,\ndemonstrating a synergy of reasoning and acting.\n3.1 S ETUP\nDomains We consider two datasets challenging knowledge retrieval and reasoning: (1) Hot-\nPotQA (Yang et al., 2018), a multi-hop question answering benchmark that requires reasoning\nover two or more Wikipedia passages, and (2) FEVER (Thorne et al., 2018), a fact veri\ufb01cation",
+        "(e.g. Wikipedia) to incorporate additional information into reasoning (act to reason).\n2\nPublished as a conference paper at ICLR 2023\nWe conduct empirical evaluations ofReAct and state-of-the-art baselines on four diverse benchmarks:\nquestion answering (HotPotQA, Yang et al., 2018), fact veri\ufb01cation (Fever, Thorne et al., 2018),\ntext-based game (ALFWorld, Shridhar et al., 2020b), and webpage navigation (WebShop, Yao\net al., 2022). For HotPotQA and Fever, with access to a Wikipedia API that the model can interact",
+        "D) Human aligned and controllable: ReAct promises an interpretable sequential decision making\nand reasoning process where humans can easily inspect reasoning and factual correctness. Moreover,\nhumans can also control or correct the agent behavior on the go by thought editing, as shown in\nFigure 5 in Section 4.\n3 K NOWLEDGE -I NTENSIVE REASONING TASKS\nWe begin with knowledge-intensive reasoning tasks like multi-hop question answering and fact\nveri\ufb01cation. As shown in Figure 1(1d), by interacting with a Wikipedia API, ReAct is able to",
+        "issues of hallucination and error propagation in chain-of-thought reasoning by\ninteracting with a simple Wikipedia API, and generating human-like task-solving\ntrajectories that are more interpretable than baselines without reasoning traces.\nFurthermore, on two interactive decision making benchmarks (ALFWorld and\nWebShop), ReAct outperforms imitation and reinforcement learning methods by\nan absolute success rate of 34% and 10% respectively, while being prompted with\nonly one or two in-context examples.\n1 I NTRODUCTION"
+      ],
+      "context_sources": [
+        "2210.03629",
+        "2210.03629",
+        "2210.03629",
+        "2210.03629"
+      ],
+      "revisions": 2,
+      "final_validation_status": "REJECTED",
+      "query_rewrite_failures": 0,
+      "latency_s": 9.721,
+      "error": null,
+      "refused": true,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.0,
+      "context_precision": 0.0
+    },
+    {
+      "id": "q30",
+      "answerable": true,
+      "question": "By how much does ReAct beat imitation and reinforcement learning methods on ALFWorld and WebShop?",
+      "answer": "ReAct outperforms imitation and reinforcement learning methods on ALFWorld and WebShop by an absolute success rate of 34% and 10% respectively. This indicates that ReAct achieves significantly better performance compared to these methods in both environments.",
+      "contexts": [
+        "Results ReAct outperforms Act on both ALFWorld (Table 3) and Webshop (Table 4). On\nALFWorld, the bestReAct trial achieves an average success rate of 71%, signi\ufb01cantly outperforming\nthe best Act (45%) and BUTLER (37%) trials. In fact, even the worse ReAct trial (48%) beats\nthe best trial of both methods. Moreover, the advantage of ReAct over Act is consistent across\nsix controlled trials, with relative performance gain ranging from 33% to 90% and averaging 62%.\nQualitatively, we saw that, without any thoughts at all, Act fails to correctly decompose goals",
+        "learning agent trained on 105 expert trajectories for each task type5.\nWebShop Can ReAct also interact with noisy real-world language environments for practical\napplications? We investigate WebShop (Yao et al., 2022), a recently proposed online shopping\nwebsite environment with 1.18M real-world products and 12k human instructions. Unlike ALFWorld,\nWebshop contains a high variety of structured and unstructured texts (e.g. product titles, descriptions,\nand options crawled from Amazon), and requires an agent to purchase a product based on a user",
+        "issues of hallucination and error propagation in chain-of-thought reasoning by\ninteracting with a simple Wikipedia API, and generating human-like task-solving\ntrajectories that are more interpretable than baselines without reasoning traces.\nFurthermore, on two interactive decision making benchmarks (ALFWorld and\nWebShop), ReAct outperforms imitation and reinforcement learning methods by\nan absolute success rate of 34% and 10% respectively, while being prompted with\nonly one or two in-context examples.\n1 I NTRODUCTION",
+        "et al., 2022). For HotPotQA and Fever, with access to a Wikipedia API that the model can interact\nwith, ReAct outperforms vanilla action generation models while being competitive with chain-of-\nthought reasoning (CoT) (Wei et al., 2022). The best approach overall is a combination of ReAct\nand CoT that allows for the use of both internal knowledge and externally obtained information\nduring reasoning. On ALFWorld and WebShop, two or even one-shot ReAct prompting is able\nto outperform imitation or reinforcement learning methods trained with 103\u223c 105 task instances,"
+      ],
+      "context_sources": [
+        "2210.03629",
+        "2210.03629",
+        "2210.03629",
+        "2210.03629"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.228,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9326355460607857,
+      "context_precision": 0.8333333332916666
+    },
+    {
+      "id": "q31",
+      "answerable": true,
+      "question": "How does Reflexion improve language agents without updating model weights?",
+      "answer": "Reflexion improves language agents without updating model weights by utilizing a framework that focuses on linguistic feedback rather than traditional weight updates. Specifically, Reflexion agents engage in verbal reflection on task feedback signals, which allows them to learn from past mistakes. They maintain a reflective text in an episodic memory buffer, which aids in enhancing decision-making in future trials. This approach enables the agents to incorporate various types of feedback, such as scalar values or free-form language, from different sources, leading to significant performance improvements across diverse tasks without the need for extensive retraining or fine-tuning of model weights.",
+      "contexts": [
+        "Abstract\nLarge language models (LLMs) have been increasingly used to interact with exter-\nnal environments (e.g., games, compilers, APIs) as goal-driven agents. However,\nit remains challenging for these language agents to quickly and efficiently learn\nfrom trial-and-error as traditional reinforcement learning methods require exten-\nsive training samples and expensive model fine-tuning. We propose Reflexion, a\nnovel framework to reinforce language agents not by updating weights, but in-\nstead through linguistic feedback. Concretely, Reflexion agents verbally reflect",
+        "In this work, we present Reflexion, an approach that leverages verbal reinforcement to teach agents\nto learn from past mistakes. We empirically show that Reflexion agents significantly outperform\ncurrently widely-used decision-making approaches by utilizing self-reflection. In future work,\nReflexion could be used to employ more advanced techniques that have been thoroughly studied in\ntraditional RL settings, such as value learning in natural language or off-policy exploration techniques.\n8 Reproducibility",
+        "stead through linguistic feedback. Concretely, Reflexion agents verbally reflect\non task feedback signals, then maintain their own reflective text in an episodic\nmemory buffer to induce better decision-making in subsequent trials. Reflexion is\nflexible enough to incorporate various types (scalar values or free-form language)\nand sources (external or internally simulated) of feedback signals, and obtains\nsignificant improvements over a baseline agent across diverse tasks (sequential\ndecision-making, coding, language reasoning). For example, Reflexion achieves a",
+        "so far limited to using in-context examples as a way of teaching the agents, since more traditional\noptimization schemes like reinforcement learning with gradient descent require substantial amounts\nof compute and time.\nPreprint. Under review.\narXiv:2303.11366v4  [cs.AI]  10 Oct 2023\nIn this paper, we propose an alternative approach called Reflexion that uses verbal reinforcement\nto help agents learn from prior failings. Reflexion converts binary or scalar feedback from the\nenvironment into verbal feedback in the form of a textual summary, which is then added as additional"
+      ],
+      "context_sources": [
+        "2303.11366",
+        "2303.11366",
+        "2303.11366",
+        "2303.11366"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.865,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9999997528473633,
+      "context_precision": 0.999999999975
+    },
+    {
+      "id": "q32",
+      "answerable": true,
+      "question": "Which three models make up the Reflexion framework?",
+      "answer": "The three models that make up the Reflexion framework are:\n\n1. **Actor (Ma)** - This model generates text and actions.\n2. **Evaluator (Me)** - This model scores the outputs produced by the Actor.\n3. **Self-Reflection model (Msr)** - This model generates verbal reinforcement cues to assist the Actor in self-improvement.",
+      "contexts": [
+        "3 Reflexion: reinforcement via verbal reflection\nWe develop a modular formulation for Reflexion, utilizing three distinct models: an Actor, denoted as\nMa, which generates text and actions; anEvaluator model, represented by Me, that scores the outputs\nproduced by Ma; and a Self-Reflection model, denoted as Msr, which generates verbal reinforcement\ncues to assist the Actor in self-improvement. We provide a detailed description of each of these\nmodels and subsequently elucidate their collaborative functioning within the Reflexion framework.\n3\nActionObs / Reward\nTrajectory\n(short-term memory)",
+        "multi-faceted approach to Evaluator design allows us to examine different strategies for scoring\ngenerated outputs, offering insights into their effectiveness and suitability across a range of tasks.\nSelf-reflection The Self-Reflection model instantiated as an LLM, plays a crucial role in the\nReflexion framework by generating verbal self-reflections to provide valuable feedback for future\ntrials. Given a sparse reward signal, such as a binary success status (success/fail), the current trajectory,\nand its persistent memory mem, the self-reflection model generates nuanced and specific feedback.",
+        "and (3) programming tasks to teach the agent to effectively use external tools such as compilers\nand interpreters. Across all three types of tasks, we observe Reflexion agents are better decision-\nmakers, reasoners, and programmers. More concretely, Reflexion agents improve on decision-making\nAlfWorld [24] tasks over strong baseline approaches by an absolute 22% in 12 iterative learning\nsteps, and on reasoning questions in HotPotQA [ 28] by 20%, and Python programming tasks on\nHumanEval [6] by as much as 11%.\nTo summarize, our contributions are the following:",
+        "Abstract\nLarge language models (LLMs) have been increasingly used to interact with exter-\nnal environments (e.g., games, compilers, APIs) as goal-driven agents. However,\nit remains challenging for these language agents to quickly and efficiently learn\nfrom trial-and-error as traditional reinforcement learning methods require exten-\nsive training samples and expensive model fine-tuning. We propose Reflexion, a\nnovel framework to reinforce language agents not by updating weights, but in-\nstead through linguistic feedback. Concretely, Reflexion agents verbally reflect"
+      ],
+      "context_sources": [
+        "2303.11366",
+        "2303.11366",
+        "2303.11366",
+        "2303.11366"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.531,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9751411997279118,
+      "context_precision": 0.9999999999
+    },
+    {
+      "id": "q33",
+      "answerable": true,
+      "question": "How does Self-Refine improve an LLM's output?",
+      "answer": "Self-Refine improves an LLM's output by employing an iterative process where the model first generates an initial output, then provides feedback on that output, and subsequently refines it based on the feedback. This method allows the LLM to enhance its own responses without the need for supervised training data, additional training, or reinforcement learning. The iterative feedback and refinement process enables the model to produce better outputs across various tasks, as evidenced by human preferences and automatic metrics showing improvements in the quality of the outputs generated with Self-Refine compared to those generated without it.",
+      "contexts": [
+        "amadaan@cs.cmu.edu, nikett@allenai.org\nAbstract\nLike humans, large language models ( LLM s) do not always generate the best\noutput on their first try. Motivated by how humans refine their written text, we\nintroduce SELF -REFINE , an approach for improving initial outputs from LLM s\nthrough iterative feedback and refinement. The main idea is to generate an initial\noutput using an LLM ; then, the same LLM provides feedback for its output and\nuses it to refine itself, iteratively. SELF -REFINE does not require any supervised",
+        "uses it to refine itself, iteratively. SELF -REFINE does not require any supervised\ntraining data, additional training, or reinforcement learning, and instead uses a\nsingle LLM as the generator, refiner and the feedback provider. We evaluate\nSELF -REFINE across 7 diverse tasks, ranging from dialog response generation\nto mathematical reasoning, using state-of-the-art ( GPT-3.5 and GPT-4) LLM s.\nAcross all evaluated tasks, outputs generated with SELF -REFINE are preferred by\nhumans and automatic metrics over those generated with the same LLM using",
+        "generate an optimal output on its first try, the LLM can often provide useful feedback and improve\nits own output accordingly. In turn, SELF -REFINE provides an effective way to obtain better outputs\nfrom a single model without any additional training, via iterative (self-)feedback and refinement.\n2 Iterative Refinement with S ELF -R EFINE\nGiven an input sequence, SELF -REFINE generates an initial output, provides feedback on the output,\nand refines the output according to the feedback. SELF -REFINE iterates between feedback and",
+        "from strong LLM s like GPT-3.5 (text-davinci-003 and gpt-3.5-turbo; OpenAI; Ouyang\net al., 2022) and GPT-4 (OpenAI, 2023) by 5-40% absolute improvement. In code-generation tasks,\nSELF -REFINE improves the initial generation by up to absolute 13% when applied to strong code\nmodels such as Codex (code-davinci-002; Chen et al., 2021). We release all of our code, which\nis easily extensible to other LLMs. In essence, our results show that even when an LLM cannot\ngenerate an optimal output on its first try, the LLM can often provide useful feedback and improve"
+      ],
+      "context_sources": [
+        "2303.17651",
+        "2303.17651",
+        "2303.17651",
+        "2303.17651"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 4.605,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9999871266383895,
+      "context_precision": 0.9999999999666667
+    },
+    {
+      "id": "q34",
+      "answerable": true,
+      "question": "On how many tasks was Self-Refine evaluated, and what was its average improvement?",
+      "answer": "Self-Refine was evaluated on 7 diverse tasks: Dialogue Response Generation, Code Optimization, Code Readability Improvement, Math Reasoning, Sentiment Reversal, Acronym Generation, and Constrained Generation. However, the document context does not provide a specific average improvement across these tasks. While there are individual task results presented, there is insufficient information to calculate an overall average improvement for Self-Refine across all evaluated tasks.",
+      "contexts": [
+        "We evaluate SELF -REFINE on 7 diverse tasks: Dialogue Response Generation (Appendix M; Mehri\nand Eskenazi, 2020), Code Optimization (Appendix N; Madaan et al., 2023), Code Readability\nImprovement (Appendix L; Puri et al., 2021), Math Reasoning (Appendix O; Cobbe et al., 2021),\nSentiment Reversal (Appendix P; Zhang et al., 2015), and we introduce two new tasks: Acronym\nGeneration (Appendix Q) and Constrained Generation (a harder version of Lin et al. (2020) with\n20-30 keyword constraints instead of 3-5; Appendix R)",
+        "by SELF -REFINE was selected as better aligned with the task instruction over the baseline method.\nThe evaluation was conducted for 150 examples for each dataset. The judges were not aware of the\nmethod that generated each sample.\n16\nD GPT-4 Evaluation\nIn light of the impressive achievements of GPT-4 in assessing and providing reasoning for complex\ntasks, we leverage its abilities for evaluation in SELF -REFINE . The approach involves presenting\ntasks to GPT-4 in a structured manner, promoting the model\u2019s deliberation on the task and generating",
+        "Example output and analysis is provided in Appendix G.\nQualitative Analysis We conduct a qualitative analysis of the feedback generated bySELF -REFINE\nand its subsequent refinements. We manually analyze 70 samples in total (35 success cases and 35\nfailure cases) for Code Optimization (Madaan et al., 2023) and Math Reasoning (Cobbe et al., 2021).\nFor both Math Reasoning and Code Optimization, we found that the feedback was predominantly\nactionable, with the majority identifying problematic aspects of the original generation and suggesting\nways to rectify them.",
+        "annotators selected the output produced by SELF -REFINE over the output from the baseline method.\nTable 6 shows the results.\nTask S ELF -REFINE (%) Direct (%) Either (%)\nSentiment Transfer 75.00 21.43 3.57\nAcronym Generation 44.59 12.16 43.24\nResponse Generation 47.58 19.66 32.76\nTable 6: Relative improvement of SELF -R EFINE in A/B evaluations across different tasks. The values\nrepresent normalized preferences, which correspond to the proportion of times the output generated\nby SELF -REFINE was selected as better aligned with the task instruction over the baseline method."
+      ],
+      "context_sources": [
+        "2303.17651",
+        "2303.17651",
+        "2303.17651",
+        "2303.17651"
+      ],
+      "revisions": 2,
+      "final_validation_status": "REJECTED",
+      "query_rewrite_failures": 0,
+      "latency_s": 9.4,
+      "error": null,
+      "refused": true,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.0,
+      "context_precision": 0.0
+    },
+    {
+      "id": "q35",
+      "answerable": true,
+      "question": "Which pretrained model is Toolformer based on, and how many parameters does it have?",
+      "answer": "Toolformer is based on the pretrained GPT-J model, which has 6.7 billion parameters.",
+      "contexts": [
+        "based on GPT-J, this time mostly relying on the\nWikipedia search API (99.3%) to \ufb01nd relevant in-\nformation. However, Toolformer still lags behind\nthe much larger GPT-3 (175B) model. This is likely\ndue to both the simplicity of our search engine (in\nmany cases, it returns results that are clearly not\na good match for a given query) and the inability\nof Toolformer to interact with it, e.g., by refor-\nmulating its query if results are not helpful or by\nbrowsing through multiple of the top results. We\nbelieve that adding this functionality is an exciting\ndirection for future work.",
+        "Toolformer 26.3 17.7 48.8\nOPT (66B) 18.6 11.4 45.7\nGPT-3 (175B) 29.0 22.6 65.9\nTable 5: Results for various question answering dataset.\nUsing the Wikipedia search tool for most examples,\nToolformer clearly outperforms baselines of the same\nsize, but falls short of GPT-3 (175B).\nthis would make solving the tasks trivial, especially\ngiven that the underlying QA system was \ufb01netuned\non Natural Questions.\nResults are shown in Table 5. Once again,\nToolformer clearly outperforms all other models\nbased on GPT-J, this time mostly relying on the\nWikipedia search API (99.3%) to \ufb01nd relevant in-",
+        "ent downstream tasks, demonstrating that after\nlearning to use tools, Toolformer, which is based\non a pretrained GPT-J model (Wang and Komat-\nsuzaki, 2021) with 6.7B parameters, achieves much\nstronger zero-shot results, clearly outperforming a\nmuch larger GPT-3 model (Brown et al., 2020) and\nseveral other baselines on various tasks.\n2 Approach\nOur aim is to equip a language modelM with the\nability to use different tools by means of API calls.\nWe require that inputs and outputs for each API\ncan be represented as text sequences. This allows\nseamless insertion of API calls into any given text,",
+        "mathematical reasoning. Toolformer makes use of the\ncalculator tool for most examples, clearly outperform-\ning even OPT (66B) and GPT-3 (175B).\nnumber predicted by the model.7\nTable 4 shows results for all benchmarks. While\nGPT-J and GPT-J + CC perform about the same,\nToolformer achieves stronger results even when\nAPI calls are disabled. We surmise that this is be-\ncause the model is \ufb01netuned on many examples\nof API calls and their results, improving its own\nmathematical capabilities. Nonetheless, allowing\nthe model to make API calls more than doubles per-"
+      ],
+      "context_sources": [
+        "2302.04761",
+        "2302.04761",
+        "2302.04761",
+        "2302.04761"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 2.829,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8199403288362505,
+      "context_precision": 0.5833333333041666
+    },
+    {
+      "id": "q36",
+      "answerable": true,
+      "question": "Which tools does Toolformer learn to use?",
+      "answer": "Toolformer learns to use several external tools, including:\n\n1. Search engines\n2. Web browsers\n3. Calculators\n4. Translation systems\n5. Python interpreters\n\nThese tools are integrated through API calls, allowing Toolformer to choose which tool to use based on the task at hand.",
+      "contexts": [
+        "contrast, Toolformer learns for itself to explicitly\nasks for the right information.\nTool Use Several approaches aim to equip LMs\nwith the ability to use external tools such as search\nengines (Komeili et al., 2022; Thoppilan et al.,\n2022; Lazaridou et al., 2022; Shuster et al., 2022;\nYao et al., 2022), web browsers (Nakano et al.,\n2021), calculators (Cobbe et al., 2021; Thoppilan\net al., 2022), translation systems (Thoppilan et al.,\n2022) and Python interpreters (Gao et al., 2022).\nThe way these models learn to use tools can roughly\nbe divided into two approaches: Either they rely on",
+        "siders useful. As illustrated in Figure 1, through\nthis simple approach, LMs can learn to control a va-\nriety of tools, and to choose for themselves which\ntool to use when and how.\nAs our approach is agnostic of the dataset be-\ning used, we can apply it to the exact same dataset\nthat was used to pretrain a model in the \ufb01rst place.\nThis ensures that the model does not lose any\nof its generality and language modeling abilities.\nWe conduct experiments on a variety of differ-\nent downstream tasks, demonstrating that after\nlearning to use tools, Toolformer, which is based",
+        "ent downstream tasks, demonstrating that after\nlearning to use tools, Toolformer, which is based\non a pretrained GPT-J model (Wang and Komat-\nsuzaki, 2021) with 6.7B parameters, achieves much\nstronger zero-shot results, clearly outperforming a\nmuch larger GPT-3 model (Brown et al., 2020) and\nseveral other baselines on various tasks.\n2 Approach\nOur aim is to equip a language modelM with the\nability to use different tools by means of API calls.\nWe require that inputs and outputs for each API\ncan be represented as text sequences. This allows\nseamless insertion of API calls into any given text,",
+        "A simple way to overcome these limitations of\ntoday\u2019s language models is to give them the abil-\nity to use external tools such as search engines,\ncalculators, or calendars. However, existing ap-\nproaches either rely on large amounts of human\nannotations (Komeili et al., 2022; Thoppilan et al.,\n2022) or limit tool use to task-speci\ufb01c settings only\n(e.g., Gao et al., 2022; Parisi et al., 2022), hinder-\ning a more widespread adoption of tool use in LMs.\nTherefore, we propose Toolformer, a model that\nlearns to use tools in a novel way, which ful\ufb01lls the\nfollowing desiderata:"
+      ],
+      "context_sources": [
+        "2302.04761",
+        "2302.04761",
+        "2302.04761",
+        "2302.04761"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.493,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9364868620749593,
+      "context_precision": 0.0
+    },
+    {
+      "id": "q37",
+      "answerable": true,
+      "question": "What does the DSP framework do with a language model and a retrieval model?",
+      "answer": "The DSP (DEMONSTRATE \u2013 SEARCH \u2013 PREDICT) framework utilizes a language model (LM) and a retrieval model (RM) in a systematic manner to enhance in-context learning. The LM is responsible for generating the final answer to a query during the PREDICT stage, as well as creating intermediate \"hop\" queries to gather relevant information (SEARCH) and exemplar queries that demonstrate how to formulate queries for training questions (DEMONSTRATE). Meanwhile, the RM retrieves the top-k most relevant text sequences for a given query, providing the necessary information that the LM can then use to generate grounded outputs. This collaboration between the LM and RM allows the DSP framework to effectively tackle complex problems and outperforms existing in-context learning methods.",
+      "contexts": [
+        "each other. In this new paradigm, the building blocks are\npretrained models and the core operations are natural lan-\nguage instructions and operations on natural language texts.\nIf we can realize this potential, then we can broaden partici-\npation in AI system development, rapidly prototype systems\nfor new domains, and maximize the value of specialized\npretrained components.\nIn the current paper, we introduced the DEMONSTRATE \u2013\nSEARCH \u2013PREDICT (DSP ) framework for retrieval aug-\nmented in-context learning. DSP consists of a number of\nsimple, composable functions for implementing in-context",
+        "(DSP ) framework for in-context learning, which relies en-\ntirely on passing natural language text (and scores) be-\ntween a frozen RM and LM. DSP introduces a num-\nber of composable functions that bootstrap training exam-\nples (DEMONSTRATE ), gather information from a knowl-\nedge corpus ( SEARCH ), and generate grounded outputs\n(PREDICT ), using them to systematically unify techniques\nfrom the retrieval-augmented NLP and the in-context learn-\ning literatures (Lee et al., 2019; Khattab et al., 2021a; Anan-\ntha et al., 2020; Gao et al., 2022; Izacard et al., 2022; Dohan",
+        "query to be answered.\nAs in Figure 2, the LM generates not only: (i) the \ufb01nal\nanswer to the input question (in thePREDICT stage), but also\n(ii) intermediate \u201chop\u201d queries to \ufb01nd useful information\nfor the input question (SEARCH ) as well as (iii) exemplar\nqueries that illustrate how to produce queries for questions\nin the training set (DEMONSTRATE ). This systematic use of\nthe LM is a hallmark of DSP programs.\nRetrieval Model DSP programs also invoke a frozen re-\ntrieval model RM to retrieve the top-k most \u201crelevant\u201d\ntext sequences for a given query. The RM can index a",
+        "2. DEMONSTRATE \u2013SEARCH \u2013PREDICT\nWe now introduce the DSP framework and show its expres-\nsive power by suggesting a number of strategies in which\nthe LM and RM can come together to tackle complex prob-\nlems effectively. We show in \u00a73 that such strategies out-\nperform existing in-context learning methods. We begin by\ndiscussing the LM and RM foundation modules on which\nDSP is built (\u00a72.1) and then the datatypes and control \ufb02ow\nwithin DSP (\u00a72.2). Subsequently, we discuss each of the\nthree inference stages: DEMONSTRATE (\u00a72.3), SEARCH\n(\u00a72.4), and PREDICT (\u00a72.5).\n2.1. Pretrained Modules: LM and RM"
+      ],
+      "context_sources": [
+        "2212.14024",
+        "2212.14024",
+        "2212.14024",
+        "2212.14024"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.639,
+      "error": null,
+      "refused": false,
+      "faithfulness": 0.7777777777777778,
+      "answer_relevancy": 0.6720334270921143,
+      "context_precision": 0.6388888888675925
+    },
+    {
+      "id": "q38",
+      "answerable": true,
+      "question": "What relative gains does DSP report over the vanilla LM, retrieve-then-read, and self-ask baselines?",
+      "answer": "The DSP (Dynamic Structured Programming) reports the following relative gains over the specified baselines:\n\n1. **Vanilla LMs**: 80% to 290% relative gains.\n2. **Retrieve-then-read pipeline**: 8% in Exact Match (EM) and 6% in F1 score.\n3. **Self-ask pipeline**: 80% to 290% relative gains.\n\nThese results indicate that DSP significantly outperforms these baseline methods in various aspects of performance.",
+      "contexts": [
+        "and 80\u2013290% relative gains against corresponding vanilla\nLMs, a standard retrieve-then-read pipeline, and a contem-\nporaneous self-ask pipeline (Press et al., 2022), respectively.\nFuture versions of this report will include additional test\ntasks and LM choices.\nIn summary, this work makes the following contributions.\nFirst, we argue that simple task-agnostic pipelines for in-\ncontext learning should give way to deliberate, task-aware\nstrategies. Second, we show that this shift need not be a\nburden: with DSP , such strategies can be easily expressed",
+        "baseline by 126% EM relative gains. This indicates the im-\nportance of grounding the LM\u2019s predictions in retrieval, and\nit shows that state-of-the-art retrievers like ColBERTv2 have\nthe capacity to do so off-the-shelf. The proposed DSP pro-\ngram also achieves relative gains of 8% in EM and 6% in F1\nover the retrieve-then-read pipeline, highlighting that non-\ntrivial gains are possible by aggregating information across\nseveral retrieved passages as we do with self-consistency.\nThese in-context learning results are competitive with a\nnumber of popular \ufb01ne-tuned systems. For instance, on",
+        "the question. This is essentially a simpli\ufb01ed simulation of\nIRRR (Qi et al., 2020).\nAs a general framework,DSP can express ideas like self-ask\nand many other, more sophisticated pipelines as we discuss\nin the present section. More importantly, DSP offers a num-\nber of intrinsic advantages that lead to large empirical gains:\n80%\u2013290% over self-ask. For instance, DSP programs are\ndeeply modular, which among other things means that DSP\nprograms will annotate and construct their own demonstra-\ntions. Thus, they can be developed without labeling any",
+        "with weak supervision (\u00a72.3), reliably rewriting questions to\nresolve conversational dependencies and iteratively decom-\npose complex queries with summarization of intermediate\nhops (\u00a72.4), and generating grounded responses from mul-\ntiple passages with self-consistency (\u00a72.5). We report pre-\nliminary results on Open-SQuAD, HotPotQA, and QReCC\nusing the frozen LM GPT-3.5 and RM ColBERTv2 (Khat-\ntab & Zaharia, 2020; Santhanam et al., 2022b) with no\n\ufb01ne-tuning. Our DSP programs deliver 37\u2013120%, 8\u201339%,\nand 80\u2013290% relative gains against corresponding vanilla"
+      ],
+      "context_sources": [
+        "2212.14024",
+        "2212.14024",
+        "2212.14024",
+        "2212.14024"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.664,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8335627044679302,
+      "context_precision": 0.249999999975
+    },
+    {
+      "id": "q39",
+      "answerable": true,
+      "question": "What are the two steps of Step-Back Prompting?",
+      "answer": "The two steps of Step-Back Prompting are:\n\n1. **Abstraction**: This step involves prompting the language model (LLM) to ask a generic step-back question about a higher-level concept or principle, allowing it to retrieve relevant facts related to that high-level concept or principle.\n\n2. **Reasoning**: In this step, the LLM uses the facts gathered from the abstraction step to reason and address the original question effectively.",
+      "contexts": [
+        "from Chain-of-Thought. In short, S TEP -BACK PROMPTING consists two simple steps:\n\u2022 Abstraction: Instead of addressing the question directly, we first prompt the LLM to ask a generic\nstep-back question about a higher-level concept or principle, and retrieve relevant facts about the\nhigh-level concept or principle. The step-back question is unique for each task in order to retrieve\nthe most relevant facts.\n\u2022 Reasoning: Grounded on the facts regarding the high-level concept or principle, the LLM can",
+        "out the direction for future improvements of methods alike STEP -BACK PROMPTING .\n2 S TEP -BACK PROMPTING\nSTEP -BACK PROMPTING is motivated by the observation that many tasks contain a lot of details,\nand it is hard for LLMs to retrieve relevant facts to tackle the task. As shown in the first example\n(top) in Figure 2, for a Physics question of \u201cWhat happens to the pressure, P , of an ideal gas if the\ntemperature is increased by a factor of 2 and the volume is increased by a factor of 8 ?\u201d, the LLM can",
+        "6\nStep-Back Prompting Enables Reasoning Via Abstraction in Large Language Models\n5 K NOWLEDGE QA\nWe evaluate STEP -BACK PROMPTING on question-answering benchmarks requiring intensive factual\nknowledge. Knowledge QA has been challenging for LLMs. In this section, we first describe the\nexperimental setup, followed by results and analysis on STEP -BACK PROMPTING .\n5.1 S TEP -BACK PROMPTING\nWe evaluate STEP -BACK PROMPTING on TimeQA (Chen et al., 2021) and SituatedQA (Zhang &\nChoi, 2021) in the Knowledge QA category. We first show the LLMs how to do Abstraction through",
+        "deep-breath\u201d (TDB) prompting (Yang et al., 2023). We perform a qualitative evaluation where we\nfind that Step-Back fixes a large portion of errors of the base model (up to \u223c 40%) while introducing\na small portion of new errors (max \u223c 12%). We also conduct an error analysis and find that majority\nof the errors made by STEP -BACK PROMPTING is attributed to the intrinsic limitations of reasoning\ncapabilities of LLMs while abstraction skills are relatively easy to demonstrate to LLMs, pointing\nout the direction for future improvements of methods alike STEP -BACK PROMPTING ."
+      ],
+      "context_sources": [
+        "2310.06117",
+        "2310.06117",
+        "2310.06117",
+        "2310.06117"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.667,
+      "error": null,
+      "refused": false,
+      "faithfulness": 0.8,
+      "answer_relevancy": 0.9999996224815414,
+      "context_precision": 0.9999999999
+    },
+    {
+      "id": "q40",
+      "answerable": true,
+      "question": "How much did Step-Back Prompting improve PaLM-2L on TimeQA and MuSiQue?",
+      "answer": "Step-Back Prompting improved the performance of PaLM-2L by 27% on the TimeQA task and by 7% on the MuSiQue benchmark.",
+      "contexts": [
+        "level of the TimeQA task. Additional error analysis of TimeQA is in Appendix A.\n6 M ULTI-HOP REASONING\nWe evaluate STEP -BACK PROMPTING on challenging Multi-Hop reasoning benchmark MuSiQue\n(Trivedi et al., 2022) and StrategyQA (Geva et al., 2021). We follow the same protocol as Section 5\nto implement STEP -BACK PROMPTING .\nTable 3 shows performance of various baselines on the dev set of MuSiQue and StrategyQA.\nBaseline performance of PaLM-2L and GPT-4 are low (35.5% and 38.5% for PaLM-2L and GPT-4",
+        "GPT-4 achieve only \u223c 40% accuracy on TimeQA and MuSiQue. Chain-of-Thought prompting leads\nto a minor improvement on a few tasks, while STEP -BACK PROMPTING improves the performance\nof PaLM-2L across the board: 7% and 11% on MMLU Physics and Chemistry, 27% on TimeQA,\nand 7% on MuSiQue.\nWe conduct a variety of analyses and find that STEP -BACK PROMPTING leads to strong performance\nimprovements (up to 36%) over chain-of-thought (CoT) prompting (Wei et al., 2022b) and \u201ctake-a-\ndeep-breath\u201d (TDB) prompting (Yang et al., 2023). We perform a qualitative evaluation where we",
+        "PaLM-2L + Step-Back + RAG (ours) 42.8% (2.0%) 86.4% (1%)\nGPT-4 38.5% (0.2%) 78.3% (1.1%)\nError Analysis: Figure 5 (right) shows the breakdown of all the remaining errors made by STEP -\nBACK PROMPTING on TimeQA. Similar to Section 4.3, we categorize the errors into\n\u2022 StepBack: The step-back question generated is not helpful in solving the task.\n\u2022 RAG: RAG fails to retrieve relevant information despite that the step-back question is on target.\n\u2022 Scoring Error: The evaluation by the judge model made a mistake.",
+        "Table 1: Strong performance of STEP -BACK PROMPTING on MMLU tasks across three model\nfamilies. CoT: zero-shot Chain of Thought prompting (Kojima et al., 2022), TDB: Take a Deep\nBreath prompting (Yang et al., 2023).\nMethod MMLU Physics MMLU Chemistry\nPaLM-2L 66.4% (0.8%) 70.9% (0.9%)\nPaLM-2L 1-shot 64% (1.6%) 75.6% (0.4%)\nPaLM-2L + CoT 65% (2%) 75.3% (1.5%)\nPaLM-2L + CoT 1-shot 61.5% (1.8%) 76.6% (1%)\nPaLM-2L + TDB 65.7% (0.7%) 73.8% (1.1%)\nPaLM-2L + Step-Back (ours) 73.2% (1.9%) 81.8% (1.4%)\nGPT-4 69.4% (2.0%) 80.9% (0.7%)\nGPT-4 1-shot 78.4% (2.4%) 80.5% (1.6%)"
+      ],
+      "context_sources": [
+        "2310.06117",
+        "2310.06117",
+        "2310.06117",
+        "2310.06117"
+      ],
+      "revisions": 0,
+      "final_validation_status": "APPROVED",
+      "query_rewrite_failures": 0,
+      "latency_s": 3.67,
+      "error": null,
+      "refused": false,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9273462714284199,
+      "context_precision": 0.49999999995
+    },
+    {
+      "id": "q41",
+      "answerable": false,
+      "question": "What indexing method does Microsoft's GraphRAG use to build community summaries?",
+      "answer": "Microsoft's GraphRAG uses a sliding window approach, fine-grained segmentation, and the incorporation of metadata as part of its indexing techniques. However, the provided context does not specify the exact indexing method used specifically for building community summaries. Additional details regarding how these techniques are applied in the context of community summaries are missing.",
+      "contexts": [
+        "its indexing techniques through the use of a sliding window\napproach, fine-grained segmentation, and the incorporation of\nmetadata. Additionally, it incorporates several optimization\nmethods to streamline the retrieval process [8].\n4\nFig. 3. Comparison between the three paradigms of RAG. (Left) Naive RAG mainly consists of three parts: indexing, retrieval and generation. (Middle)\nAdvanced RAG proposes multiple optimization strategies around pre-retrieval and post-retrieval, with a process similar to the Naive RAG, still following a",
+        "encoded into vectors, and stored in a vector database. 2) Retrieval. Retrieve the Top k chunks most relevant to the question based on semantic similarity. 3)\nGeneration. Input the original question and the retrieved chunks together into LLM to generate the final answer.\nwidespread adoption of ChatGPT. The Naive RAG follows\na traditional process that includes indexing, retrieval, and\ngeneration, which is also characterized as a \u201cRetrieve-Read\u201d\nframework [7].\nIndexing starts with the cleaning and extraction of raw data\nin diverse formats like PDF, HTML, Word, and Markdown,",
+        "retrieval is designed to delve deeper into graph-structured data\nsources, extracting interconnected information [106].\nC. Adaptive Retrieval\nAdaptive retrieval methods, exemplified by Flare [24] and\nSelf-RAG [25], refine the RAG framework by enabling LLMs\nto actively determine the optimal moments and content for\nretrieval, thus enhancing the efficiency and relevance of the\ninformation sourced.\nThese methods are part of a broader trend wherein\nLLMs employ active judgment in their operations, as seen\nin model agents like AutoGPT, Toolformer, and Graph-",
+        "query may not suffice to acquire adequate context information.\nMoreover, there\u2019s a concern that generation models might\noverly rely on augmented information, leading to outputs that\nsimply echo retrieved content without adding insightful or\nsynthesized information.\nB. Advanced RAG\nAdvanced RAG introduces specific improvements to over-\ncome the limitations of Naive RAG. Focusing on enhancing re-\ntrieval quality, it employs pre-retrieval and post-retrieval strate-\ngies. To tackle the indexing issues, Advanced RAG refines\nits indexing techniques through the use of a sliding window"
+      ],
+      "context_sources": [
+        "2312.10997",
+        "2312.10997",
+        "2312.10997",
+        "2312.10997"
+      ],
+      "revisions": 2,
+      "final_validation_status": "REJECTED",
+      "query_rewrite_failures": 0,
+      "latency_s": 10.803,
+      "error": null,
+      "refused": true
+    },
+    {
+      "id": "q42",
+      "answerable": false,
+      "question": "What is the maximum context window of Gemini 1.5 Pro?",
+      "answer": "The document context does not provide specific information about the maximum context window of Gemini 1.5 Pro. It discusses the context lengths of other models, such as GPT-3.5-Turbo (16K tokens), Claude-1.3 (8K tokens), and Claude-1.3 (100K tokens), but does not mention Gemini 1.5 Pro at all. Therefore, the missing information is the specific context window size for Gemini 1.5 Pro, which is not addressed in the provided context.",
+      "contexts": [
+        "their entire context window when prompted for\ndownstream tasks.\nExtended-context models are not necessarily bet-\nter at using input context. When the input con-\ntext fits in the context window of both a model\nand its extended-context counterpart, we see that\nperformance between them is nearly identical. For\nexample, the 10- and 20-document settings both\nfit in the context window of GPT-3.5-Turbo and\nGPT-3.5-Turbo (16K), and we observe that their\nperformance as a function of position of relative\ninformation is nearly superimposed (solid purple",
+        "2023; Rubin and Berant, 2023, inter alia ) have\nresulted in language models with larger context\nwindows (e.g., 4096, 32K, and even 100K tokens),\nbut it remains unclear how these extended-context\nlanguage models make use of their input contexts\nwhen performing downstream tasks.\nWe empirically investigate this question via\ncontrolled experiments with a variety of state-of-\nthe-art open (MPT-30B-Instruct, LongChat-13B\n(16K)) and closed (OpenAI\u2019s GPT-3.5-Turbo and\nAnthropic\u2019s Claude-1.3) language models in set-\ntings that require accessing and using information",
+        "length of 4K tokens, and GPT-3.5-Turbo (16K) is a\nversion with an extended maximum context length\nof 16K tokens. We evaluate Claude-1.3 and Claude-\n1.3 (100K) with the Anthropic API; Claude-1.3\nhas a maximum context length of 8K tokens, and\nClaude-1.3 (100K) has an extended context length\nof 100K tokens. 6\n2.3 Results and Discussion\nWe experiment with input contexts containing 10,\n20, and 30 total documents. Figure 5 presents multi-\ndocument question answering performance when\nvarying the position of relevant information within\nthe input context. To contextualize model perfor-",
+        "isting language models are generally implemented\nwith Transformers (Vaswani et al., 2017), which re-\nquire memory and compute that increases quadrat-\nically in sequence length. As a result, Trans-\nformer language models were often trained with\nrelatively small context windows (between 512-\n2048 tokens). Recent improvements in hardware\n(e.g., faster GPUs with more memory) and algo-\nrithms (Dai et al., 2019; Dao et al., 2022; Poli et al.,\narXiv:2307.03172v3  [cs.CL]  20 Nov 2023\n2023; Rubin and Berant, 2023, inter alia ) have\nresulted in language models with larger context"
+      ],
+      "context_sources": [
+        "2307.03172",
+        "2307.03172",
+        "2307.03172",
+        "2307.03172"
+      ],
+      "revisions": 2,
+      "final_validation_status": "REJECTED",
+      "query_rewrite_failures": 0,
+      "latency_s": 13.412,
+      "error": null,
+      "refused": true
+    },
+    {
+      "id": "q43",
+      "answerable": false,
+      "question": "How many experts does Mixtral 8x7B route each token to?",
+      "answer": "The document context does not provide any information about Mixtral 8x7B or how many experts it routes each token to. There is no mention of Mixtral 8x7B, its architecture, or its operational details in the provided excerpts. To adequately answer your query, information regarding the specific design and functioning of Mixtral 8x7B, particularly in relation to its token routing mechanism, is needed.",
+      "contexts": [
+        "Table 8 shows the instructions and demonstrations for the initial retrieval token. Table 9 shows\nthe instruction and demonstrations used to collect the three-way output tokens for Retrieve given\ninstruction, preceding sentences, and previously retrieved passages. Due to the longer demonstration\nand test input, we only use a single demonstration. Table 10 shows an instruction and demonstrations\nused to collect the three-way output tokens for ISREL . Table 11 shows an instruction and demon-\nstrations used to collect the three-way output tokens for ISREL . Table 12 shows an instruction and",
+        "2023; Rubin and Berant, 2023, inter alia ) have\nresulted in language models with larger context\nwindows (e.g., 4096, 32K, and even 100K tokens),\nbut it remains unclear how these extended-context\nlanguage models make use of their input contexts\nwhen performing downstream tasks.\nWe empirically investigate this question via\ncontrolled experiments with a variety of state-of-\nthe-art open (MPT-30B-Instruct, LongChat-13B\n(16K)) and closed (OpenAI\u2019s GPT-3.5-Turbo and\nAnthropic\u2019s Claude-1.3) language models in set-\ntings that require accessing and using information",
+        "Table 2, Table 3, and Table 4 present the average and maximum number of tokens in each of the input\ncontexts for all experimental settings. Note that MPT-30B and MPT-30B-Instruct use the same tokenizer,\nGPT-3.5-Turbo and GPT-3.5-Turbo (16K) use the same tokenizer, and Claude-1.3 and Claude-1.3 (100K)\nuse the same tokenizer. Furthermore, the Claude-1.3 tokenizer is the same as the GPT-3.5-Turbo tokenizer,\nmodulo some additional special tokens that do not appear in our data. As a result, the token counts for\nthese two model families is the same in our experimental settings.\nClosed-Book Oracle",
+        "We validate important design choices by evaluating what happens when we do not include them. We\nuse the 247M parameter model for all experiments and we train on a compressed 157 billion token\nschedule for all ablation experiments. We describe results relative to the default settings presented in\nthe main text and recalled here. We report C4 evaluation loss at the end of the training process, and\nalso compares how the evaluation loss decrease versus the training time, measured relatively to the\nbaseline training time. Results are reported in Fig. 8 and Table 13."
+      ],
+      "context_sources": [
+        "2310.11511",
+        "2307.03172",
+        "2307.03172",
+        "2112.04426"
+      ],
+      "revisions": 2,
+      "final_validation_status": "REJECTED",
+      "query_rewrite_failures": 0,
+      "latency_s": 9.696,
+      "error": null,
+      "refused": true
+    },
+    {
+      "id": "q44",
+      "answerable": false,
+      "question": "What score does OpenAI's text-embedding-3-large reach on the MTEB benchmark?",
+      "answer": "The document context does not provide specific information about the score of OpenAI's text-embedding-3-large on the MTEB benchmark. However, it does mention the MTEB leaderboard, which evaluates embedding models across various tasks and datasets. This implies that scores for different models, including OpenAI's, may exist but are not detailed in the provided text. Therefore, the specific score for OpenAI's text-embedding-3-large is missing from the context.",
+      "contexts": [
+        "on 1 trillion tokens using 2048-token sequences,\nfollowed by an additional sequence length adapta-\ntion pre-training phase on 50 billion tokens using\n8192-token sequences. MPT-30B-Instruct uses AL-\niBi (Press et al., 2022) to represent positional infor-\nmation. We also evaluate LongChat-13B (16K) (Li\net al., 2023), which extends the LLaMA-13B (Tou-\nvron et al., 2023a) context window from 2048 to\n16384 tokens by using condensed rotary positional\nembeddings before fine-tuning with 16384-token\nsequences.\nClosed models. We use the OpenAI API to ex-\nperiment with GPT-3.5-Turbo and GPT-3.5-Turbo",
+        "capability of embedding models plays a key role. This mainly\nincludes a sparse encoder (BM25) and a dense retriever (BERT\narchitecture Pre-training language models). Recent research\nhas introduced prominent embedding models such as AngIE,\nV oyage, BGE,etc [94]\u2013[96], which are benefit from multi-task\ninstruct tuning. Hugging Face\u2019s MTEB leaderboard 7 evaluates\nembedding models across 8 tasks, covering 58 datasests. Ad-\nditionally, C-MTEB focuses on Chinese capability, covering\n6 tasks and 35 datasets. There is no one-size-fits-all answer",
+        "performs much better. The perplexities for retrieving from full MassiveText are quite low, which is\npartly due to partial overlap with Wikitext103 not caught by our deduplication.\nModel Retrieval Set #Database tokens #Database keys Valid Test\nAdaptive Inputs (Baevski and Auli, 2019) - - - 17.96 18.65\nS/p.sc/a.sc/l.sc /m.sc (Yogatama et al., 2021) Wikipedia 3B 3B 17.20 17.60\n\ud835\udc58NN-LM (Khandelwal et al., 2020) Wikipedia 3B 3B 16.06 16.12\nMegatron (Shoeybi et al., 2019) - - - - 10.81\nBaseline transformer (ours) - - - 21.53 22.96\n\ud835\udc58NN-LM (ours) Wikipedia 4B 4B 18.52 19.54",
+        "tian M. Meyer, and Steffen Eger. 2019. MoverScore:\nText generation evaluating with contextualized em-\nbeddings and earth mover distance. In Proceedings\nof the 2019 Conference on Empirical Methods in\nNatural Language Processing and the 9th Interna-\ntional Joint Conference on Natural Language Pro-\ncessing (EMNLP-IJCNLP), pages 563\u2013578, Hong\nKong, China. Association for Computational Lin-\nguistics.\nA Examples from WikiEval\nTables 2, 3 and 4 show examples from the WikiEval\ndataset, focusing in particular on answers with high\nand low faithfulness (Table 2), high and low answer"
+      ],
+      "context_sources": [
+        "2307.03172",
+        "2312.10997",
+        "2112.04426",
+        "2309.15217"
+      ],
+      "revisions": 2,
+      "final_validation_status": "REJECTED",
+      "query_rewrite_failures": 0,
+      "latency_s": 9.081,
+      "error": null,
+      "refused": true
+    },
+    {
+      "id": "q45",
+      "answerable": false,
+      "question": "Which index types does pgvector support for approximate nearest-neighbour search?",
+      "answer": "The document context does not explicitly mention which index types pgvector supports for approximate nearest-neighbour search. However, it does indicate that L2 distance is used for retrieving approximate k-nearest neighbours from a key-value database. This suggests that L2 distance is relevant to the search method employed, but the specific index types supported by pgvector are not detailed in the provided context. Therefore, while we know that L2 distance is utilized, the exact index types remain unspecified.",
+      "contexts": [
+        "switching to distantly-supervised passages (using\nthe highest-ranked BM25 passage that contains the\nanswer), has only a small impact: 1 point lower\ntop-k accuracy for retrieval. Appendix A contains\nmore details.\nSimilarity and loss Besides dot product, cosine\nand Euclidean L2 distance are also commonly used\nas decomposable similarity functions. We test these\nalternatives and \ufb01nd that L2 performs compara-\nble to dot product, and both of them are superior\nto cosine. Similarly, in addition to negative log-\nlikelihood, a popular option for ranking is triplet",
+        "tations of the collection of passages can be pre-\ncomputed. Most decomposable similarity functions\nare some transformations of Euclidean distance\n(L2). For instance, cosine is equivalent to inner\nproduct for unit vectors and the Mahalanobis dis-\ntance is equivalent to L2 distance in a transformed\nspace. Inner product search has been widely used\nand studied, as well as its connection to cosine\nsimilarity and L2 distance (Mussmann and Ermon,\n2016; Ram and Gray, 2012). As our ablation study\n\ufb01nds other similarity functions perform compara-\nbly (Section 5.2; Appendix B), we thus choose",
+        "Retrieval neighbours. Our database consists of a key-value memory. Each value consists of two\ncontiguous chunks of tokens which we denote\u00bb\ud835\udc41\u0094\ud835\udc39\u2026 where \ud835\udc41 is theneighbourchunk which is used\nto compute the key, and\ud835\udc39 is itscontinuationin the original document. The corresponding key is\nthe B/e.sc /r.sc/t.sc embedding of\ud835\udc41, averaged over time, that we denoteB/e.sc /r.sc/t.sc\u201e\ud835\udc41\u201d. For each chunk\ud835\udc36, we\nretrieve its approximate\ud835\udc58-nearest neighbours from our key-value database using the\ud835\udc3f2 distance",
+        "B Alternative Similarity Functions &\nTriplet Loss\nIn addition to dot product (DP) and negative log-\nlikelihood based on softmax (NLL), we also exper-\niment with Euclidean distance (L2) and the triplet\nloss. We negate L2 similarity scores before ap-\nplying softmax and change signs of question-to-\npositive and question-to-negative similarities when\napplying the triplet loss on dot product scores. The\nmargin value of the triplet loss is set to 1. Ta-\nble 6 summarizes the results. All these additional\nexperiments are conducted using the same hyper-\nparameters tuned for the baseline (DP, NLL)."
+      ],
+      "context_sources": [
+        "2004.04906",
+        "2004.04906",
+        "2112.04426",
+        "2004.04906"
+      ],
+      "revisions": 2,
+      "final_validation_status": "REJECTED",
+      "query_rewrite_failures": 0,
+      "latency_s": 10.596,
+      "error": null,
+      "refused": true
+    },
+    {
+      "id": "q46",
+      "answerable": false,
+      "question": "Which checkpointer does LangGraph recommend for production deployments?",
+      "answer": "The document context does not specify which checkpointer LangGraph recommends for production deployments. It lacks any mention of specific checkpointers or recommendations related to LangGraph's deployment strategies. To answer your query, additional information regarding LangGraph's preferred checkpointer for production use would be necessary.",
+      "contexts": [
+        "12 LMs) are rated by the two best variants of our estimator: ChatGPT (Top) and LLAMA+NP (Bottom), both with\nretrieval. The variance is overall low, and is lower as the sample size gets larger and with LLAMA+NP (bottom)\nthan with ChatGPT (top).\nstudies in the NLP domain. We first manually write\n10 prompts asking about NLP papers: Tell me a\nsummary of <paper-title>, and then obtain re-\nsponses from ChatGPT. Next, we runFACTSCORE\nagainst an ACL anthology as a knowledge source.\nFinally, we compute an error rate (ER)\u2014a differ-\nence between humans\u2019 validation (labeled by au-",
+        "them. CRAG is plug-and-play and can be\nseamlessly coupled with various RAG-based\napproaches. Experiments on four datasets\ncovering short- and long-form generation tasks\nshow that CRAG can significantly improve the\nperformance of RAG-based approaches. 1\n1 Introduction\nLarge language models (LLMs) have attracted\nincreasing attention and exhibited impressive abili-\nties to understand instructions and generate fluent\nlanguage texts (Brown et al., 2020; Ouyang et al.,\n2022; Touvron et al., 2023a). Nevertheless, LLMs\ninevitably manifest hallucinations (Ji et al., 2023)",
+        "The first category includes standard RAG baselines, where an LM (Llama2, Alpaca) generates output\ngiven the query prepended with the top retrieved documents using the same retriever as in our system.\nIt also includes Llama2-FT, where Llama2 is fine-tuned on all training data we use without the\nreflection tokens or retrieved passages. We also report the result of retrieval-augmented baselines\nwith LMs trained with private data: Ret-ChatGPT and Ret-Llama2-chat, which deploy the same\naugmentation technique above, as well as perplexity.ai, an InstructGPT-based production search",
+        "edge bases, and ensuring data security\u2014such as preventing\n10https://github.com/inverse-scaling/prize\ninadvertent disclosure of document sources or metadata by\nLLMs\u2014are critical engineering challenges that remain to be\naddressed [175].\nThe development of the RAG ecosystem is greatly impacted\nby the progression of its technical stack. Key tools like\nLangChain and LLamaIndex have quickly gained popularity\nwith the emergence of ChatGPT, providing extensive RAG-\nrelated APIs and becoming essential in the realm of LLMs.The\nemerging technology stack, while not as rich in features as"
+      ],
+      "context_sources": [
+        "2305.14251",
+        "2401.15884",
+        "2310.11511",
+        "2312.10997"
+      ],
+      "revisions": 2,
+      "final_validation_status": "REJECTED",
+      "query_rewrite_failures": 0,
+      "latency_s": 7.952,
+      "error": null,
+      "refused": true
+    },
+    {
+      "id": "q47",
+      "answerable": false,
+      "question": "What does Llama 3 70B score on MMLU?",
+      "answer": "The provided document context does not include any information regarding the performance score of Llama 3 70B on the MMLU benchmark. It only contains scores for Llama 2 models and other related models, but there is no mention of Llama 3. Therefore, the specific score for Llama 3 70B on MMLU is missing from the context.",
+      "contexts": [
+        "SAIL - - 69.2 48.4\nLLaMA213B 45.7 77.5 30.2 26.0\nAlpaca13B 46.1 77.7 51.1 57.6\nLLaMA2-hf-7b\nRAG 50.5 44.9 48.9 43.4\nCRAG 54.9 47.7 59.5 53.7\nSelf-RAG* 29.0 32.2 0.7 23.9\nSelf-CRAG 49.0 69.1 0.6 27.9\nSelfRAG-LLaMA2-7b\nRAG 52.8 59.2 39.0 53.2\nCRAG 59.8 74.1 75.6 68.6\nSelf-RAG 54.9 81.2 72.4 67.3\nSelf-CRAG 61.8 86.2 74.8 67.2\nTable 1: Overall evaluation results on the test sets of four datasets. Results are separated based on the generation\nLLMs. Bold numbers indicate the best performance among all methods and LLMs. Gray-colored bold scores",
+        "Llama2-FT7B 48.7 57.3 64.3 65.8 78.2 31.0 35.8 51.2 5.0 7.5\nSAIL*7B \u2013 \u2013 69.2 48.4 \u2013 \u2013 \u2013 \u2013 \u2013 \u2013\nLlama213B 45.7 47.0 30.2 26.0 77.5 16.3 20.5 24.7 2.3 3.6\nAlpaca13 B 46.1 66.9 51.1 57.6 77.7 34.8 36.7 56.6 2.0 3.8\nOur SELF -RAG 7B 54.9 66.4 72.4 67.3 81.2 30.0 35.7 74.3 66.9 67.8\nOur SELF -RAG 13 B 55.8 69.3 74.5 73.1 80.2 31.7 37.0 71.6 70.3 71.3\n5 R ESULTS AND ANALYSIS\n5.1 M AIN RESULTS\nComparison against baselines without retrieval. Table 2 (top) presents the baselines without\nretrieval. Our SELF -RAG (bottom two rows) demonstrates a substantial performance advantage",
+        "Llama2-70B + TDB 60.4% (2.1%) 63.6% (1.9%)\nLlama2-70B + Step-Back (ours) 64.8% (1.5%) 66.7% (1.6%)\nThe implicit step-back question here is \u201cwhat are the physics or chemistry principles and concepts\ninvolved in solving this task? \u201d. We provide demonstrations to the model to recite the relevant\nprinciples for solving the task from its own knowledge (see Appendix D.1 for few-shot exemplars).\n4.2 R ESULTS\nNumber of Shots\n0.70\n0.71\n0.72\n0.73\n0.74\n0.75\n1 2 3 4 5\nAccuracy\nFigure 3: Ablation study of STEP -BACK PROMPT -\nING accuracy using PaLM-2L on MMLU high-",
+        "model size and factual precision, e.g., Alpaca\n65B > 13B > 7B, and Vicuna 13B > 7B.\n0 20 40 60 80\nEst. FActScore (%)\nStableLM 7B\nDolly 12B\nOasst-pythia 12B\nMPT-Chat 7B\nVicuna 7B\nAlpaca 7B\nVicuna 13B\nAlpaca 13B\nInstructGPT\nAlpaca 65B\nChatGPT\nGPT4\nHuman\nBased on F1 micro\n0 20 40 60 80\nEst. FActScore (%)\nStableLM 7B\nDolly 12B\nOasst-pythia 12B\nMPT-Chat 7B\nAlpaca 7B\nVicuna 7B\nAlpaca 13B\nVicuna 13B\nInstructGPT\nAlpaca 65B\nGPT4\nChatGPT\nHuman\nBased on ER\nFigure 3: Ranking between 13 subjects (human and 12 LMs), rated by the two best variants of our estimator:"
+      ],
+      "context_sources": [
+        "2401.15884",
+        "2310.11511",
+        "2310.06117",
+        "2305.14251"
+      ],
+      "revisions": 2,
+      "final_validation_status": "REJECTED",
+      "query_rewrite_failures": 0,
+      "latency_s": 8.008,
+      "error": null,
+      "refused": true
+    },
+    {
+      "id": "q48",
+      "answerable": false,
+      "question": "What sliding window size does Mistral 7B use for attention?",
+      "answer": "The document context does not provide any specific information regarding the sliding window size used for attention in the Mistral 7B model. It discusses various language models and their context windows but does not mention the sliding window size for Mistral 7B specifically. Therefore, the answer to your query is that the sliding window size for Mistral 7B is not specified in the provided context.",
+      "contexts": [
+        "attention spans in neural language modeling. In\nProc. of ICLR.\nTri Dao, Daniel Y . Fu, Stefano Ermon, Atri Rudra,\nand Christopher R\u00e9. 2022. FlashAttention: Fast\nand memory-efficient exact attention with IO-\nawareness. ArXiv:2205.14135.\nHermann Ebbinghaus. 1913. Memory: A contribu-\ntion to experimental psychology. H. A. Ruger &\nC. E. Bussenius, Trans.\nAlbert Gu, Karan Goel, and Christopher R\u00e9. 2022.\nEfficiently modeling long sequences with struc-\ntured state spaces. In Proc. of ICLR.\nMaor Ivgi, Uri Shaham, and Jonathan Berant. 2023.\nEfficient long-text understanding with short-text",
+        "2023; Rubin and Berant, 2023, inter alia ) have\nresulted in language models with larger context\nwindows (e.g., 4096, 32K, and even 100K tokens),\nbut it remains unclear how these extended-context\nlanguage models make use of their input contexts\nwhen performing downstream tasks.\nWe empirically investigate this question via\ncontrolled experiments with a variety of state-of-\nthe-art open (MPT-30B-Instruct, LongChat-13B\n(16K)) and closed (OpenAI\u2019s GPT-3.5-Turbo and\nAnthropic\u2019s Claude-1.3) language models in set-\ntings that require accessing and using information",
+        "models of varying sizes (7B, 13B, and 70B pa-\nrameters), with and without additional supervised\nfine-tuning and reinforcement learning from hu-\nman feedback (\u201c-chat-\u201d models). The results are\npresented in Figure 16.\nComparing Llama-2 models of varying sizes, we\nfind that only the larger models (13B and 70B)\nexhibit the U-shaped performance curve (i.e., both\nprimacy and recency bias)\u2014the smallest Llama-\n2 models (7B) are solely recency-biased. Given\nthese results, we hypothesize that prior work (e.g.,\nKhandelwal et al., 2018; Sun et al., 2021) did not",
+        "the retrieval encoder and cross-attention weights. In all cases, the cross-attention is added every third\nlayer starting at layer six. The learning rate for the three smaller models was set to2\u0002 10\u00004 and\nhalf that for the larger model. We experimented with allowing the entire model to resume training\nduring \ufb01ne-tuning but consistently found that the best approach was to freeze the pre-trained model.\nThis kept the retrieval-o\ufb00 performance frozen whereas when all weights were tuned the retrieval o\ufb00\nperformance would degrade.\nC. Training details and hyperparameters"
+      ],
+      "context_sources": [
+        "2307.03172",
+        "2307.03172",
+        "2307.03172",
+        "2112.04426"
+      ],
+      "revisions": 2,
+      "final_validation_status": "REJECTED",
+      "query_rewrite_failures": 0,
+      "latency_s": 8.939,
+      "error": null,
+      "refused": true
+    },
+    {
+      "id": "q49",
+      "answerable": false,
+      "question": "How much does GPT-4o cost per million input tokens?",
+      "answer": "The document context does not provide any information regarding the cost of GPT-4o per million input tokens. To find such pricing details, you may need to refer to official sources from the provider of GPT-4o, such as their website or pricing documentation, as this information is not included in the provided excerpts.",
+      "contexts": [
+        "and key-value retrieval experiments would cost upwards of\n$6000. See Appendix D for GPT-4 results and discussion.\nModel Closed-Book Oracle\nLongChat-13B (16K) 35.0% 83.4%\nMPT-30B-Instruct 31.5% 81.9%\nGPT-3.5-Turbo 56.1% 88.3%\nGPT-3.5-Turbo (16K) 56.0% 88.6%\nClaude-1.3 48.3% 76.1%\nClaude-1.3 (100K) 48.2% 76.4%\nTable 1: Closed-book and oracle accuracy of language\nmodels on the multi-document question answering task.\nshaped performance curve\u2014models are often much\nbetter at using relevant information that occurs at\nthe very beginning (primacy bias) and very end of",
+        "GPT-4 69.4% (2.0%) 80.9% (0.7%)\nGPT-4 1-shot 78.4% (2.4%) 80.5% (1.6%)\nGPT-4 + CoT 82.9% (0.5%) 85.3% (1.0%)\nGPT-4 + CoT 1-shot 79.3% (1.0%) 82.8% (0.5%)\nGPT-4 + TDB 74.4% (4.0%) 81.5% (1.3%)\nGPT-4 + Step-Back (ours) 84.5% (1.2%) 85.6% (1.4%)\nLlama2-70B 51.9% (3.6%) 55.7% (2.1%)\nLlama2-70B 1-shot 57.3% (1.6%) 58.5% (2.5%)\nLlama2-70B + CoT 59.3% (2.0%) 64.1% (1.2%)\nLlama2-70B + CoT 1-shot 59.6% (2.0%) 68.1% (1.4%)\nLlama2-70B + TDB 60.4% (2.1%) 63.6% (1.9%)\nLlama2-70B + Step-Back (ours) 64.8% (1.5%) 66.7% (1.6%)",
+        "GPT is provided in Table 15. Outputs from In-\nstructGPT are used (1) to human experts for revi-\nsion (Section 3.3) and (2) for model-based evalua-\ntors (Section 4). We find human experts split and\nmerged atomic facts from InstructGPT for 18% and\n34% of the cases, respectively.\nA.3 More details on annotator recruitment\nWe recruit freelancers through Upwork and pay\n15\u201325 USD per hour. We recruit fact-checking\nexperts\u2014freelancers who mentioned fact-checking\nas their expertise\u2014for Step 3. Every worker went\nthrough a qualification test of 2 hours and was",
+        "Table 2, Table 3, and Table 4 present the average and maximum number of tokens in each of the input\ncontexts for all experimental settings. Note that MPT-30B and MPT-30B-Instruct use the same tokenizer,\nGPT-3.5-Turbo and GPT-3.5-Turbo (16K) use the same tokenizer, and Claude-1.3 and Claude-1.3 (100K)\nuse the same tokenizer. Furthermore, the Claude-1.3 tokenizer is the same as the GPT-3.5-Turbo tokenizer,\nmodulo some additional special tokens that do not appear in our data. As a result, the token counts for\nthese two model families is the same in our experimental settings.\nClosed-Book Oracle"
+      ],
+      "context_sources": [
+        "2307.03172",
+        "2310.06117",
+        "2305.14251",
+        "2307.03172"
+      ],
+      "revisions": 2,
+      "final_validation_status": "REJECTED",
+      "query_rewrite_failures": 0,
+      "latency_s": 8.238,
+      "error": null,
+      "refused": true
+    },
+    {
+      "id": "q50",
+      "answerable": false,
+      "question": "What context length does Claude 3 Opus support?",
+      "answer": "The document context does not provide any information about Claude 3 Opus, as it only discusses Claude-1.3 and Claude-1.3 (100K), which have maximum context lengths of 8K tokens and 100K tokens, respectively. Therefore, it is unclear what context length Claude 3 Opus supports, as it is not mentioned in the provided context.",
+      "contexts": [
+        "length of 4K tokens, and GPT-3.5-Turbo (16K) is a\nversion with an extended maximum context length\nof 16K tokens. We evaluate Claude-1.3 and Claude-\n1.3 (100K) with the Anthropic API; Claude-1.3\nhas a maximum context length of 8K tokens, and\nClaude-1.3 (100K) has an extended context length\nof 100K tokens. 6\n2.3 Results and Discussion\nWe experiment with input contexts containing 10,\n20, and 30 total documents. Figure 5 presents multi-\ndocument question answering performance when\nvarying the position of relevant information within\nthe input context. To contextualize model perfor-",
+        "2023; Rubin and Berant, 2023, inter alia ) have\nresulted in language models with larger context\nwindows (e.g., 4096, 32K, and even 100K tokens),\nbut it remains unclear how these extended-context\nlanguage models make use of their input contexts\nwhen performing downstream tasks.\nWe empirically investigate this question via\ncontrolled experiments with a variety of state-of-\nthe-art open (MPT-30B-Instruct, LongChat-13B\n(16K)) and closed (OpenAI\u2019s GPT-3.5-Turbo and\nAnthropic\u2019s Claude-1.3) language models in set-\ntings that require accessing and using information",
+        "Anthropic\u2019s Claude-1.3) language models in set-\ntings that require accessing and using information\nwithin an input context. In particular, our experi-\nments make controlled changes to the input context\nsize and the position of the relevant information\nwithin the input context and study their effects on\nlanguage model performance. If language models\ncan robustly use information within long input con-\ntexts, then their performance should be minimally\naffected by the position of the relevant information\nin the input context.\nWe first experiment with multi-document ques-",
+        "Figure 7: The effect of changing the input context length and the position of relevant information on key-value\nretrieval performance. Lower positions are closer to the start of the input context. Although some models show\nperfect accuracy on this synthetic task (e.g., Claude-1.3 and Claude-1.3 (100K)), we see again that performance is\noften highest when relevant information is occurs at the very start or end of the context, and rapidly degrades when\nmodels must retrieve from the middle of the input context.\nplaced at the start of the input context, LongChat-"
+      ],
+      "context_sources": [
+        "2307.03172",
+        "2307.03172",
+        "2307.03172",
+        "2307.03172"
+      ],
+      "revisions": 2,
+      "final_validation_status": "REJECTED",
+      "query_rewrite_failures": 0,
+      "latency_s": 9.882,
+      "error": null,
+      "refused": true
+    }
+  ]
+}
