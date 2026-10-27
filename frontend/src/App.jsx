@@ -534,7 +534,14 @@ function App() {
 
       {/* Main Workspace */}
       <main className="main-content">
-        
+
+        {isMockMode && (
+          <div className="simulated-banner" role="status">
+            <AlertCircle size={16} />
+            Simulated demo — responses are scripted. No LLM is called and the scores shown are not measurements.
+          </div>
+        )}
+
         {/* Header Bar */}
         <header className="header-bar">
           <div className="header-title">
@@ -553,7 +560,7 @@ function App() {
             {activeTab === 'evaluation' && (
               <>
                 <h1>Evaluation Studio</h1>
-                <p>Run RAGAS batch compliance audits measuring faithfulness, relevance, and precision.</p>
+                <p>Score answers for faithfulness, relevance, and context precision with an LLM judge (RAGAS-style definitions, not the ragas library).</p>
               </>
             )}
             {activeTab === 'settings' && (
@@ -564,13 +571,7 @@ function App() {
             )}
           </div>
 
-          <div className="header-actions">
-            {isMockMode && activeTab !== 'settings' && (
-              <div className="badge-status mock" style={{ fontSize: '0.85rem', padding: '0.4rem 0.8rem' }}>
-                <AlertCircle size={14} /> Demo Mode: No API keys required
-              </div>
-            )}
-          </div>
+          <div className="header-actions"></div>
         </header>
 
         {/* View Content */}
