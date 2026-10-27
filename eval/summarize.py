@@ -21,6 +21,17 @@ def fmt(metric: dict) -> str:
     return f"{metric['mean']:.3f} (n={metric['n']}{failed})"
 
 
+def source_hits(result: dict, questions_path: Path) -> tuple[int, int]:
+    """Count answerable, error-free questions whose cited paper appears in the retrieved chunks."""
+    sources = {}
+    for line in questions_path.read_text().splitlines():
+        if line.strip():
+            row = json.loads(line)
+            sources[row["id"]] = row["source"]
+    answerable = [rec for rec in result["records"] if rec["answerable"] and not rec["error"]]
+    return sum(sources[rec["id"]] in rec["context_sources"] for rec in answerable), len(answerable)
+
+
 def main() -> None:
     latest: dict[str, tuple[str, dict]] = {}
     for path in sorted(EVAL_DIR.glob("results/*.json")):
@@ -39,8 +50,10 @@ def main() -> None:
         "Every source passage was checked against its paper by `eval/check_questions.py`. The author",
         "authorized the runs on 2026-10-27 without reviewing each row by hand.",
         "",
-        "| config | faithfulness | answer relevancy | context precision | refusal accuracy | false refusals | mean revisions | latency p50 / p95 (s) | cost (USD) | errors |",
-        "|---|---|---|---|---|---|---|---|---|---|",
+        "Source retrieved: answerable questions whose cited paper is among the final retrieved chunks.",
+        "",
+        "| config | faithfulness | answer relevancy | context precision | source retrieved | refusal accuracy | false refusals | mean revisions | latency p50 / p95 (s) | cost (USD) | errors |",
+        "|---|---|---|---|---|---|---|---|---|---|---|",
     ]
     for key in sorted(latest):
         _, r = latest[key]
@@ -48,9 +61,10 @@ def main() -> None:
         ra, fr = s["refusal_accuracy"], s["false_refusals"]
         cost = s["cost_usd"]["pipeline"] + s["cost_usd"]["judge"]
         lat = s["latency_s"] or {"p50": float("nan"), "p95": float("nan")}
+        hit, n_ans = source_hits(r, REPO / m["questions_file"])
         lines.append(
             f"| {key}: {m['configuration_label']} | {fmt(s['faithfulness'])} | {fmt(s['answer_relevancy'])} | "
-            f"{fmt(s['context_precision'])} | {ra['correct']}/{ra['n']} | {fr['count']}/{fr['n']} | "
+            f"{fmt(s['context_precision'])} | {hit}/{n_ans} | {ra['correct']}/{ra['n']} | {fr['count']}/{fr['n']} | "
             f"{s['mean_revisions']} | {lat['p50']} / {lat['p95']} | {cost:.2f} | {s['n_errors']} |"
         )
 
