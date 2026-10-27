@@ -1,0 +1,162 @@
+[
+  {
+    "arxiv_id": "2005.11401v4",
+    "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+    "url": "https://arxiv.org/pdf/2005.11401v4",
+    "file": "2005.11401.pdf",
+    "sha256": "23e3249e9a1e75418d82efecab0ea8c4d033b89c93742f63208d47ce01f21233",
+    "bytes": 885323
+  },
+  {
+    "arxiv_id": "2004.04906v3",
+    "title": "Dense Passage Retrieval for Open-Domain Question Answering",
+    "url": "https://arxiv.org/pdf/2004.04906v3",
+    "file": "2004.04906.pdf",
+    "sha256": "3e67fc1a9977715acf722d85f0b7d124b03715e975f6310a4d6c12094190912f",
+    "bytes": 383508
+  },
+  {
+    "arxiv_id": "2002.08909v1",
+    "title": "REALM: Retrieval-Augmented Language Model Pre-Training",
+    "url": "https://arxiv.org/pdf/2002.08909v1",
+    "file": "2002.08909.pdf",
+    "sha256": "0ec1a7ab3de5514c6d3baa8af0322816d4ee7cd4c14b9f2c450cbc9da9e6b363",
+    "bytes": 419037
+  },
+  {
+    "arxiv_id": "2007.01282v2",
+    "title": "Leveraging Passage Retrieval with Generative Models for Open Domain Question Answering",
+    "url": "https://arxiv.org/pdf/2007.01282v2",
+    "file": "2007.01282.pdf",
+    "sha256": "f1ee7e927c3fb31beb2146f8c205692a91b40dadd65d80e025c6686e4d430953",
+    "bytes": 326612
+  },
+  {
+    "arxiv_id": "2112.04426v3",
+    "title": "Improving language models by retrieving from trillions of tokens",
+    "url": "https://arxiv.org/pdf/2112.04426v3",
+    "file": "2112.04426.pdf",
+    "sha256": "1b3e89b589b73d51ca76cb7d98f22fa5438f8b13e05363613bc6b3199f9777f4",
+    "bytes": 1566448
+  },
+  {
+    "arxiv_id": "2212.10496v1",
+    "title": "Precise Zero-Shot Dense Retrieval without Relevance Labels",
+    "url": "https://arxiv.org/pdf/2212.10496v1",
+    "file": "2212.10496.pdf",
+    "sha256": "dc0ae3c5584ed146beee122e6a9ad9c48547dde048d53e9be8435d8f1d354531",
+    "bytes": 424964
+  },
+  {
+    "arxiv_id": "2305.06983v2",
+    "title": "Active Retrieval Augmented Generation",
+    "url": "https://arxiv.org/pdf/2305.06983v2",
+    "file": "2305.06983.pdf",
+    "sha256": "2425bd04de6e082512ef576298ec24df770a7f576bb2c23d09b3fd498f716c52",
+    "bytes": 850866
+  },
+  {
+    "arxiv_id": "2310.11511v1",
+    "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+    "url": "https://arxiv.org/pdf/2310.11511v1",
+    "file": "2310.11511.pdf",
+    "sha256": "d9eaa1398abac0df67a9d0933a5bf8b6d9d83d2e72da2a486073cd842dd52978",
+    "bytes": 1405127
+  },
+  {
+    "arxiv_id": "2401.15884v3",
+    "title": "Corrective Retrieval Augmented Generation",
+    "url": "https://arxiv.org/pdf/2401.15884v3",
+    "file": "2401.15884.pdf",
+    "sha256": "975aa1fd3c1b603126e93ff99d6504858b61301bf1d34c9df88ebe53a0b026cb",
+    "bytes": 667756
+  },
+  {
+    "arxiv_id": "2403.14403v2",
+    "title": "Adaptive-RAG: Learning to Adapt Retrieval-Augmented Large Language Models through Question Complexity",
+    "url": "https://arxiv.org/pdf/2403.14403v2",
+    "file": "2403.14403.pdf",
+    "sha256": "12d262c682626c26a98bdafc7ec5dc6af3fae8247d26d4f2c712b1599dafce62",
+    "bytes": 577416
+  },
+  {
+    "arxiv_id": "2307.03172v3",
+    "title": "Lost in the Middle: How Language Models Use Long Contexts",
+    "url": "https://arxiv.org/pdf/2307.03172v3",
+    "file": "2307.03172.pdf",
+    "sha256": "653b29619eae2ae4b361d7bdcdc06db4bedcb1b0eabe31814036beca8c1af0b1",
+    "bytes": 747542
+  },
+  {
+    "arxiv_id": "2309.15217v2",
+    "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation",
+    "url": "https://arxiv.org/pdf/2309.15217v2",
+    "file": "2309.15217.pdf",
+    "sha256": "6c24762a3f277fd120ed1adf34b01420ecf92f18ff6d1b5435fa0a09cb804ecb",
+    "bytes": 231984
+  },
+  {
+    "arxiv_id": "2305.14251v2",
+    "title": "FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation",
+    "url": "https://arxiv.org/pdf/2305.14251v2",
+    "file": "2305.14251.pdf",
+    "sha256": "88f7542131228f320829a67678f5dec2b069a72acf3852b3e563f0c1d03fc8ff",
+    "bytes": 2511276
+  },
+  {
+    "arxiv_id": "2312.10997v5",
+    "title": "Retrieval-Augmented Generation for Large Language Models: A Survey",
+    "url": "https://arxiv.org/pdf/2312.10997v5",
+    "file": "2312.10997.pdf",
+    "sha256": "396a0fadeb4cd40f5c8ccc36b73a0815f6cb4d7f6bfa53b6c48c1f9aba7c7e02",
+    "bytes": 1662567
+  },
+  {
+    "arxiv_id": "2210.03629v3",
+    "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+    "url": "https://arxiv.org/pdf/2210.03629v3",
+    "file": "2210.03629.pdf",
+    "sha256": "f285b0971ae4a790e402fb93966bed3adde2cf0a04977d08b2b40d6ab0cace69",
+    "bytes": 633805
+  },
+  {
+    "arxiv_id": "2303.11366v4",
+    "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+    "url": "https://arxiv.org/pdf/2303.11366v4",
+    "file": "2303.11366.pdf",
+    "sha256": "6059b6f89fea9959bd3dab553fbb97756a3dfb1b15e3cbab2fbf3ab6664333bd",
+    "bytes": 591097
+  },
+  {
+    "arxiv_id": "2303.17651v2",
+    "title": "Self-Refine: Iterative Refinement with Self-Feedback",
+    "url": "https://arxiv.org/pdf/2303.17651v2",
+    "file": "2303.17651.pdf",
+    "sha256": "81e44592314d80218ad108d3490cd0b84ba5962fefd5c84819987afd77a57087",
+    "bytes": 2014949
+  },
+  {
+    "arxiv_id": "2302.04761v1",
+    "title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
+    "url": "https://arxiv.org/pdf/2302.04761v1",
+    "file": "2302.04761.pdf",
+    "sha256": "6d7483d94653008e40c2058a1c22441c92e3713dae278b6361e8efc447c99522",
+    "bytes": 657966
+  },
+  {
+    "arxiv_id": "2212.14024v2",
+    "title": "Demonstrate-Search-Predict: Composing retrieval and language models for knowledge-intensive NLP",
+    "url": "https://arxiv.org/pdf/2212.14024v2",
+    "file": "2212.14024.pdf",
+    "sha256": "bd64e2f901e3d24fa7cbdab8135136dc6b055a6b5ef96f42b6348c5d7a4a4393",
+    "bytes": 1268099
+  },
+  {
+    "arxiv_id": "2310.06117v2",
+    "title": "Take a Step Back: Evoking Reasoning via Abstraction in Large Language Models",
+    "url": "https://arxiv.org/pdf/2310.06117v2",
+    "file": "2310.06117.pdf",
+    "sha256": "5133e42bd76de3b31be5fd21a3d36ebb45bfdf58db00047839175829f214eb72",
+    "bytes": 977271
+  }
+]

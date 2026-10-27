@@ -152,3 +152,10 @@ dist-ssr/
 
 # Removed helper script state
 .git_progressive_push_state.json
+
+# Evaluation corpus PDFs and FAISS index (recreated by eval/corpus.py and eval/run_eval.py)
+eval/corpus/
+eval/vector_store/
+
+# Throwaway smoke-test results
+eval/results/smoke/
