@@ -199,7 +199,7 @@ def run_metadata(config_key: str, questions_path: Path, n: int, index_chunks: in
         "configuration": config_key,
         "configuration_label": CONFIG["configurations"][config_key]["label"],
         "git_commit": git("rev-parse", "HEAD"),
-        "git_dirty": bool(git("status", "--porcelain")),
+        "git_dirty": bool(git("status", "--porcelain", "--", ".", ":!eval/results")),
         "pipeline": CONFIG["pipeline"],
         "judge": CONFIG["judge"],
         "questions_file": str(questions_path.relative_to(REPO)),
