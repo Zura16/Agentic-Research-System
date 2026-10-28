@@ -1,0 +1,2 @@
+{"id": "s01", "question": "What does HyDE stand for?", "answerable": true, "reference_answer": "Hypothetical Document Embeddings.", "source": "2212.10496", "source_passage": "Hypothetical Document Embeddings (HyDE)", "reviewed": true}
+{"id": "s02", "question": "How does Qdrant store payload indexes on disk?", "answerable": false, "reference_answer": "The corpus does not contain this information.", "source": null, "source_passage": null, "reviewed": true}

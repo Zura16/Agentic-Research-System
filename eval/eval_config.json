@@ -1,0 +1,27 @@
+{
+  "pipeline": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "temperature": 0.2,
+    "embedding_model": "text-embedding-ada-002",
+    "retrieval_k": 4
+  },
+  "judge": {
+    "model": "gpt-4o",
+    "temperature": 0.0,
+    "embedding_model": "text-embedding-3-small"
+  },
+  "configurations": {
+    "a": {"label": "retrieval + reasoning only (no validation)", "validate": false, "max_revisions": 0},
+    "b": {"label": "full pipeline, max 2 revisions", "validate": true, "max_revisions": 2},
+    "c": {"label": "full pipeline, max 4 revisions", "validate": true, "max_revisions": 4}
+  },
+  "prices_usd_per_million_tokens": {
+    "_note": "Inputs for the cost estimate, not measurements. Check https://openai.com/api/pricing before each run; raw token counts are logged so cost can be recomputed.",
+    "gpt-4o-mini": {"input": 0.15, "output": 0.60},
+    "gpt-4o": {"input": 2.50, "output": 10.00},
+    "text-embedding-ada-002": {"input": 0.10, "output": 0.0},
+    "text-embedding-3-small": {"input": 0.02, "output": 0.0}
+  },
+  "max_usd_per_invocation": 10.0
+}
